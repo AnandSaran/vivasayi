@@ -1,0 +1,1 @@
+const int MINIMUM_POST_LENGTH=150;

@@ -1,0 +1,1 @@
+enum HomeNavigationItemOrientationEnum { TOP, BOTTOM }
