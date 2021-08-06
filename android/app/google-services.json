@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "714992012565",
+    "project_id": "vivasayi-7db1f",
+    "storage_bucket": "vivasayi-7db1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714992012565:android:a60f003fca47c236c82d1c",
+        "android_client_info": {
+          "package_name": "com.vivasayi.drapjinfotech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714992012565-mefnfennrq4tkvrjquue33rrh06tn6vf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbnU0IRUklkOTFVyRkO4TsMEO1OqXrmjc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714992012565-mefnfennrq4tkvrjquue33rrh06tn6vf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

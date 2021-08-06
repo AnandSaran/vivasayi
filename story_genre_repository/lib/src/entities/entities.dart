@@ -1,0 +1,1 @@
+export 'story_genre_entity.dart';

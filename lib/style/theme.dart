@@ -12,7 +12,8 @@ class Colors {
   static const Color transparent = const Color(0x00000000);
   static const Color loginGradientEnd = const Color(0xFFFFFFF9);
   static const Color homeNavigationBarBackgroundColor= const Color(0xFFFFFFFF);
-  
+  static const Color toolBarBackgroundColor= const Color(0xFF00942C);
+
   static const Color iconColor= const Color(0xFFFFFFFF);
   
   static const Color blackColor= const Color(0xFF000000);

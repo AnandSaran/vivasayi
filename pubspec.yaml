@@ -23,17 +23,27 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  story_genre_repository:
+    path: story_genre_repository
   jiffy: ^3.0.1
   shared_preferences: ^2.0.6
   flutter_bloc: ^7.0.1
   equatable: ^2.0.0
-  rxdart: ^0.26.0
+  rxdart: ^0.27.1
   flutter_svg: ^0.22.0
-
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  geoflutterfire: ^3.0.1
+  firebase_core: ^1.4.0
+  cloud_firestore: ^2.4.0
+  firebase_storage: ^10.0.1
+  flutter_quill: ^1.7.3
+  tuple: ^2.0.0
+  universal_html: ^2.0.8
+  filesystem_picker: ^2.0.0-nullsafety.0
+  file_picker: ^3.0.4
+  path_provider: ^2.0.2
+  path: ^1.8.0
+  image_picker: ^0.8.2
+  cached_network_image: ^3.1.0
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

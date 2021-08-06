@@ -28,4 +28,16 @@ class Navigation {
   pop(BuildContext context) {
     Navigator.pop(context);
   }
+
+  popWithResultBack(BuildContext context, dynamic data) {
+    Navigator.pop(context, data);
+  }
+
+  dynamic pushPageResult(BuildContext context, String route) async {
+    return await Navigator.of(context).pushNamed(route);
+    /*Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => screenName),
+    );*/
+  }
 }

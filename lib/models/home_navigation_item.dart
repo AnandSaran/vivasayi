@@ -1,5 +1,6 @@
 import 'package:vivasayi/constants/string_constants.dart';
-import 'package:vivasayi/models/home_navigation_item_orientation_enum.dart';
+
+import 'enum/enum.dart';
 
 class HomeNavigationItem {
   HomeNavigationItem(

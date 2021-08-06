@@ -1,1 +1,1 @@
-const String COL_ENTRY="entry";
+const String COL_POST="post";
