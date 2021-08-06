@@ -120,6 +120,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  diff_match_patch:
+    dependency: transitive
+    description:
+      name: diff_match_patch
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.1"
   equatable:
     dependency: "direct main"
     description:
@@ -278,7 +285,7 @@ packages:
       name: flutter_quill
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.3"
+    version: "1.8.3"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -592,6 +599,13 @@ packages:
     dependency: "direct main"
     description:
       path: story_genre_repository
+      relative: true
+    source: path
+    version: "1.0.0+1"
+  story_repository:
+    dependency: "direct main"
+    description:
+      path: story_repository
       relative: true
     source: path
     version: "1.0.0+1"

@@ -25,6 +25,8 @@ dependencies:
     sdk: flutter
   story_genre_repository:
     path: story_genre_repository
+  story_repository:
+    path: story_repository
   jiffy: ^3.0.1
   shared_preferences: ^2.0.6
   flutter_bloc: ^7.0.1

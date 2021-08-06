@@ -9,10 +9,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:rxdart/rxdart.dart';
+import 'package:story_repository/story_repository.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/extension/extension.dart';
-import 'package:vivasayi/repository/repository.dart';
 import 'package:vivasayi/models/models.dart';
+import 'package:vivasayi/repository/repository.dart';
 
 import 'bloc.dart';
 
@@ -52,7 +53,13 @@ class PostBloc extends BlocBase {
 
   void submit(BuildContext context, String content, String plainText) {
     _content.add(content);
-    _showProgress.sink.add(true);
+
+    var myJSON = jsonDecode(_content.value);
+    print("title: " + Document.fromJson(myJSON).title);
+    print("subtitle: " + Document.fromJson(myJSON).subtitle);
+    print("imageUrl: " + Document.fromJson(myJSON).imageUrl);
+
+    /*_showProgress.sink.add(true);
     if (_validateContent(context, plainText)) {
       _showSelectStoryGenreScreen.sink.add(true);
       // addUserPost();
@@ -66,7 +73,7 @@ class PostBloc extends BlocBase {
 
     Stream<List<Post>> allPostList() {
       return _repository.posts();
-    }
+    }*/
   }
 
   void dispose() async {

@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
+import 'package:story_repository/extension/extension.dart';
 import 'package:story_repository/src/entities/entities.dart';
 
 @immutable
@@ -46,11 +50,14 @@ class Story {
   }
 
   static Story fromEntity(StoryEntity entity) {
+    var myJSON = jsonDecode(entity.content);
+    Document quilDocument = Document.fromJson(myJSON);
+
     return Story(
       id: entity.id,
-      title: "",
-      subTitle: "",
-      imageUrl: "",
+      title: quilDocument.title,
+      subTitle: quilDocument.subtitle,
+      imageUrl: quilDocument.imageUrl,
     );
   }
 }
