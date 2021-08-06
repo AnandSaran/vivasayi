@@ -6,21 +6,21 @@ import 'package:story_genre_repository/src/story_genre_repository.dart';
 import 'entities/entities.dart';
 
 class FirestoreStoryGenreRepository implements StoryGenreRepository {
-  final todoCollection = FirebaseFirestore.instance.collection(COL_STORY_GENRE);
+  final storyGenreCollection = FirebaseFirestore.instance.collection(COL_STORY_GENRE);
 
   @override
   Future<void> addNewStoryGenre(StoryGenre storyGenre) {
-    return todoCollection.add(storyGenre.toEntity().toDocument());
+    return storyGenreCollection.add(storyGenre.toEntity().toDocument());
   }
 
   @override
   Future<void> deleteStoryGenre(StoryGenre storyGenre) {
-    return todoCollection.doc(storyGenre.id).delete();
+    return storyGenreCollection.doc(storyGenre.id).delete();
   }
 
   @override
   Stream<List<StoryGenre>> storyGenres() {
-    return todoCollection.orderBy(FIELD_GENRE_NAME).snapshots().map((snapshot) {
+    return storyGenreCollection.orderBy(FIELD_GENRE_NAME).snapshots().map((snapshot) {
       return snapshot.docs
           .map((doc) =>
               StoryGenre.fromEntity(StoryGenreEntity.fromSnapshot(doc)))
@@ -30,7 +30,7 @@ class FirestoreStoryGenreRepository implements StoryGenreRepository {
 
   @override
   Future<void> updateStoryGenre(StoryGenre storyGenre) {
-    return todoCollection
+    return storyGenreCollection
         .doc(storyGenre.id)
         .update(storyGenre.toEntity().toDocument());
   }

@@ -34,7 +34,7 @@ class StoryGenre {
 
   @override
   String toString() {
-    return 'Todo{genreName: $genreName, id: $id}';
+    return 'StoryGenre{genreName: $genreName, id: $id}';
   }
 
   StoryGenreEntity toEntity() {
