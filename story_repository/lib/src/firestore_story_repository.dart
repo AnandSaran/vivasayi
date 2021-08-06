@@ -8,7 +8,7 @@ import 'entities/entities.dart';
 class FirestoreStoryRepository implements StoryRepository {
   var storyCollection = FirebaseFirestore.instance.collection(COL_STORY_HOME);
 
-  void changeCollectionName(String collectionName) {
+  FirestoreStoryRepository(String collectionName){
     storyCollection = FirebaseFirestore.instance.collection(collectionName);
   }
 
