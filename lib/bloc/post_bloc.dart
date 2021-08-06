@@ -53,13 +53,7 @@ class PostBloc extends BlocBase {
 
   void submit(BuildContext context, String content, String plainText) {
     _content.add(content);
-
-    var myJSON = jsonDecode(_content.value);
-    print("title: " + Document.fromJson(myJSON).title);
-    print("subtitle: " + Document.fromJson(myJSON).subtitle);
-    print("imageUrl: " + Document.fromJson(myJSON).imageUrl);
-
-    /*_showProgress.sink.add(true);
+    _showProgress.sink.add(true);
     if (_validateContent(context, plainText)) {
       _showSelectStoryGenreScreen.sink.add(true);
       // addUserPost();
@@ -73,7 +67,7 @@ class PostBloc extends BlocBase {
 
     Stream<List<Post>> allPostList() {
       return _repository.posts();
-    }*/
+    }
   }
 
   void dispose() async {
