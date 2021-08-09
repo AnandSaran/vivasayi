@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:vivasayi/models/toplist.dart';
-import 'package:vivasayi/screens/product_widget.dart';
 import 'package:vivasayi/style/theme.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -226,7 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Colors.white,
             child: Padding(
               padding:
-              const EdgeInsets.only(left: 10, right: 10, top: 1, bottom: 1),
+                  const EdgeInsets.only(left: 10, right: 10, top: 1, bottom: 1),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: details.length,
@@ -246,7 +245,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               details[index]['name'],
                               textAlign: TextAlign.center,
                               style:
-                              TextStyle(color: Colors.black, fontSize: 12),
+                                  TextStyle(color: Colors.black, fontSize: 12),
                             ),
                           ),
                         ),
@@ -307,65 +306,70 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _productList() {
-    return Column(
-      children: [
-        Container(
-          color: Colors.white,
-          height: 200,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return Container(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                  child: Image.asset(
-                    'asset/svg/seedimage.png',
-                    height: 200,
-                    width: 250,
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-        Expanded(
-            child: ListView.builder(
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              color: Colors.white,
+              height: 200,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Column(
-                      children: <Widget>[
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  return Container(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                      child: Image.asset(
+                        'asset/svg/seedimage.png',
+                        height: 200,
+                        width: 250,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Flexible(
+                child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                     scrollDirection: Axis.vertical,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Column(
                           children: <Widget>[
-                            Container(
-                              height: 72.0,
-                              width: 72.0,
-                              decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.black.withAlpha(70),
-                                        offset: const Offset(2.0, 2.0),
-                                        blurRadius: 2.0)
-                                  ],
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(12.0)),
-                                  image: DecorationImage(
-                                    image: ExactAssetImage(
-                                      'asset/svg/seedimage.png',
-                                    ),
-                                    fit: BoxFit.cover,
-                                  )),
-                            ),
-                            SizedBox(
-                              width: 8.0,
-                            ),
-                            Expanded(
-                                child: Column(
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                  height: 72.0,
+                                  width: 72.0,
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.black.withAlpha(70),
+                                            offset: const Offset(2.0, 2.0),
+                                            blurRadius: 2.0)
+                                      ],
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(12.0)),
+                                      image: DecorationImage(
+                                        image: ExactAssetImage(
+                                          'asset/svg/seedimage.png',
+                                        ),
+                                        fit: BoxFit.cover,
+                                      )),
+                                ),
+                                SizedBox(
+                                  width: 8.0,
+                                ),
+                                Expanded(
+                                    child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment
-                                      .start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
                                       'My item header',
@@ -385,16 +389,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                     )
                                   ],
                                 )),
+                              ],
+                            ),
+                            Divider(),
                           ],
                         ),
-                        Divider(),
-                      ],
-                    ),
-                  );
-                })),
-      ],
+                      );
+                    })),
+          ],
+        ),
+      ),
     );
-
   }
 }
 
