@@ -2,8 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as FlutterBloc;
 import 'package:story_genre_repository/story_genre_repository.dart';
+import 'package:story_repository/story_repository.dart';
+import 'package:vivasayi/bloc/story/home_story_bloc.dart';
 import 'package:vivasayi/bloc/story_genres/story_genres.dart';
 import 'package:vivasayi/screen/story_genre/story_genre_screen.dart';
+import 'package:vivasayi/screens/homepage.dart';
+import 'package:vivasayi/style/theme.dart';
 
 import 'bloc/bloc.dart';
 import 'bloc/bloc_provider/bloc_provider.dart';
@@ -24,12 +28,15 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: APP_NAME,
       theme: ThemeData(
+        fontFamily: 'sitka',
+        primaryColor: AppColors.appGreen,
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       //  home: Wrapper(),
-      initialRoute: ROUTE_CREATE_STORY,
+      initialRoute: ROUTE_HOME,
       routes: {
+        ROUTE_HOME: (context) => generateHomeBlocProvider(),
         ROUTE_CREATE_STORY: (context) => BlocProvider<PostBloc>(
               bloc: PostBloc(),
               child: CreateStoryScreen(
@@ -44,6 +51,44 @@ class App extends StatelessWidget {
                 },
                 child: StoryGenreScreen()),
       },
+    );
+  }
+
+  FlutterBloc.MultiBlocProvider generateHomeBlocProvider() {
+    return FlutterBloc.MultiBlocProvider(
+      providers: [
+        FlutterBloc.BlocProvider<AgriMedicinesStoryBloc>(
+          create: (BuildContext context) => AgriMedicinesStoryBloc(
+              storyRepository: FirestoreStoryRepository(
+                  HomeNavigationItemIdEnum.AGRI_MEDICINES.value)),
+        ),
+        FlutterBloc.BlocProvider<ArticlesStoryBloc>(
+          create: (BuildContext context) => ArticlesStoryBloc(
+              storyRepository: FirestoreStoryRepository(
+                  HomeNavigationItemIdEnum.ARTICLES.value)),
+        ),
+        FlutterBloc.BlocProvider<HomeStoryBloc>(
+          create: (BuildContext context) => HomeStoryBloc(
+              storyRepository: FirestoreStoryRepository(
+                  HomeNavigationItemIdEnum.HOME.value)),
+        ),
+        FlutterBloc.BlocProvider<ModernAgriStoryBloc>(
+          create: (BuildContext context) => ModernAgriStoryBloc(
+              storyRepository: FirestoreStoryRepository(
+                  HomeNavigationItemIdEnum.MODERN_AGRI.value)),
+        ),
+        FlutterBloc.BlocProvider<NaturalAgriStoryBloc>(
+          create: (BuildContext context) => NaturalAgriStoryBloc(
+              storyRepository: FirestoreStoryRepository(
+                  HomeNavigationItemIdEnum.NATURAL_AGRI.value)),
+        ),
+        FlutterBloc.BlocProvider<TerraceGardenStoryBloc>(
+          create: (BuildContext context) => TerraceGardenStoryBloc(
+              storyRepository: FirestoreStoryRepository(
+                  HomeNavigationItemIdEnum.TERRACE_GARDEN.value)),
+        ),
+      ],
+      child: MyHomePage(title: 'Vivasayi'),
     );
   }
 }

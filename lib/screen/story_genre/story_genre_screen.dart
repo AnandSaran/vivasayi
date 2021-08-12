@@ -9,7 +9,7 @@ class StoryGenreScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(STORY_GENRE),
-        backgroundColor: Theme.Colors.toolBarBackgroundColor,
+        backgroundColor: Theme.AppColors.toolBarBackgroundColor,
       ),
       body: SelectStoryGenre(),
     );

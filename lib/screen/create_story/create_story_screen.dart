@@ -100,7 +100,7 @@ class _CreateStoryState extends State<CreateStoryScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(CREATE_STORY),
-        backgroundColor: Theme.Colors.toolBarBackgroundColor,
+        backgroundColor: Theme.AppColors.toolBarBackgroundColor,
         actions: <Widget>[
           /* Builder(
             builder: (context) => IconButton(
@@ -115,7 +115,7 @@ class _CreateStoryState extends State<CreateStoryScreen> {
             builder: (context) => IconButton(
               icon: Icon(
                 Icons.cloud_upload,
-                color: Theme.Colors.iconColor,
+                color: Theme.AppColors.iconColor,
               ),
               onPressed: () => _bloc.submit(
                   context,
