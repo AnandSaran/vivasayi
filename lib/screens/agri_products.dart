@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:vivasayi/style/theme.dart';
 
 class AgriProductsScreen extends StatelessWidget {
+  final String id;
+
+  const AgriProductsScreen({Key? key, required this.id}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Expanded(

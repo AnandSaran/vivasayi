@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NaturalAgriScreen extends StatelessWidget {
+  final String id;
+  const NaturalAgriScreen({Key? key, required this.id}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -48,27 +51,28 @@ class NaturalAgriScreen extends StatelessWidget {
                                   ),
                                   Expanded(
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            'My item header',
-                                            style: TextStyle(
-                                                fontSize: 14.0,
-                                                color: Colors.black87,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            'Item Subheader goes here Lorem Ipsumxcvxvxdvdxvdsvdsvsdvsdvsvsv is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
-                                            maxLines: 4,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontSize: 12.0,
-                                                color: Colors.black54,
-                                                fontWeight: FontWeight.normal),
-                                          )
-                                        ],
-                                      )),
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        'My item header',
+                                        style: TextStyle(
+                                            fontSize: 14.0,
+                                            color: Colors.black87,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        'Item Subheader goes here Lorem Ipsumxcvxvxdvdxvdsvdsvsdvsdvsvsv is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
+                                        maxLines: 4,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black54,
+                                            fontWeight: FontWeight.normal),
+                                      )
+                                    ],
+                                  )),
                                 ],
                               ),
                               Divider(),

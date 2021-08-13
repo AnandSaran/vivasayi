@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AgriMedicinesScreen extends StatelessWidget {
+  final String id;
+
+  const AgriMedicinesScreen({Key? key, required this.id}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Expanded(
