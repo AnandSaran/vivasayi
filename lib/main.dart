@@ -40,8 +40,7 @@ class App extends StatelessWidget {
         ROUTE_HOME: (context) => generateHomeBlocProvider(),
         ROUTE_CREATE_STORY: (context) => BlocProvider<PostBloc>(
               bloc: PostBloc(),
-              child: CreateStoryScreen(
-                  collectionName: HomeNavigationItemIdEnum.HOME.value),
+              child: CreateStoryScreen(),
             ),
         ROUTE_SELECT_GENRE: (context) =>
             FlutterBloc.BlocProvider<StoryGenresBloc>(

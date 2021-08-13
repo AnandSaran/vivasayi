@@ -33,7 +33,7 @@ class AgriMedicinesScreen extends StatelessWidget {
           if (state is StoryLoading) {
             return LoadingIndicator();
           } else if (state is StoryLoaded) {
-            return storyListView(state.stories);
+            return storyView(state.stories, context, id);
           } else {
             return Container();
           }

@@ -17,9 +17,7 @@ import 'package:vivasayi/universal_ui/universal_ui.dart';
 import 'package:vivasayi/util/navigation.dart';
 
 class CreateStoryScreen extends StatefulWidget {
-  const CreateStoryScreen({Key? key, required this.collectionName})
-      : super(key: key);
-  final String collectionName;
+  const CreateStoryScreen({Key? key}) : super(key: key);
 
   @override
   _CreateStoryState createState() => _CreateStoryState();
@@ -34,22 +32,12 @@ class _CreateStoryState extends State<CreateStoryScreen> {
   /// Zefyr editor like any other input field requires a focus node.
   late FocusNode _focusNode;
 
-  /*@override
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-  }
-*/
-  @override
-  void dispose() {
-    _bloc.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
+    final collectionName = ModalRoute.of(context)!.settings.arguments as String;
     _bloc = BlocProvider.of<PostBloc>(context);
-    _bloc.setStoryCollectionName(widget.collectionName);
+    _bloc.setStoryCollectionName(collectionName);
     _focusNode = FocusNode();
     try {
       _controller = _bloc.loadEmptyDocument();
@@ -63,6 +51,17 @@ class _CreateStoryState extends State<CreateStoryScreen> {
     }
     _postUploadCompleteListener();
     _showSelectStoryGenreScreenListener();
+  }
+
+  @override
+  void dispose() {
+    _bloc.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override

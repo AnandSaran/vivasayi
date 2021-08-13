@@ -60,29 +60,29 @@ class _MyHomePageState extends State<MyHomePage> {
             .firstWhere((element) => element.isSelected);
         switch (selectedNavigationItem.id) {
           case HomeNavigationItemIdEnum.HOME:
-            return homeContentScreen(selectedNavigationItem.id.title);
+            return homeContentScreen(selectedNavigationItem.id.value);
           case HomeNavigationItemIdEnum.NATURAL_AGRI:
-            return naturalAgriContentScreen(selectedNavigationItem.id.title);
+            return naturalAgriContentScreen(selectedNavigationItem.id.value);
           case HomeNavigationItemIdEnum.MODERN_AGRI:
-            return _modernAgriContentScreen(selectedNavigationItem.id.title);
+            return _modernAgriContentScreen(selectedNavigationItem.id.value);
           case HomeNavigationItemIdEnum.AGRI_MEDICINES:
-            return _agriMedicinesContentScreen(selectedNavigationItem.id.title);
+            return _agriMedicinesContentScreen(selectedNavigationItem.id.value);
           case HomeNavigationItemIdEnum.TERRACE_GARDEN:
-            return _terraceGardenContentScreen(selectedNavigationItem.id.title);
+            return _terraceGardenContentScreen(selectedNavigationItem.id.value);
           case HomeNavigationItemIdEnum.AGRI_DOCTORS:
-            return _agriDoctorsContentScreen(selectedNavigationItem.id.title);
+            return _agriDoctorsContentScreen(selectedNavigationItem.id.value);
           case HomeNavigationItemIdEnum.ARTICLES:
-            return _articlesContentScreen(selectedNavigationItem.id.title);
+            return _articlesContentScreen(selectedNavigationItem.id.value);
           case HomeNavigationItemIdEnum.IRRIGATION:
-            return _irrigationContentScreen(selectedNavigationItem.id.title);
+            return _irrigationContentScreen(selectedNavigationItem.id.value);
           case HomeNavigationItemIdEnum.NURSERY:
-            return _nurseryContentScreen(selectedNavigationItem.id.title);
+            return _nurseryContentScreen(selectedNavigationItem.id.value);
           case HomeNavigationItemIdEnum.MANURE:
-            return _manureContentScreen(selectedNavigationItem.id.title);
+            return _manureContentScreen(selectedNavigationItem.id.value);
           case HomeNavigationItemIdEnum.MACHINES:
-            return _machinesContentScreen(selectedNavigationItem.id.title);
+            return _machinesContentScreen(selectedNavigationItem.id.value);
           case HomeNavigationItemIdEnum.EQUIPS:
-            return _equipsContentScreen(selectedNavigationItem.id.title);
+            return _equipsContentScreen(selectedNavigationItem.id.value);
           case HomeNavigationItemIdEnum.AGRICULTURAL_PRODUCTS:
             return _agriculturalProductsContentScreen(
                 selectedNavigationItem.id.title);

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:story_repository/story_repository.dart';
 import 'package:vivasayi/bloc/bloc.dart';
 import 'package:vivasayi/screen/widget/widgets.dart';
 
@@ -49,7 +48,7 @@ class HomeContentScreen extends StatelessWidget {
       if (state is StoryLoading) {
         return LoadingIndicator();
       } else if (state is StoryLoaded) {
-        return storyListView(state.stories);
+        return storyView(state.stories, context, id);
       } else {
         return Container();
       }

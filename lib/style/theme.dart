@@ -10,6 +10,7 @@ abstract class AppColors {
   static const Color loginGradientEnd = const Color(0xFFFFFFF9);
   static const Color homeNavigationBarBackgroundColor = const Color(0xFFFFFFFF);
   static const Color toolBarBackgroundColor = const Color(0xFF00942C);
+  static const Color fabColor = const Color(0xFFFF5722);
 
   static const Color iconColor = const Color(0xFFFFFFFF);
 

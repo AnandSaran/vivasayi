@@ -33,6 +33,14 @@ class Navigation {
     Navigator.pop(context, data);
   }
 
+  pushPageWithArgument(BuildContext context, String route, dynamic data) {
+    Navigator.pushNamed(
+      context,
+      route,
+      arguments: data,
+    );
+  }
+
   dynamic pushPageResult(BuildContext context, String route) async {
     return await Navigator.of(context).pushNamed(route);
     /*Navigator.push(
