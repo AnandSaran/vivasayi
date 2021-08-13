@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:vivasayi/models/toplist.dart';
+import 'package:vivasayi/screens/prod_description.dart';
 import 'package:vivasayi/screens/product_details.dart';
 import 'package:vivasayi/screens/product_widget.dart';
 import 'package:vivasayi/style/theme.dart';
@@ -77,6 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: InkWell(
                       onTap: () {
                         print(detailsBottom[index]['name']);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProductDescription(),
+                            ));
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
