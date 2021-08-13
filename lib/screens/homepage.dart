@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:vivasayi/models/toplist.dart';
-import 'package:vivasayi/screens/product_details.dart';
-import 'package:vivasayi/screens/product_widget.dart';
+import 'package:vivasayi/bloc/home_navigation/home_navigation.dart';
+import 'package:vivasayi/constants/constant.dart';
+import 'package:vivasayi/models/enum/enum.dart';
+import 'package:vivasayi/models/home_navigation_item.dart';
 import 'package:vivasayi/style/theme.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -15,7 +17,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,91 +24,61 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: AppColors.appGreen,
         title: Text(widget.title),
       ),
-      body: Column(
-        children: [
-          Container(
-            height: 100,
-            color: Colors.white,
-            child: Padding(
-              padding:
-                  const EdgeInsets.only(left: 10, right: 10, top: 1, bottom: 1),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: details.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 90,
-                    color: Colors.white,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(details[index]['image']),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text(
-                              details[index]['name'],
-                              textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 12),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-          _homeList(),
-          Container(
-            height: 100,
-            color: AppColors.lightGrey,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: details.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 80,
-                    color: AppColors.lightGrey,
-                    child: InkWell(
-                      onTap: () {
-                        print(detailsBottom[index]['name']);
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(detailsBottom[index]['image']),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(
-                              child: Text(
-                                detailsBottom[index]['name'],
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 12),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
+      body: _bodyWidget(),
     );
   }
 
-  Widget _homeList() {
+  _bodyWidget() {
+    return Column(
+      children: [
+        _topNavigationWidget(),
+        _homeContentWidget(),
+        _bottomNavigationWidget(),
+      ],
+    );
+  }
+
+  _homeContentWidget() {
+    return BlocBuilder<HomeNavigationBloc, HomeNavigationState>(
+        builder: (context, state) {
+      if (state is HomeNavigationLoaded) {
+        var selectedNavigationItem = state.homeNavigationList
+            .firstWhere((element) => element.isSelected);
+        switch (selectedNavigationItem.id) {
+          case HomeNavigationItemIdEnum.HOME:
+            return _homeContentScreen();
+          case HomeNavigationItemIdEnum.NATURAL_AGRI:
+            return _naturalAgriContentScreen();
+          case HomeNavigationItemIdEnum.MODERN_AGRI:
+            return _modernAgriContentScreen();
+          case HomeNavigationItemIdEnum.AGRI_MEDICINES:
+            return _agriMedicinesContentScreen();
+          case HomeNavigationItemIdEnum.TERRACE_GARDEN:
+            return _terraceGardenContentScreen();
+          case HomeNavigationItemIdEnum.AGRI_DOCTORS:
+            return _agriDoctorsContentScreen();
+          case HomeNavigationItemIdEnum.ARTICLES:
+            return _articlesContentScreen();
+          case HomeNavigationItemIdEnum.IRRIGATION:
+            return _irrigationContentScreen();
+          case HomeNavigationItemIdEnum.NURSERY:
+            return _nurseryContentScreen();
+          case HomeNavigationItemIdEnum.MANURE:
+            return _manureContentScreen();
+          case HomeNavigationItemIdEnum.MACHINES:
+            return _machinesContentScreen();
+          case HomeNavigationItemIdEnum.EQUIPS:
+            return _equipsContentScreen();
+          case HomeNavigationItemIdEnum.AGRICULTURAL_PRODUCTS:
+            return _agriculturalProductsContentScreen();
+        }
+      } else {
+        return Container();
+      }
+    });
+  }
+
+  Widget _homeContentScreen() {
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
@@ -202,5 +173,185 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  _topNavigationWidget() {
+    return Container(
+      height: 100,
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10, right: 10, top: 1, bottom: 1),
+        child: _topNavigationList(),
+      ),
+    );
+  }
+
+  _topNavigationList() {
+    return BlocBuilder<HomeNavigationBloc, HomeNavigationState>(
+        builder: (context, state) {
+      if (state is HomeNavigationLoaded) {
+        var topNavigationList = state.homeNavigationList
+            .where((element) =>
+                element.orientation == HomeNavigationItemOrientationEnum.TOP)
+            .toList();
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: topNavigationList.length,
+          itemBuilder: (context, index) {
+            var navigationItem = topNavigationList[index];
+            return Container(
+                width: 90,
+                color: Colors.white,
+                child: InkWell(
+                  onTap: () {
+                    _onClickNavigationItem(navigationItem);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Opacity(
+                        opacity: navigationItem.isSelected
+                            ? OPACITY_100
+                            : OPACITY_50,
+                        child: SvgPicture.asset(navigationItem.imagePath),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            navigationItem.title,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.black, fontSize: 12),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ));
+          },
+        );
+      } else {
+        return Container();
+      }
+    });
+  }
+
+  Container _bottomNavigationWidget() {
+    return Container(
+      height: 100,
+      color: AppColors.lightGrey,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10, right: 10),
+        child: _bottomNavigationList(),
+      ),
+    );
+  }
+
+  _bottomNavigationList() {
+    return BlocBuilder<HomeNavigationBloc, HomeNavigationState>(
+        builder: (context, state) {
+      if (state is HomeNavigationLoaded) {
+        var bottomNavigationList = state.homeNavigationList
+            .where((element) =>
+                element.orientation == HomeNavigationItemOrientationEnum.BOTTOM)
+            .toList();
+
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: bottomNavigationList.length,
+          itemBuilder: (context, index) {
+            var navigationItem = bottomNavigationList[index];
+
+            return Container(
+              width: 80,
+              color: AppColors.lightGrey,
+              child: InkWell(
+                onTap: () {
+                  _onClickNavigationItem(navigationItem);
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Opacity(
+                      opacity:
+                          navigationItem.isSelected ? OPACITY_100 : OPACITY_50,
+                      child: SvgPicture.asset(navigationItem.imagePath),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          navigationItem.title,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.black, fontSize: 12),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      } else {
+        return Container();
+      }
+    });
+  }
+
+  void _onClickNavigationItem(HomeNavigationItem navigationItem) {
+    context
+        .read<HomeNavigationBloc>()
+        .add(SelectHomeNavigationItem(navigationItem));
+  }
+
+  _naturalAgriContentScreen() {
+    return Container();
+  }
+
+  _modernAgriContentScreen() {
+    return Container();
+  }
+
+  _agriMedicinesContentScreen() {
+    return Container();
+  }
+
+  _terraceGardenContentScreen() {
+    return Container();
+  }
+
+  _agriDoctorsContentScreen() {
+    return Container();
+  }
+
+  _articlesContentScreen() {
+    return Container();
+  }
+
+  _irrigationContentScreen() {
+    return Container();
+  }
+
+  _nurseryContentScreen() {
+    return Container();
+  }
+
+  _manureContentScreen() {
+    return Container();
+  }
+
+  _machinesContentScreen() {
+    return Container();
+  }
+
+  _equipsContentScreen() {
+    return Container();
+  }
+
+  _agriculturalProductsContentScreen() {
+    return Container();
   }
 }

@@ -1,0 +1,10 @@
+const double OPACITY_10 = 0.1;
+const double OPACITY_20 = 0.2;
+const double OPACITY_30 = 0.3;
+const double OPACITY_40 = 0.4;
+const double OPACITY_50 = 0.5;
+const double OPACITY_60 = 0.6;
+const double OPACITY_70 = 0.7;
+const double OPACITY_80 = 0.8;
+const double OPACITY_90 = 0.9;
+const double OPACITY_100 = 1.0;

@@ -5,6 +5,7 @@ import 'package:story_genre_repository/story_genre_repository.dart';
 import 'package:story_repository/story_repository.dart';
 import 'package:vivasayi/bloc/story/home_story_bloc.dart';
 import 'package:vivasayi/bloc/story_genres/story_genres.dart';
+import 'package:vivasayi/repository/repository.dart';
 import 'package:vivasayi/screen/story_genre/story_genre_screen.dart';
 import 'package:vivasayi/screens/homepage.dart';
 import 'package:vivasayi/style/theme.dart';
@@ -57,6 +58,11 @@ class App extends StatelessWidget {
   FlutterBloc.MultiBlocProvider generateHomeBlocProvider() {
     return FlutterBloc.MultiBlocProvider(
       providers: [
+        FlutterBloc.BlocProvider<HomeNavigationBloc>(
+          create: (BuildContext context) => HomeNavigationBloc(
+              homeNavigationRepository: HomeNavigationRepository())
+            ..add((LoadHomeNavigationList())),
+        ),
         FlutterBloc.BlocProvider<AgriMedicinesStoryBloc>(
           create: (BuildContext context) => AgriMedicinesStoryBloc(
               storyRepository: FirestoreStoryRepository(

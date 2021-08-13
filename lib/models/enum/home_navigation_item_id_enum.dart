@@ -49,4 +49,37 @@ extension HomeNavigationItemIdEnumExtension on HomeNavigationItemIdEnum {
         return EMPTY_STRING;
     }
   }
+
+  String get title {
+    switch (this) {
+      case HomeNavigationItemIdEnum.HOME:
+        return 'Home';
+      case HomeNavigationItemIdEnum.NATURAL_AGRI:
+        return 'Natural Agri';
+      case HomeNavigationItemIdEnum.MODERN_AGRI:
+        return 'Modern Agri';
+      case HomeNavigationItemIdEnum.AGRI_MEDICINES:
+        return 'Agri Medicines';
+      case HomeNavigationItemIdEnum.TERRACE_GARDEN:
+        return 'TerraceGarden';
+      case HomeNavigationItemIdEnum.AGRI_DOCTORS:
+        return 'Agri Doctors';
+      case HomeNavigationItemIdEnum.ARTICLES:
+        return 'Articles';
+      case HomeNavigationItemIdEnum.IRRIGATION:
+        return 'Irrigation';
+      case HomeNavigationItemIdEnum.NURSERY:
+        return 'Nursery';
+      case HomeNavigationItemIdEnum.MANURE:
+        return 'Manure';
+      case HomeNavigationItemIdEnum.MACHINES:
+        return 'Machines';
+      case HomeNavigationItemIdEnum.EQUIPS:
+        return 'Equips';
+      case HomeNavigationItemIdEnum.AGRICULTURAL_PRODUCTS:
+        return 'Agricultural products';
+      default:
+        return EMPTY_STRING;
+    }
+  }
 }
