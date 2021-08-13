@@ -6,7 +6,22 @@ import 'package:vivasayi/bloc/home_navigation/home_navigation.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/models/home_navigation_item.dart';
+import 'package:vivasayi/screens/agri_doctor_screen.dart';
+import 'package:vivasayi/screens/agri_products.dart';
+import 'package:vivasayi/screens/articles_screen.dart';
+import 'package:vivasayi/screens/equips_screen.dart';
+import 'package:vivasayi/screens/home_content_screen.dart';
+import 'package:vivasayi/screens/irrigation_screen.dart';
+import 'package:vivasayi/screens/modern_agri_screen.dart';
+import 'package:vivasayi/screens/natural_agri_screen.dart';
+import 'package:vivasayi/screens/nursery_screen.dart';
+import 'package:vivasayi/screens/product_widget.dart';
+import 'package:vivasayi/screens/terrace_garden_screen.dart';
 import 'package:vivasayi/style/theme.dart';
+
+import 'agri_medicines_screen.dart';
+import 'machines_screen.dart';
+import 'manure_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -41,41 +56,41 @@ class _MyHomePageState extends State<MyHomePage> {
   _homeContentWidget() {
     return BlocBuilder<HomeNavigationBloc, HomeNavigationState>(
         builder: (context, state) {
-          if (state is HomeNavigationLoaded) {
-            var selectedNavigationItem = state.homeNavigationList
-                .firstWhere((element) => element.isSelected);
-            switch (selectedNavigationItem.id) {
-              case HomeNavigationItemIdEnum.HOME:
-                return _homeContentScreen();
-              case HomeNavigationItemIdEnum.NATURAL_AGRI:
-                return _naturalAgriContentScreen();
-              case HomeNavigationItemIdEnum.MODERN_AGRI:
-                return _modernAgriContentScreen();
-              case HomeNavigationItemIdEnum.AGRI_MEDICINES:
-                return _agriMedicinesContentScreen();
-              case HomeNavigationItemIdEnum.TERRACE_GARDEN:
-                return _terraceGardenContentScreen();
-              case HomeNavigationItemIdEnum.AGRI_DOCTORS:
-                return _agriDoctorsContentScreen();
-              case HomeNavigationItemIdEnum.ARTICLES:
-                return _articlesContentScreen();
-              case HomeNavigationItemIdEnum.IRRIGATION:
-                return _irrigationContentScreen();
-              case HomeNavigationItemIdEnum.NURSERY:
-                return _nurseryContentScreen();
-              case HomeNavigationItemIdEnum.MANURE:
-                return _manureContentScreen();
-              case HomeNavigationItemIdEnum.MACHINES:
-                return _machinesContentScreen();
-              case HomeNavigationItemIdEnum.EQUIPS:
-                return _equipsContentScreen();
-              case HomeNavigationItemIdEnum.AGRICULTURAL_PRODUCTS:
-                return _agriculturalProductsContentScreen();
-            }
-          } else {
-            return Container();
-          }
-        });
+      if (state is HomeNavigationLoaded) {
+        var selectedNavigationItem = state.homeNavigationList
+            .firstWhere((element) => element.isSelected);
+        switch (selectedNavigationItem.id) {
+          case HomeNavigationItemIdEnum.HOME:
+            return homeContentScreen();
+          case HomeNavigationItemIdEnum.NATURAL_AGRI:
+            return naturalAgriContentScreen();
+          case HomeNavigationItemIdEnum.MODERN_AGRI:
+            return _modernAgriContentScreen();
+          case HomeNavigationItemIdEnum.AGRI_MEDICINES:
+            return _agriMedicinesContentScreen();
+          case HomeNavigationItemIdEnum.TERRACE_GARDEN:
+            return _terraceGardenContentScreen();
+          case HomeNavigationItemIdEnum.AGRI_DOCTORS:
+            return _agriDoctorsContentScreen();
+          case HomeNavigationItemIdEnum.ARTICLES:
+            return _articlesContentScreen();
+          case HomeNavigationItemIdEnum.IRRIGATION:
+            return _irrigationContentScreen();
+          case HomeNavigationItemIdEnum.NURSERY:
+            return _nurseryContentScreen();
+          case HomeNavigationItemIdEnum.MANURE:
+            return _manureContentScreen();
+          case HomeNavigationItemIdEnum.MACHINES:
+            return _machinesContentScreen();
+          case HomeNavigationItemIdEnum.EQUIPS:
+            return _equipsContentScreen();
+          case HomeNavigationItemIdEnum.AGRICULTURAL_PRODUCTS:
+            return _agriculturalProductsContentScreen();
+        }
+      } else {
+        return Container();
+      }
+    });
   }
 
   Widget _homeContentScreen() {
@@ -141,27 +156,27 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                                 Expanded(
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          'My item header',
-                                          style: TextStyle(
-                                              fontSize: 14.0,
-                                              color: Colors.black87,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Text(
-                                          'Item Subheader goes here Lorem Ipsumxcvxvxdvdxvdsvdsvsdvsdvsvsv is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
-                                          maxLines: 4,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              fontSize: 12.0,
-                                              color: Colors.black54,
-                                              fontWeight: FontWeight.normal),
-                                        )
-                                      ],
-                                    )),
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'My item header',
+                                      style: TextStyle(
+                                          fontSize: 14.0,
+                                          color: Colors.black87,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      'Item Subheader goes here Lorem Ipsumxcvxvxdvdxvdsvdsvsdvsdvsvsv is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
+                                      maxLines: 4,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontSize: 12.0,
+                                          color: Colors.black54,
+                                          fontWeight: FontWeight.normal),
+                                    )
+                                  ],
+                                )),
                               ],
                             ),
                             Divider(),
@@ -189,52 +204,52 @@ class _MyHomePageState extends State<MyHomePage> {
   _topNavigationList() {
     return BlocBuilder<HomeNavigationBloc, HomeNavigationState>(
         builder: (context, state) {
-          if (state is HomeNavigationLoaded) {
-            var topNavigationList = state.homeNavigationList
-                .where((element) =>
-            element.orientation == HomeNavigationItemOrientationEnum.TOP)
-                .toList();
-            return ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: topNavigationList.length,
-              itemBuilder: (context, index) {
-                var navigationItem = topNavigationList[index];
-                return Container(
-                    width: 90,
-                    color: Colors.white,
-                    child: InkWell(
-                      onTap: () {
-                        _onClickNavigationItem(navigationItem);
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Opacity(
-                            opacity: navigationItem.isSelected
-                                ? OPACITY_100
-                                : OPACITY_50,
-                            child: SvgPicture.asset(navigationItem.imagePath),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(
-                              child: Text(
-                                navigationItem.title,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(color: Colors.black, fontSize: 12),
-                              ),
-                            ),
-                          ),
-                        ],
+      if (state is HomeNavigationLoaded) {
+        var topNavigationList = state.homeNavigationList
+            .where((element) =>
+                element.orientation == HomeNavigationItemOrientationEnum.TOP)
+            .toList();
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: topNavigationList.length,
+          itemBuilder: (context, index) {
+            var navigationItem = topNavigationList[index];
+            return Container(
+                width: 90,
+                color: Colors.white,
+                child: InkWell(
+                  onTap: () {
+                    _onClickNavigationItem(navigationItem);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Opacity(
+                        opacity: navigationItem.isSelected
+                            ? OPACITY_100
+                            : OPACITY_50,
+                        child: SvgPicture.asset(navigationItem.imagePath),
                       ),
-                    ));
-              },
-            );
-          } else {
-            return Container();
-          }
-        });
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            navigationItem.title,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.black, fontSize: 12),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ));
+          },
+        );
+      } else {
+        return Container();
+      }
+    });
   }
 
   Container _bottomNavigationWidget() {
@@ -251,54 +266,54 @@ class _MyHomePageState extends State<MyHomePage> {
   _bottomNavigationList() {
     return BlocBuilder<HomeNavigationBloc, HomeNavigationState>(
         builder: (context, state) {
-          if (state is HomeNavigationLoaded) {
-            var bottomNavigationList = state.homeNavigationList
-                .where((element) =>
-            element.orientation == HomeNavigationItemOrientationEnum.BOTTOM)
-                .toList();
+      if (state is HomeNavigationLoaded) {
+        var bottomNavigationList = state.homeNavigationList
+            .where((element) =>
+                element.orientation == HomeNavigationItemOrientationEnum.BOTTOM)
+            .toList();
 
-            return ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: bottomNavigationList.length,
-              itemBuilder: (context, index) {
-                var navigationItem = bottomNavigationList[index];
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: bottomNavigationList.length,
+          itemBuilder: (context, index) {
+            var navigationItem = bottomNavigationList[index];
 
-                return Container(
-                  width: 80,
-                  color: AppColors.lightGrey,
-                  child: InkWell(
-                    onTap: () {
-                      _onClickNavigationItem(navigationItem);
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Opacity(
-                          opacity:
+            return Container(
+              width: 80,
+              color: AppColors.lightGrey,
+              child: InkWell(
+                onTap: () {
+                  _onClickNavigationItem(navigationItem);
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Opacity(
+                      opacity:
                           navigationItem.isSelected ? OPACITY_100 : OPACITY_50,
-                          child: SvgPicture.asset(navigationItem.imagePath),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text(
-                              navigationItem.title,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.black, fontSize: 12),
-                            ),
-                          ),
-                        ),
-                      ],
+                      child: SvgPicture.asset(navigationItem.imagePath),
                     ),
-                  ),
-                );
-              },
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          navigationItem.title,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.black, fontSize: 12),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             );
-          } else {
-            return Container();
-          }
-        });
+          },
+        );
+      } else {
+        return Container();
+      }
+    });
   }
 
   void _onClickNavigationItem(HomeNavigationItem navigationItem) {
@@ -307,51 +322,55 @@ class _MyHomePageState extends State<MyHomePage> {
         .add(SelectHomeNavigationItem(navigationItem));
   }
 
-  _naturalAgriContentScreen() {
-    return Container();
+  homeContentScreen() {
+    return HomeContentScreen();
+  }
+
+  naturalAgriContentScreen() {
+    return NaturalAgriScreen();
   }
 
   _modernAgriContentScreen() {
-    return Container();
+    return ModernAgriScreen();
   }
 
   _agriMedicinesContentScreen() {
-    return Container();
+    return AgriMedicinesScreen();
   }
 
   _terraceGardenContentScreen() {
-    return Container();
+    return TerraceGardenScreen();
   }
 
   _agriDoctorsContentScreen() {
-    return Container();
+    return AgriDoctorScreen();
   }
 
   _articlesContentScreen() {
-    return Container();
+    return ArticlesScreen();
   }
 
   _irrigationContentScreen() {
-    return Container();
+    return IrrigationScreen();
   }
 
   _nurseryContentScreen() {
-    return Container();
+    return NurseryScreen();
   }
 
   _manureContentScreen() {
-    return Container();
+    return ManureScreen();
   }
 
   _machinesContentScreen() {
-    return Container();
+    return MachinesScreen();
   }
 
   _equipsContentScreen() {
-    return Container();
+    return EquipsScreen();
   }
 
   _agriculturalProductsContentScreen() {
-    return Container();
+    return AgriProductsScreen();
   }
 }
