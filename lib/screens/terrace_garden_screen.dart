@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vivasayi/bloc/bloc.dart';
+import 'package:vivasayi/screen/widget/widgets.dart';
 
 class TerraceGardenScreen extends StatelessWidget {
   final String id;
@@ -15,76 +18,24 @@ class TerraceGardenScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Flexible(
-                  child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Column(
-                            children: <Widget>[
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Container(
-                                    height: 72.0,
-                                    width: 72.0,
-                                    decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.black.withAlpha(70),
-                                              offset: const Offset(2.0, 2.0),
-                                              blurRadius: 2.0)
-                                        ],
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(12.0)),
-                                        image: DecorationImage(
-                                          image: ExactAssetImage(
-                                            'asset/svg/seedimage.png',
-                                          ),
-                                          fit: BoxFit.cover,
-                                        )),
-                                  ),
-                                  SizedBox(
-                                    width: 8.0,
-                                  ),
-                                  Expanded(
-                                      child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        'My item header',
-                                        style: TextStyle(
-                                            fontSize: 14.0,
-                                            color: Colors.black87,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        'Item Subheader goes here Lorem Ipsumxcvxvxdvdxvdsvdsvsdvsdvsvsv is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
-                                        maxLines: 4,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            fontSize: 12.0,
-                                            color: Colors.black54,
-                                            fontWeight: FontWeight.normal),
-                                      )
-                                    ],
-                                  )),
-                                ],
-                              ),
-                              Divider(),
-                            ],
-                          ),
-                        );
-                      })),
+              Flexible(child: _buildStoryListView()),
             ],
           ),
         ),
       ),
     );
+  }
+
+  _buildStoryListView() {
+    return BlocBuilder<TerraceGardenStoryBloc, StoryState>(
+        builder: (context, state) {
+      if (state is StoryLoading) {
+        return LoadingIndicator();
+      } else if (state is StoryLoaded) {
+        return storyListView(state.stories);
+      } else {
+        return Container();
+      }
+    });
   }
 }

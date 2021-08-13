@@ -66,32 +66,38 @@ class App extends StatelessWidget {
         FlutterBloc.BlocProvider<AgriMedicinesStoryBloc>(
           create: (BuildContext context) => AgriMedicinesStoryBloc(
               storyRepository: FirestoreStoryRepository(
-                  HomeNavigationItemIdEnum.AGRI_MEDICINES.value)),
+                  HomeNavigationItemIdEnum.AGRI_MEDICINES.value))
+            ..add((LoadStory())),
         ),
         FlutterBloc.BlocProvider<ArticlesStoryBloc>(
           create: (BuildContext context) => ArticlesStoryBloc(
               storyRepository: FirestoreStoryRepository(
-                  HomeNavigationItemIdEnum.ARTICLES.value)),
+                  HomeNavigationItemIdEnum.ARTICLES.value))
+            ..add((LoadStory())),
         ),
         FlutterBloc.BlocProvider<HomeStoryBloc>(
           create: (BuildContext context) => HomeStoryBloc(
-              storyRepository: FirestoreStoryRepository(
-                  HomeNavigationItemIdEnum.HOME.value)),
+              storyRepository:
+                  FirestoreStoryRepository(HomeNavigationItemIdEnum.HOME.value))
+            ..add((LoadStory())),
         ),
         FlutterBloc.BlocProvider<ModernAgriStoryBloc>(
           create: (BuildContext context) => ModernAgriStoryBloc(
               storyRepository: FirestoreStoryRepository(
-                  HomeNavigationItemIdEnum.MODERN_AGRI.value)),
+                  HomeNavigationItemIdEnum.MODERN_AGRI.value))
+            ..add((LoadStory())),
         ),
         FlutterBloc.BlocProvider<NaturalAgriStoryBloc>(
           create: (BuildContext context) => NaturalAgriStoryBloc(
               storyRepository: FirestoreStoryRepository(
-                  HomeNavigationItemIdEnum.NATURAL_AGRI.value)),
+                  HomeNavigationItemIdEnum.NATURAL_AGRI.value))
+            ..add((LoadStory())),
         ),
         FlutterBloc.BlocProvider<TerraceGardenStoryBloc>(
           create: (BuildContext context) => TerraceGardenStoryBloc(
               storyRepository: FirestoreStoryRepository(
-                  HomeNavigationItemIdEnum.TERRACE_GARDEN.value)),
+                  HomeNavigationItemIdEnum.TERRACE_GARDEN.value))
+            ..add((LoadStory())),
         ),
       ],
       child: MyHomePage(title: 'Vivasayi'),

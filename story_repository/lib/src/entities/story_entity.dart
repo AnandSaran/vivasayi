@@ -41,7 +41,7 @@ class StoryEntity extends Equatable {
     final data = snap.data();
     if (data == null) throw Exception();
     return StoryEntity(
-        id: snap.get('id'),
+        id: snap.id,
         userId: snap.get('userId'),
         content: snap.get('content'),
         genre: snap.get('genre'));
