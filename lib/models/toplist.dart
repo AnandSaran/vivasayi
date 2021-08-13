@@ -9,21 +9,16 @@ final List<Map> details = [
   },
   {"name": "Agri Doctors", "id": "5", "image": 'asset/svg/doctor.svg'},
   {"name": "Articles", "id": "6", "image": 'asset/svg/book.svg'},
-  {"name": "Natural Agri", "id": "7", "image": 'asset/svg/natural_agri.svg'},
-  {"name": "Modern Agri", "id": "8", "image": 'asset/svg/modern_agri.svg'},
-  {"name": "Agri Medicines", "id": "9", "image": 'asset/svg/agri_medicine.svg'},
 ];
 
 final List<Map> detailsBottom = [
   {"name": "Home", "id": "1", "image": 'asset/svg/home.svg'},
   {"name": "Irrigation", "id": "2", "image": 'asset/svg/irrigation.svg'},
   {"name": "Nursery", "id": "2", "image": 'asset/svg/nursery.svg'},
+  {"name": "Manure", "id": "6", "image": 'asset/svg/book.svg'},
   {"name": "Machines", "id": "2", "image": 'asset/svg/machine.svg'},
+  {"name": "Equips", "id": "7", "image": 'asset/svg/natural_agri.svg'},
   {"name": "Agri Product", "id": "5", "image": 'asset/svg/agri_product.svg'},
-  {"name": "Articles", "id": "6", "image": 'asset/svg/book.svg'},
-  {"name": "Natural Agri", "id": "7", "image": 'asset/svg/natural_agri.svg'},
-  {"name": "Modern Agri", "id": "8", "image": 'asset/svg/modern_agri.svg'},
-  {"name": "Agri Medicines", "id": "9", "image": 'asset/svg/agri_medicine.svg'},
 ];
 
 final List<Map> imagesList = [

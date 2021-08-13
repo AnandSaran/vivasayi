@@ -6,7 +6,21 @@ import 'package:vivasayi/bloc/home_navigation/home_navigation.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/models/home_navigation_item.dart';
+import 'package:vivasayi/screens/agri_doctor_screen.dart';
+import 'package:vivasayi/screens/agri_products.dart';
+import 'package:vivasayi/screens/articles_screen.dart';
+import 'package:vivasayi/screens/equips_screen.dart';
+import 'package:vivasayi/screens/home_content_screen.dart';
+import 'package:vivasayi/screens/irrigation_screen.dart';
+import 'package:vivasayi/screens/modern_agri_screen.dart';
+import 'package:vivasayi/screens/natural_agri_screen.dart';
+import 'package:vivasayi/screens/nursery_screen.dart';
+import 'package:vivasayi/screens/terrace_garden_screen.dart';
 import 'package:vivasayi/style/theme.dart';
+
+import 'agri_medicines_screen.dart';
+import 'machines_screen.dart';
+import 'manure_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -46,133 +60,37 @@ class _MyHomePageState extends State<MyHomePage> {
             .firstWhere((element) => element.isSelected);
         switch (selectedNavigationItem.id) {
           case HomeNavigationItemIdEnum.HOME:
-            return _homeContentScreen();
+            return homeContentScreen(selectedNavigationItem.id.title);
           case HomeNavigationItemIdEnum.NATURAL_AGRI:
-            return _naturalAgriContentScreen();
+            return naturalAgriContentScreen(selectedNavigationItem.id.title);
           case HomeNavigationItemIdEnum.MODERN_AGRI:
-            return _modernAgriContentScreen();
+            return _modernAgriContentScreen(selectedNavigationItem.id.title);
           case HomeNavigationItemIdEnum.AGRI_MEDICINES:
-            return _agriMedicinesContentScreen();
+            return _agriMedicinesContentScreen(selectedNavigationItem.id.title);
           case HomeNavigationItemIdEnum.TERRACE_GARDEN:
-            return _terraceGardenContentScreen();
+            return _terraceGardenContentScreen(selectedNavigationItem.id.title);
           case HomeNavigationItemIdEnum.AGRI_DOCTORS:
-            return _agriDoctorsContentScreen();
+            return _agriDoctorsContentScreen(selectedNavigationItem.id.title);
           case HomeNavigationItemIdEnum.ARTICLES:
-            return _articlesContentScreen();
+            return _articlesContentScreen(selectedNavigationItem.id.title);
           case HomeNavigationItemIdEnum.IRRIGATION:
-            return _irrigationContentScreen();
+            return _irrigationContentScreen(selectedNavigationItem.id.title);
           case HomeNavigationItemIdEnum.NURSERY:
-            return _nurseryContentScreen();
+            return _nurseryContentScreen(selectedNavigationItem.id.title);
           case HomeNavigationItemIdEnum.MANURE:
-            return _manureContentScreen();
+            return _manureContentScreen(selectedNavigationItem.id.title);
           case HomeNavigationItemIdEnum.MACHINES:
-            return _machinesContentScreen();
+            return _machinesContentScreen(selectedNavigationItem.id.title);
           case HomeNavigationItemIdEnum.EQUIPS:
-            return _equipsContentScreen();
+            return _equipsContentScreen(selectedNavigationItem.id.title);
           case HomeNavigationItemIdEnum.AGRICULTURAL_PRODUCTS:
-            return _agriculturalProductsContentScreen();
+            return _agriculturalProductsContentScreen(
+                selectedNavigationItem.id.title);
         }
       } else {
         return Container();
       }
     });
-  }
-
-  Widget _homeContentScreen() {
-    return Expanded(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              color: Colors.white,
-              height: 200,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Container(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                      child: Image.asset(
-                        'asset/svg/seedimage.png',
-                        height: 200,
-                        width: 250,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            Flexible(
-                child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Column(
-                          children: <Widget>[
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Container(
-                                  height: 72.0,
-                                  width: 72.0,
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black.withAlpha(70),
-                                            offset: const Offset(2.0, 2.0),
-                                            blurRadius: 2.0)
-                                      ],
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(12.0)),
-                                      image: DecorationImage(
-                                        image: ExactAssetImage(
-                                          'asset/svg/seedimage.png',
-                                        ),
-                                        fit: BoxFit.cover,
-                                      )),
-                                ),
-                                SizedBox(
-                                  width: 8.0,
-                                ),
-                                Expanded(
-                                    child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      'My item header',
-                                      style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: Colors.black87,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      'Item Subheader goes here Lorem Ipsumxcvxvxdvdxvdsvdsvsdvsdvsvsv is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
-                                      maxLines: 4,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontSize: 12.0,
-                                          color: Colors.black54,
-                                          fontWeight: FontWeight.normal),
-                                    )
-                                  ],
-                                )),
-                              ],
-                            ),
-                            Divider(),
-                          ],
-                        ),
-                      );
-                    })),
-          ],
-        ),
-      ),
-    );
   }
 
   _topNavigationWidget() {
@@ -307,51 +225,81 @@ class _MyHomePageState extends State<MyHomePage> {
         .add(SelectHomeNavigationItem(navigationItem));
   }
 
-  _naturalAgriContentScreen() {
-    return Container();
+  homeContentScreen(String id) {
+    return HomeContentScreen(
+      id: id,
+    );
   }
 
-  _modernAgriContentScreen() {
-    return Container();
+  naturalAgriContentScreen(String id) {
+    return NaturalAgriScreen(
+      id: id,
+    );
   }
 
-  _agriMedicinesContentScreen() {
-    return Container();
+  _modernAgriContentScreen(String id) {
+    return ModernAgriScreen(
+      id: id,
+    );
   }
 
-  _terraceGardenContentScreen() {
-    return Container();
+  _agriMedicinesContentScreen(String id) {
+    return AgriMedicinesScreen(
+      id: id,
+    );
   }
 
-  _agriDoctorsContentScreen() {
-    return Container();
+  _terraceGardenContentScreen(String id) {
+    return TerraceGardenScreen(
+      id: id,
+    );
   }
 
-  _articlesContentScreen() {
-    return Container();
+  _agriDoctorsContentScreen(String id) {
+    return AgriDoctorScreen(
+      id: id,
+    );
   }
 
-  _irrigationContentScreen() {
-    return Container();
+  _articlesContentScreen(String id) {
+    return ArticlesScreen(
+      id: id,
+    );
   }
 
-  _nurseryContentScreen() {
-    return Container();
+  _irrigationContentScreen(String id) {
+    return IrrigationScreen(
+      id: id,
+    );
   }
 
-  _manureContentScreen() {
-    return Container();
+  _nurseryContentScreen(String id) {
+    return NurseryScreen(
+      id: id,
+    );
   }
 
-  _machinesContentScreen() {
-    return Container();
+  _manureContentScreen(String id) {
+    return ManureScreen(
+      id: id,
+    );
   }
 
-  _equipsContentScreen() {
-    return Container();
+  _machinesContentScreen(String id) {
+    return MachinesScreen(
+      id: id,
+    );
   }
 
-  _agriculturalProductsContentScreen() {
-    return Container();
+  _equipsContentScreen(String id) {
+    return EquipsScreen(
+      id: id,
+    );
+  }
+
+  _agriculturalProductsContentScreen(String id) {
+    return AgriProductsScreen(
+      id: id,
+    );
   }
 }
