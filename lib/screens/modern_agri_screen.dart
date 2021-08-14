@@ -9,6 +9,7 @@ class ModernAgriScreen extends StatelessWidget {
 
   const ModernAgriScreen({Key? key, required this.id}) : super(key: key);
 
+  
   @override
   Widget build(BuildContext context) {
     return Expanded(
