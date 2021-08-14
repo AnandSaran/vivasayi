@@ -3,6 +3,7 @@ import 'package:story_repository/story_repository.dart';
 
 ListView storyListView(List<Story> stories) {
   return ListView.builder(
+    
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
