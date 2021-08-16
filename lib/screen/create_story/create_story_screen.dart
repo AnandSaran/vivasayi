@@ -171,7 +171,7 @@ class _CreateStoryState extends State<CreateStoryScreen> {
 
   Widget _buildWelcomeEditor(BuildContext context) {
     var quillEditor = QuillEditor(
-        controller: _controller!,
+        controller: _controller,
         scrollController: ScrollController(),
         scrollable: true,
         focusNode: _focusNode,
@@ -195,7 +195,7 @@ class _CreateStoryState extends State<CreateStoryScreen> {
         ));
     if (kIsWeb) {
       quillEditor = QuillEditor(
-          controller: _controller!,
+          controller: _controller,
           scrollController: ScrollController(),
           scrollable: true,
           focusNode: _focusNode,
@@ -225,14 +225,14 @@ class _CreateStoryState extends State<CreateStoryScreen> {
         onVideoPickCallback: _onVideoPickCallback);
     if (kIsWeb) {
       toolbar = QuillToolbar.basic(
-          controller: _controller!,
+          controller: _controller,
           onImagePickCallback: _onImagePickCallback,
           webImagePickImpl: _webImagePickImpl);
     }
     final isDesktop = !kIsWeb && !Platform.isAndroid && !Platform.isIOS;
     if (isDesktop) {
       toolbar = QuillToolbar.basic(
-          controller: _controller!,
+          controller: _controller,
           onImagePickCallback: _onImagePickCallback,
           filePickImpl: openFileSystemPickerForDesktop);
     }
