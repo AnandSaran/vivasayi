@@ -60,32 +60,32 @@ class _MyHomePageState extends State<MyHomePage> {
             .firstWhere((element) => element.isSelected);
         switch (selectedNavigationItem.id) {
           case HomeNavigationItemIdEnum.HOME:
-            return homeContentScreen(selectedNavigationItem.id.value);
+            return homeContentScreen(selectedNavigationItem.id);
           case HomeNavigationItemIdEnum.NATURAL_AGRI:
-            return naturalAgriContentScreen(selectedNavigationItem.id.value);
+            return naturalAgriContentScreen(selectedNavigationItem.id);
           case HomeNavigationItemIdEnum.MODERN_AGRI:
-            return _modernAgriContentScreen(selectedNavigationItem.id.value);
+            return _modernAgriContentScreen(selectedNavigationItem.id);
           case HomeNavigationItemIdEnum.AGRI_MEDICINES:
-            return _agriMedicinesContentScreen(selectedNavigationItem.id.value);
+            return _agriMedicinesContentScreen(selectedNavigationItem.id);
           case HomeNavigationItemIdEnum.TERRACE_GARDEN:
-            return _terraceGardenContentScreen(selectedNavigationItem.id.value);
+            return _terraceGardenContentScreen(selectedNavigationItem.id);
           case HomeNavigationItemIdEnum.AGRI_DOCTORS:
-            return _agriDoctorsContentScreen(selectedNavigationItem.id.value);
+            return _agriDoctorsContentScreen(selectedNavigationItem.id);
           case HomeNavigationItemIdEnum.ARTICLES:
-            return _articlesContentScreen(selectedNavigationItem.id.value);
+            return _articlesContentScreen(selectedNavigationItem.id);
           case HomeNavigationItemIdEnum.IRRIGATION:
-            return _irrigationContentScreen(selectedNavigationItem.id.value);
+            return _irrigationContentScreen(selectedNavigationItem.id);
           case HomeNavigationItemIdEnum.NURSERY:
-            return _nurseryContentScreen(selectedNavigationItem.id.value);
+            return _nurseryContentScreen(selectedNavigationItem.id);
           case HomeNavigationItemIdEnum.MANURE:
-            return _manureContentScreen(selectedNavigationItem.id.value);
+            return _manureContentScreen(selectedNavigationItem.id);
           case HomeNavigationItemIdEnum.MACHINES:
-            return _machinesContentScreen(selectedNavigationItem.id.value);
+            return _machinesContentScreen(selectedNavigationItem.id);
           case HomeNavigationItemIdEnum.EQUIPS:
-            return _equipsContentScreen(selectedNavigationItem.id.value);
+            return _equipsContentScreen(selectedNavigationItem.id);
           case HomeNavigationItemIdEnum.AGRICULTURAL_PRODUCTS:
             return _agriculturalProductsContentScreen(
-                selectedNavigationItem.id.title);
+                selectedNavigationItem.id);
         }
       } else {
         return Container();
@@ -225,79 +225,79 @@ class _MyHomePageState extends State<MyHomePage> {
         .add(SelectHomeNavigationItem(navigationItem));
   }
 
-  homeContentScreen(String id) {
+  homeContentScreen(HomeNavigationItemIdEnum id) {
     return HomeContentScreen(
       id: id,
     );
   }
 
-  naturalAgriContentScreen(String id) {
+  naturalAgriContentScreen(HomeNavigationItemIdEnum id) {
     return NaturalAgriScreen(
       id: id,
     );
   }
 
-  _modernAgriContentScreen(String id) {
+  _modernAgriContentScreen(HomeNavigationItemIdEnum id) {
     return ModernAgriScreen(
       id: id,
     );
   }
 
-  _agriMedicinesContentScreen(String id) {
+  _agriMedicinesContentScreen(HomeNavigationItemIdEnum id) {
     return AgriMedicinesScreen(
       id: id,
     );
   }
 
-  _terraceGardenContentScreen(String id) {
+  _terraceGardenContentScreen(HomeNavigationItemIdEnum id) {
     return TerraceGardenScreen(
       id: id,
     );
   }
 
-  _agriDoctorsContentScreen(String id) {
+  _agriDoctorsContentScreen(HomeNavigationItemIdEnum id) {
     return AgriDoctorScreen(
       id: id,
     );
   }
 
-  _articlesContentScreen(String id) {
+  _articlesContentScreen(HomeNavigationItemIdEnum id) {
     return ArticlesScreen(
       id: id,
     );
   }
 
-  _irrigationContentScreen(String id) {
+  _irrigationContentScreen(HomeNavigationItemIdEnum id) {
     return IrrigationScreen(
       id: id,
     );
   }
 
-  _nurseryContentScreen(String id) {
+  _nurseryContentScreen(HomeNavigationItemIdEnum id) {
     return NurseryScreen(
       id: id,
     );
   }
 
-  _manureContentScreen(String id) {
+  _manureContentScreen(HomeNavigationItemIdEnum id) {
     return ManureScreen(
       id: id,
     );
   }
 
-  _machinesContentScreen(String id) {
+  _machinesContentScreen(HomeNavigationItemIdEnum id) {
     return MachinesScreen(
       id: id,
     );
   }
 
-  _equipsContentScreen(String id) {
+  _equipsContentScreen(HomeNavigationItemIdEnum id) {
     return EquipsScreen(
       id: id,
     );
   }
 
-  _agriculturalProductsContentScreen(String id) {
+  _agriculturalProductsContentScreen(HomeNavigationItemIdEnum id) {
     return AgriProductsScreen(
       id: id,
     );

@@ -9,6 +9,7 @@ const String GOOD = "Good";
 
 const String APP_NAME = "Vivasayi";
 const String CREATE_STORY = "Create Story";
+const String EDIT_STORY = "Edit Story";
 const String STORY_GENRE = "Story Genre";
 
 //title - home navigation item

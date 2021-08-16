@@ -6,6 +6,7 @@ import 'package:story_repository/story_repository.dart';
 import 'package:vivasayi/bloc/story/home_story_bloc.dart';
 import 'package:vivasayi/bloc/story_genres/story_genres.dart';
 import 'package:vivasayi/repository/repository.dart';
+import 'package:vivasayi/screen/read_story/read_story_screen.dart';
 import 'package:vivasayi/screen/story_genre/story_genre_screen.dart';
 import 'package:vivasayi/screens/homepage.dart';
 import 'package:vivasayi/style/theme.dart';
@@ -42,6 +43,7 @@ class App extends StatelessWidget {
               bloc: PostBloc(),
               child: CreateStoryScreen(),
             ),
+        ROUTE_READ_STORY: (context) => ReadStoryScreen(),
         ROUTE_SELECT_GENRE: (context) =>
             FlutterBloc.BlocProvider<StoryGenresBloc>(
                 create: (context) {

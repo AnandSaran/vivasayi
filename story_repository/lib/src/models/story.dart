@@ -11,12 +11,14 @@ class Story {
   final String title;
   final String subTitle;
   final String imageUrl;
+  final String content;
 
   Story({
     required this.id,
     required this.title,
     required this.subTitle,
     required this.imageUrl,
+    required this.content,
   });
 
   Story copyWith() {
@@ -25,12 +27,17 @@ class Story {
       title: title,
       subTitle: subTitle,
       imageUrl: imageUrl,
+      content: content,
     );
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ title.hashCode ^ subTitle.hashCode ^ imageUrl.hashCode;
+    return id.hashCode ^
+        title.hashCode ^
+        subTitle.hashCode ^
+        imageUrl.hashCode ^
+        content.hashCode;
   }
 
   @override
@@ -41,12 +48,13 @@ class Story {
             id == other.id &&
             title == other.title &&
             subTitle == other.subTitle &&
-            imageUrl == other.imageUrl;
+            imageUrl == other.imageUrl &&
+            content == other.content;
   }
 
   @override
   String toString() {
-    return 'Story{id: $id, title: $title, subTitle: $subTitle, imageUrl: $imageUrl}';
+    return 'Story{id: $id, title: $title, subTitle: $subTitle, imageUrl: $imageUrl, content: $content}';
   }
 
   static Story fromEntity(StoryEntity entity) {
@@ -58,6 +66,7 @@ class Story {
       title: quilDocument.title,
       subTitle: quilDocument.subtitle,
       imageUrl: quilDocument.imageUrl,
+      content: entity.content,
     );
   }
 }

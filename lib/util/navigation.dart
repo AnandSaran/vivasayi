@@ -41,6 +41,22 @@ class Navigation {
     );
   }
 
+  pushReplacementNamed(BuildContext context, String route, dynamic data) {
+    Navigator.pushReplacementNamed(
+      context,
+      route,
+      arguments: data,
+    );
+  }
+
+  popAndPushNamed(BuildContext context, String route, dynamic data) {
+    Navigator.popAndPushNamed(
+      context,
+      route,
+      arguments: data,
+    );
+  }
+
   dynamic pushPageResult(BuildContext context, String route) async {
     return await Navigator.of(context).pushNamed(route);
     /*Navigator.push(

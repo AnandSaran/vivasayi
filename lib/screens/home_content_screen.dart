@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vivasayi/bloc/bloc.dart';
+import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/screen/widget/widgets.dart';
 
 class HomeContentScreen extends StatelessWidget {
-  final String id;
+  final HomeNavigationItemIdEnum id;
 
   const HomeContentScreen({Key? key, required this.id}) : super(key: key);
 

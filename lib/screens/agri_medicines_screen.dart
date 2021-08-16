@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vivasayi/bloc/bloc.dart';
+import 'package:vivasayi/models/enum/home_navigation_item_id_enum.dart';
 import 'package:vivasayi/screen/widget/widgets.dart';
 
 class AgriMedicinesScreen extends StatelessWidget {
-  final String id;
+  final HomeNavigationItemIdEnum id;
 
   const AgriMedicinesScreen({Key? key, required this.id}) : super(key: key);
 

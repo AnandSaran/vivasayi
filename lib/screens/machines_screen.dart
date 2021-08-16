@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/style/theme.dart';
 
 class MachinesScreen extends StatelessWidget {
-  final String id;
+  final HomeNavigationItemIdEnum id;
 
   const MachinesScreen({Key? key, required this.id}) : super(key: key);
   @override

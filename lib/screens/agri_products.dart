@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/style/theme.dart';
 
 class AgriProductsScreen extends StatelessWidget {
-  final String id;
+  final HomeNavigationItemIdEnum id;
 
   const AgriProductsScreen({Key? key, required this.id}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -27,7 +29,7 @@ class AgriProductsScreen extends StatelessWidget {
                       ),
                     ),
                     Text("Filter"),
-                    Expanded(flex:3,child: SizedBox()),
+                    Expanded(flex: 3, child: SizedBox()),
                     Flexible(
                       flex: 5,
                       child: Container(
@@ -38,8 +40,8 @@ class AgriProductsScreen extends StatelessWidget {
                           border: Border.all(
                               color: AppColors.appGreen, // set border color
                               width: 2.0), // set border width
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10.0)), // set rounded corner radius
+                          borderRadius: BorderRadius.all(Radius.circular(
+                              10.0)), // set rounded corner radius
                         ),
                         child: TextField(
                           decoration: InputDecoration(
@@ -76,10 +78,10 @@ class AgriProductsScreen extends StatelessWidget {
                                           offset: const Offset(2.0, 2.0),
                                           blurRadius: 2.0)
                                     ],
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                     image: DecorationImage(
-                                      image:  NetworkImage(
+                                      image: NetworkImage(
                                         'https://picsum.photos/500/500?random=$index',
                                       ),
                                       fit: BoxFit.cover,

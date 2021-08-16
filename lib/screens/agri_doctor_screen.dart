@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vivasayi/models/enum/enum.dart';
 
 class AgriDoctorScreen extends StatelessWidget {
-  final String id;
+  final HomeNavigationItemIdEnum id;
 
   const AgriDoctorScreen({Key? key, required this.id}) : super(key: key);
   @override

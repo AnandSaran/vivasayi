@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/style/theme.dart';
 
 class NurseryScreen extends StatelessWidget {
-  final String id;
+  final HomeNavigationItemIdEnum id;
 
   const NurseryScreen({Key? key, required this.id}) : super(key: key);
   @override

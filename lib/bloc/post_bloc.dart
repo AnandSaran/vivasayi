@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:rxdart/rxdart.dart';
-import 'package:story_repository/story_repository.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/extension/extension.dart';
 import 'package:vivasayi/models/models.dart';
@@ -53,7 +52,6 @@ class PostBloc extends BlocBase {
 
   void submit(BuildContext context, String content, String plainText) {
     _content.add(content);
-    _showProgress.sink.add(true);
     if (_validateContent(context, plainText)) {
       _showSelectStoryGenreScreen.sink.add(true);
       // addUserPost();
@@ -87,9 +85,19 @@ class PostBloc extends BlocBase {
   }
 
   void addUserPost(String genre) {
+    _showProgress.sink.add(true);
     Post post =
         Post(EMPTY_STRING, EMPTY_STRING, _content.value, EMPTY_STRING, genre);
     _repository.addNewPost(post).then((value) {
+      _cleanDocument();
+    });
+  }
+
+  void updateUserPost(String genre, String id) {
+    _showProgress.sink.add(true);
+    Post post =
+        Post(id, EMPTY_STRING, _content.value, EMPTY_STRING, genre);
+    _repository.updatePost(post).then((value) {
       _cleanDocument();
     });
   }
@@ -135,6 +143,12 @@ class PostBloc extends BlocBase {
 
   QuillController loadEmptyDocument() {
     final doc = Document()..insert(0, EMPTY_STRING);
+    return QuillController(
+        document: doc, selection: const TextSelection.collapsed(offset: 0));
+  }
+
+  QuillController loadRemoteDocument(String content) {
+    final doc = Document.fromJson(jsonDecode(content));
     return QuillController(
         document: doc, selection: const TextSelection.collapsed(offset: 0));
   }

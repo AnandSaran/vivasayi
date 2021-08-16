@@ -12,6 +12,8 @@ import 'package:story_genre_repository/story_genre_repository.dart';
 import 'package:tuple/tuple.dart';
 import 'package:vivasayi/bloc/bloc.dart';
 import 'package:vivasayi/constants/constant.dart';
+import 'package:vivasayi/models/data_factory/read_story_data_factory.dart';
+import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/style/theme.dart' as Theme;
 import 'package:vivasayi/universal_ui/universal_ui.dart';
 import 'package:vivasayi/util/navigation.dart';
@@ -31,16 +33,23 @@ class _CreateStoryState extends State<CreateStoryScreen> {
 
   /// Zefyr editor like any other input field requires a focus node.
   late FocusNode _focusNode;
+  late ReadStoryDataFactory readStoryDataFactory;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final collectionName = ModalRoute.of(context)!.settings.arguments as String;
+    readStoryDataFactory =
+        ModalRoute.of(context)!.settings.arguments as ReadStoryDataFactory;
     _bloc = BlocProvider.of<PostBloc>(context);
-    _bloc.setStoryCollectionName(collectionName);
+    _bloc.setStoryCollectionName(readStoryDataFactory.storyScreenId.value);
     _focusNode = FocusNode();
     try {
-      _controller = _bloc.loadEmptyDocument();
+      if (readStoryDataFactory.isEdit) {
+        _controller =
+            _bloc.loadRemoteDocument(readStoryDataFactory.story.content);
+      } else {
+        _controller = _bloc.loadEmptyDocument();
+      }
     } catch (error) {
       _bloc.loadDocument().then((controller) {
         setState(() {
@@ -98,7 +107,7 @@ class _CreateStoryState extends State<CreateStoryScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(CREATE_STORY),
+        title: Text(readStoryDataFactory.isEdit ? EDIT_STORY : CREATE_STORY),
         backgroundColor: Theme.AppColors.toolBarBackgroundColor,
         actions: <Widget>[
           /* Builder(
@@ -145,10 +154,19 @@ class _CreateStoryState extends State<CreateStoryScreen> {
   }
 
   void showSelectGenrePage() async {
-    StoryGenre storyGenre = await Navigation()
-        .pushPageResult(context, ROUTE_SELECT_GENRE) as StoryGenre;
-    print("Result back : " + storyGenre.toString());
-    _bloc.addUserPost(storyGenre.genreName);
+    try {
+      StoryGenre storyGenre = await Navigation()
+          .pushPageResult(context, ROUTE_SELECT_GENRE) as StoryGenre;
+      print("Result back : " + storyGenre.toString());
+        if (readStoryDataFactory.isEdit) {
+          _bloc.updateUserPost(
+              storyGenre.genreName, readStoryDataFactory.story.id);
+        } else {
+          _bloc.addUserPost(storyGenre.genreName);
+        }
+    }catch(e){
+
+    }
   }
 
   Widget _buildWelcomeEditor(BuildContext context) {
