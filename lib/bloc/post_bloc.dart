@@ -154,10 +154,14 @@ class PostBloc extends BlocBase {
   }
 
   void _cleanDocument() async {
-    final file = File(Directory.systemTemp.path + POST_LOCAL_PATH);
-    if (await file.exists()) {
-      file.delete().then((value) => _postUploaded.sink.add(true));
-    } else {
+    try {
+      final file = File(Directory.systemTemp.path + POST_LOCAL_PATH);
+      if (await file.exists()) {
+        file.delete().then((value) => _postUploaded.sink.add(true));
+      } else {
+        _postUploaded.sink.add(true);
+      }
+    }catch(e){
       _postUploaded.sink.add(true);
     }
   }
