@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:rxdart/rxdart.dart';
+import 'package:story_repository/src/models/story.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/extension/extension.dart';
 import 'package:vivasayi/models/models.dart';
@@ -81,7 +82,11 @@ class PostBloc extends BlocBase {
 
   //Remove item from the goal list
   void removePost(String postId) {
-    _repository.deletePost(postId);
+    _showProgress.sink.add(true);
+    _repository.deletePost(postId).then((value) {
+      _showProgress.sink.add(false);
+      _postUploaded.sink.add(true);
+    });
   }
 
   void addUserPost(String genre) {
@@ -95,8 +100,7 @@ class PostBloc extends BlocBase {
 
   void updateUserPost(String genre, String id) {
     _showProgress.sink.add(true);
-    Post post =
-        Post(id, EMPTY_STRING, _content.value, EMPTY_STRING, genre);
+    Post post = Post(id, EMPTY_STRING, _content.value, EMPTY_STRING, genre);
     _repository.updatePost(post).then((value) {
       _cleanDocument();
     });
@@ -177,4 +181,6 @@ class PostBloc extends BlocBase {
               return fileURL;
             }));
   }
+
+  deletePost(Story story) {}
 }

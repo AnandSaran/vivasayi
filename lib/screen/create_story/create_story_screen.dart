@@ -119,6 +119,17 @@ class _CreateStoryState extends State<CreateStoryScreen> {
               onPressed: () => _bloc.saveDocument(context, _controller),
             ),
           ),*/
+          Visibility(
+              visible: readStoryDataFactory.isEdit,
+              child: Builder(
+                builder: (context) => IconButton(
+                  icon: Icon(
+                    Icons.delete,
+                    color: Theme.AppColors.iconColor,
+                  ),
+                  onPressed: () => _bloc.removePost(readStoryDataFactory.story.id),
+                ),
+              )),
           Builder(
             builder: (context) => IconButton(
               icon: Icon(
@@ -158,20 +169,18 @@ class _CreateStoryState extends State<CreateStoryScreen> {
       StoryGenre storyGenre = await Navigation()
           .pushPageResult(context, ROUTE_SELECT_GENRE) as StoryGenre;
       print("Result back : " + storyGenre.toString());
-        if (readStoryDataFactory.isEdit) {
-          _bloc.updateUserPost(
-              storyGenre.genreName, readStoryDataFactory.story.id);
-        } else {
-          _bloc.addUserPost(storyGenre.genreName);
-        }
-    }catch(e){
-
-    }
+      if (readStoryDataFactory.isEdit) {
+        _bloc.updateUserPost(
+            storyGenre.genreName, readStoryDataFactory.story.id);
+      } else {
+        _bloc.addUserPost(storyGenre.genreName);
+      }
+    } catch (e) {}
   }
 
   Widget _buildWelcomeEditor(BuildContext context) {
     var quillEditor = QuillEditor(
-        controller: _controller!,
+        controller: _controller,
         scrollController: ScrollController(),
         scrollable: true,
         focusNode: _focusNode,
@@ -195,7 +204,7 @@ class _CreateStoryState extends State<CreateStoryScreen> {
         ));
     if (kIsWeb) {
       quillEditor = QuillEditor(
-          controller: _controller!,
+          controller: _controller,
           scrollController: ScrollController(),
           scrollable: true,
           focusNode: _focusNode,
@@ -225,14 +234,14 @@ class _CreateStoryState extends State<CreateStoryScreen> {
         onVideoPickCallback: _onVideoPickCallback);
     if (kIsWeb) {
       toolbar = QuillToolbar.basic(
-          controller: _controller!,
+          controller: _controller,
           onImagePickCallback: _onImagePickCallback,
           webImagePickImpl: _webImagePickImpl);
     }
     final isDesktop = !kIsWeb && !Platform.isAndroid && !Platform.isIOS;
     if (isDesktop) {
       toolbar = QuillToolbar.basic(
-          controller: _controller!,
+          controller: _controller,
           onImagePickCallback: _onImagePickCallback,
           filePickImpl: openFileSystemPickerForDesktop);
     }
