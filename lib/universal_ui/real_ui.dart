@@ -1,4 +1,3 @@
-/*
 import 'dart:ui' as ui;
 
 class PlatformViewRegistry {
@@ -6,4 +5,3 @@ class PlatformViewRegistry {
     ui.platformViewRegistry.registerViewFactory(viewId, cb);
   }
 }
-*/
