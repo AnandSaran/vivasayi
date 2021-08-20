@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vivasayi/screens/product_screen.dart';
 import 'package:vivasayi/style/theme.dart';
 
 class NurseryScreen extends StatelessWidget {
@@ -26,11 +27,37 @@ class NurseryScreen extends StatelessWidget {
                         color: AppColors.appGreen,
                       ),
                     ),
-                    Text("Filter"),
+                    Text("Filter", style: TextStyle(fontSize: 12.0),),
                     Expanded(flex:3,child: SizedBox()),
                     Flexible(
-                      flex: 5,
+                      flex: 4,
                       child: Container(
+                          margin: EdgeInsets.only(
+                              right: 16.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AppColors.appGreen,
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text('Location'),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(
+                                  Icons.location_pin,
+                                  color: AppColors.appGreen,
+                                ),
+                              ),
+                            ],
+                          )
+                      ),
+                      /* Container(
                         margin: EdgeInsets.all(3),
                         padding: EdgeInsets.all(3),
                         decoration: BoxDecoration(
@@ -48,7 +75,7 @@ class NurseryScreen extends StatelessWidget {
                               suffixIcon: Icon(Icons.location_pin,
                                   color: AppColors.appGreen)),
                         ),
-                      ),
+                      ),*/
                     )
                   ],
                 ),
@@ -64,32 +91,42 @@ class NurseryScreen extends StatelessWidget {
                       crossAxisCount: 2,
                       children: List.generate(10, (index) {
                         return Center(
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                height: 125.0,
-                                width: 125.0,
-                                decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black.withAlpha(70),
-                                          offset: const Offset(2.0, 2.0),
-                                          blurRadius: 2.0)
-                                    ],
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0)),
-                                    image: DecorationImage(
-                                      image:  NetworkImage(
-                                        'https://picsum.photos/500/500?random=$index',
-                                      ),
-                                      fit: BoxFit.cover,
-                                    )),
-                              ),
-                              Text(
-                                'Product $index',
-                                style: Theme.of(context).textTheme.headline5,
-                              ),
-                            ],
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => ProductScreen()),
+                              );
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  height: 125.0,
+                                  width: 125.0,
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.black.withAlpha(70),
+                                            offset: const Offset(2.0, 2.0),
+                                            blurRadius: 2.0)
+                                      ],
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      image: DecorationImage(
+                                        image:  NetworkImage(
+                                          'https://picsum.photos/500/500?random=$index',
+                                        ),
+                                        fit: BoxFit.cover,
+                                      )),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Company $index',
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       }),
