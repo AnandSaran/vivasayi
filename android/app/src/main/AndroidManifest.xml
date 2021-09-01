@@ -1,8 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vivasayi.drapjinfotech.vivasayi">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
    <application
         android:label="vivasayi"
         android:icon="@mipmap/ic_launcher">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyAbnU0IRUklkOTFVyRkO4TsMEO1OqXrmjc"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

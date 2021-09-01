@@ -64,4 +64,13 @@ class Navigation {
       MaterialPageRoute(builder: (context) => screenName),
     );*/
   }
+
+  void showToast(BuildContext context, String message) {
+    hidKeyPad();
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  hidKeyPad() {
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
 }

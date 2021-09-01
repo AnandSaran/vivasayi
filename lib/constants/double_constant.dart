@@ -8,3 +8,4 @@ const double OPACITY_70 = 0.7;
 const double OPACITY_80 = 0.8;
 const double OPACITY_90 = 0.9;
 const double OPACITY_100 = 1.0;
+const double TOOLBAR_ELEVATION = 5;

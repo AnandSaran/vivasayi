@@ -1,11 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as FlutterBloc;
+import 'package:shop_repository/shop_repository.dart';
 import 'package:story_genre_repository/story_genre_repository.dart';
 import 'package:story_repository/story_repository.dart';
+import 'package:vivasayi/bloc/shop/agri_product_shop_bloc.dart';
+import 'package:vivasayi/bloc/shop/equip_shop_bloc.dart';
+import 'package:vivasayi/bloc/shop/irrigation_shop_bloc.dart';
+import 'package:vivasayi/bloc/shop/machine_shop_bloc.dart';
+import 'package:vivasayi/bloc/shop/manure_shop_bloc.dart';
+import 'package:vivasayi/bloc/shop/nursery_shop_bloc.dart';
+import 'package:vivasayi/bloc/shop/shop_event.dart';
 import 'package:vivasayi/bloc/story/home_story_bloc.dart';
 import 'package:vivasayi/bloc/story_genres/story_genres.dart';
 import 'package:vivasayi/repository/repository.dart';
+import 'package:vivasayi/screen/create_shop/create_shop_profile_screen.dart';
 import 'package:vivasayi/screen/read_story/read_story_screen.dart';
 import 'package:vivasayi/screen/story_genre/story_genre_screen.dart';
 import 'package:vivasayi/screens/homepage.dart';
@@ -32,6 +41,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'sitka',
         primaryColor: AppColors.appGreen,
+        accentColor: AppColors.accentColor,
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
@@ -52,6 +62,13 @@ class App extends StatelessWidget {
                     ..add(LoadStoryGenres());
                 },
                 child: StoryGenreScreen()),
+        ROUTE_CREATE_SHOP_PROFILE: (context) =>
+            BlocProvider<CreateShopProfileBloc>(
+              bloc: CreateShopProfileBloc(
+                  shopCategoryRepository: ShopCategoryRepository(),
+                  shopRepository: FirestoreShopRepository()),
+              child: CreateShopProfileScreen(),
+            ),
       },
     );
   }
@@ -100,8 +117,45 @@ class App extends StatelessWidget {
                   HomeNavigationItemIdEnum.TERRACE_GARDEN.value))
             ..add((LoadStory())),
         ),
+        FlutterBloc.BlocProvider<AgriProductShopBloc>(
+          create: (BuildContext context) => AgriProductShopBloc(
+              shopRepository: FirestoreShopRepository()
+                ..updateShopCategory(
+                    HomeNavigationItemIdEnum.AGRICULTURAL_PRODUCTS.value))
+            ..add((LoadShop())),
+        ),
+        FlutterBloc.BlocProvider<EquipShopBloc>(
+          create: (BuildContext context) => EquipShopBloc(
+              shopRepository: FirestoreShopRepository()
+                ..updateShopCategory(HomeNavigationItemIdEnum.EQUIPS.value))
+            ..add((LoadShop())),
+        ),
+        FlutterBloc.BlocProvider<IrrigationShopBloc>(
+          create: (BuildContext context) => IrrigationShopBloc(
+              shopRepository: FirestoreShopRepository()
+                ..updateShopCategory(HomeNavigationItemIdEnum.IRRIGATION.value))
+            ..add((LoadShop())),
+        ),
+        FlutterBloc.BlocProvider<MachineShopBloc>(
+          create: (BuildContext context) => MachineShopBloc(
+              shopRepository: FirestoreShopRepository()
+                ..updateShopCategory(HomeNavigationItemIdEnum.MACHINES.value))
+            ..add((LoadShop())),
+        ),
+        FlutterBloc.BlocProvider<ManureShopBloc>(
+          create: (BuildContext context) => ManureShopBloc(
+              shopRepository: FirestoreShopRepository()
+                ..updateShopCategory(HomeNavigationItemIdEnum.MANURE.value))
+            ..add((LoadShop())),
+        ),
+        FlutterBloc.BlocProvider<NurseryShopBloc>(
+          create: (BuildContext context) => NurseryShopBloc(
+              shopRepository: FirestoreShopRepository()
+                ..updateShopCategory(HomeNavigationItemIdEnum.NURSERY.value))
+            ..add((LoadShop())),
+        ),
       ],
-      child: MyHomePage(title: 'Vivasayi'),
+      child: MyHomePage(title: APP_NAME),
     );
   }
 }

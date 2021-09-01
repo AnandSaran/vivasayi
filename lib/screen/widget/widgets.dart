@@ -9,3 +9,6 @@ export 'snackbar.dart';
 export 'story_list_view.dart';
 export 'fab_add.dart';
 export 'story_view.dart';
+export 'phone_number.dart';
+export 'shop_view.dart';
+export 'shop_filter_view.dart';

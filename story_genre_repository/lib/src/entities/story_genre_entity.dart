@@ -36,7 +36,7 @@ class StoryGenreEntity extends Equatable {
     final data = snap.data();
     if (data == null) throw Exception();
     return StoryGenreEntity(
-        id: snap.get('id'), genreName: snap.get('genreName'));
+        id: snap.id, genreName: snap.get('genreName'));
   }
 
   Map<String, Object?> toDocument() {
