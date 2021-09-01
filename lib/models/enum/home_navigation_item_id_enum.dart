@@ -14,6 +14,7 @@ enum HomeNavigationItemIdEnum {
   MACHINES,
   EQUIPS,
   AGRICULTURAL_PRODUCTS,
+  CREATE_SHOP,
 }
 
 extension HomeNavigationItemIdEnumExtension on HomeNavigationItemIdEnum {
@@ -45,6 +46,8 @@ extension HomeNavigationItemIdEnumExtension on HomeNavigationItemIdEnum {
         return 'equips';
       case HomeNavigationItemIdEnum.AGRICULTURAL_PRODUCTS:
         return 'agricultural_products';
+        case HomeNavigationItemIdEnum.CREATE_SHOP:
+        return 'create_shop';
       default:
         return EMPTY_STRING;
     }
@@ -61,7 +64,7 @@ extension HomeNavigationItemIdEnumExtension on HomeNavigationItemIdEnum {
       case HomeNavigationItemIdEnum.AGRI_MEDICINES:
         return 'Agri Medicines';
       case HomeNavigationItemIdEnum.TERRACE_GARDEN:
-        return 'TerraceGarden';
+        return 'Terrace Garden';
       case HomeNavigationItemIdEnum.AGRI_DOCTORS:
         return 'Agri Doctors';
       case HomeNavigationItemIdEnum.ARTICLES:
@@ -77,7 +80,9 @@ extension HomeNavigationItemIdEnumExtension on HomeNavigationItemIdEnum {
       case HomeNavigationItemIdEnum.EQUIPS:
         return 'Equips';
       case HomeNavigationItemIdEnum.AGRICULTURAL_PRODUCTS:
-        return 'Agricultural products';
+        return 'Agri Products';
+      case HomeNavigationItemIdEnum.CREATE_SHOP:
+        return 'Create Shop';
       default:
         return EMPTY_STRING;
     }

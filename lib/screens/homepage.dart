@@ -6,6 +6,7 @@ import 'package:vivasayi/bloc/home_navigation/home_navigation.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/models/home_navigation_item.dart';
+import 'package:vivasayi/models/models.dart';
 import 'package:vivasayi/screens/agri_doctor_screen.dart';
 import 'package:vivasayi/screens/agri_products.dart';
 import 'package:vivasayi/screens/articles_screen.dart';
@@ -17,6 +18,8 @@ import 'package:vivasayi/screens/natural_agri_screen.dart';
 import 'package:vivasayi/screens/nursery_screen.dart';
 import 'package:vivasayi/screens/terrace_garden_screen.dart';
 import 'package:vivasayi/style/theme.dart';
+import 'package:vivasayi/style/theme.dart' as Theme;
+import 'package:vivasayi/util/navigation.dart';
 
 import 'agri_medicines_screen.dart';
 import 'machines_screen.dart';
@@ -37,6 +40,15 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: AppColors.appGreen,
         title: Text(widget.title),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.add,
+              color: Theme.AppColors.iconColor,
+            ),
+            onPressed: () => showCreateContentDialog(),
+          ),
+        ],
       ),
       body: _bodyWidget(),
     );
@@ -86,6 +98,8 @@ class _MyHomePageState extends State<MyHomePage> {
           case HomeNavigationItemIdEnum.AGRICULTURAL_PRODUCTS:
             return _agriculturalProductsContentScreen(
                 selectedNavigationItem.id);
+          default:
+            return homeContentScreen(HomeNavigationItemIdEnum.HOME);
         }
       } else {
         return Container();
@@ -301,5 +315,80 @@ class _MyHomePageState extends State<MyHomePage> {
     return AgriProductsScreen(
       id: id,
     );
+  }
+
+  showCreateContentDialog() {
+    Widget option1 =
+        generateCreateStoryDialogOption(HomeNavigationItemIdEnum.HOME);
+    Widget option2 =
+        generateCreateStoryDialogOption(HomeNavigationItemIdEnum.NATURAL_AGRI);
+    Widget option3 =
+        generateCreateStoryDialogOption(HomeNavigationItemIdEnum.MODERN_AGRI);
+    Widget option4 = generateCreateStoryDialogOption(
+        HomeNavigationItemIdEnum.AGRI_MEDICINES);
+    Widget option5 = generateCreateStoryDialogOption(
+        HomeNavigationItemIdEnum.TERRACE_GARDEN);
+   /* Widget option6 =
+        generateCreateStoryDialogOption(HomeNavigationItemIdEnum.AGRI_DOCTORS);*/
+    Widget option7 =
+        generateCreateStoryDialogOption(HomeNavigationItemIdEnum.ARTICLES);
+    Widget option8 =
+        generateCreateStoryDialogOption(HomeNavigationItemIdEnum.CREATE_SHOP);
+
+    SimpleDialog dialog = SimpleDialog(
+      children: <Widget>[
+        option1,
+        option2,
+        option3,
+        option4,
+        option5,
+        /*option6,*/
+        option7,
+        option8,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return dialog;
+      },
+    );
+  }
+
+  Widget generateCreateStoryDialogOption(
+      HomeNavigationItemIdEnum homeNavigationItemId) {
+    return SimpleDialogOption(
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Text(homeNavigationItemId.title),
+      ),
+      onPressed: () {
+        onClickCreateContentDialogItem(homeNavigationItemId);
+      },
+    );
+  }
+
+  void onClickCreateContentDialogItem(
+      HomeNavigationItemIdEnum homeNavigationItemId) {
+    switch (homeNavigationItemId) {
+      case HomeNavigationItemIdEnum.CREATE_SHOP:
+        showCreateShopProfilePage();
+        break;
+      default:
+        showCreateStoryPage(homeNavigationItemId);
+        break;
+    }
+  }
+
+  void showCreateStoryPage(HomeNavigationItemIdEnum id) {
+    ReadStoryDataFactory readStoryDataFactory =
+        ReadStoryDataFactory(storyScreenId: id);
+    Navigation().popAndPushNamed(context, ROUTE_CREATE_STORY,
+        data: readStoryDataFactory);
+  }
+
+  void showCreateShopProfilePage() {
+    Navigation().popAndPushNamed(context, ROUTE_CREATE_SHOP_PROFILE);
   }
 }

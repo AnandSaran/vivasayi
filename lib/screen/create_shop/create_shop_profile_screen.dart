@@ -91,7 +91,7 @@ class _CreateShopProfileScreenState extends State<CreateShopProfileScreen> {
         builder: (context, snapshots) {
           final isShopImageUploading =
               (snapshots.item1.data == null ? false : snapshots.item1.data);
-          final isShopImage = (snapshots.item2.data == null
+          final shopImage = (snapshots.item2.data == null
               ? PLACE_HOLDER_SHOP
               : snapshots.item2.data);
           return Center(
@@ -118,7 +118,7 @@ class _CreateShopProfileScreenState extends State<CreateShopProfileScreen> {
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: NetworkImage(
-                            isShopImage!,
+                            shopImage!,
                           ))),
                 ),
                 Visibility(

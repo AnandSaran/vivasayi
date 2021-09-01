@@ -116,7 +116,7 @@ class _ReadStoryScreenState extends State<ReadStoryScreen> {
 
   onTapEdit(ReadStoryDataFactory readStoryDataFactory) {
     readStoryDataFactory.isEdit = true;
-    Navigation().popAndPushNamed(
-        context, ROUTE_CREATE_STORY, readStoryDataFactory);
+    Navigation().popAndPushNamed(context, ROUTE_CREATE_STORY,
+        data: readStoryDataFactory);
   }
 }

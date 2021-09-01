@@ -49,7 +49,7 @@ class Navigation {
     );
   }
 
-  popAndPushNamed(BuildContext context, String route, dynamic data) {
+  popAndPushNamed(BuildContext context, String route, {dynamic data}) {
     Navigator.popAndPushNamed(
       context,
       route,
@@ -67,7 +67,8 @@ class Navigation {
 
   void showToast(BuildContext context, String message) {
     hidKeyPad();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 
   hidKeyPad() {

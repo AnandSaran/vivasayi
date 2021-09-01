@@ -1,0 +1,1 @@
+export 'read_story_data_factory.dart';
