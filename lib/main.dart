@@ -16,6 +16,7 @@ import 'package:vivasayi/bloc/story_genres/story_genres.dart';
 import 'package:vivasayi/repository/repository.dart';
 import 'package:vivasayi/screen/create_shop/create_shop_profile_screen.dart';
 import 'package:vivasayi/screen/read_story/read_story_screen.dart';
+import 'package:vivasayi/screen/splash/splash_screen.dart';
 import 'package:vivasayi/screen/story_genre/story_genre_screen.dart';
 import 'package:vivasayi/screens/homepage.dart';
 import 'package:vivasayi/style/theme.dart';
@@ -46,8 +47,9 @@ class App extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       //  home: Wrapper(),
-      initialRoute: ROUTE_HOME,
+      initialRoute: ROUTE_SPLASH,
       routes: {
+        ROUTE_SPLASH: (context) => SplashScreen(),
         ROUTE_HOME: (context) => generateHomeBlocProvider(),
         ROUTE_CREATE_STORY: (context) => BlocProvider<PostBloc>(
               bloc: PostBloc(),
