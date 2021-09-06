@@ -14,7 +14,7 @@ import 'package:vivasayi/extension/extension.dart';
 import 'package:vivasayi/models/models.dart';
 import 'package:vivasayi/repository/repository.dart';
 
-class CreateShopProfileBloc extends BlocBase {
+class CreateShopProfileScreenBloc extends BlocBase {
   final ShopCategoryRepository shopCategoryRepository;
   final ShopRepository shopRepository;
 
@@ -29,7 +29,7 @@ class CreateShopProfileBloc extends BlocBase {
   final _shopCategory = BehaviorSubject<List<ShopCategory>>();
   var progressButtonState = BehaviorSubject<ButtonState>();
 
-  CreateShopProfileBloc(
+  CreateShopProfileScreenBloc(
       {required this.shopCategoryRepository, required this.shopRepository});
 
   @override

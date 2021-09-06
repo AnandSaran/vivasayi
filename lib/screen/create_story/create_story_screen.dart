@@ -11,7 +11,7 @@ import 'package:story_genre_repository/story_genre_repository.dart';
 import 'package:tuple/tuple.dart';
 import 'package:vivasayi/bloc/bloc.dart';
 import 'package:vivasayi/constants/constant.dart';
-import 'package:vivasayi/models/data_factory/read_story_data_factory.dart';
+import 'package:vivasayi/models/data_model/read_story_data_model.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/style/theme.dart' as Theme;
 import 'package:vivasayi/universal_ui/universal_ui.dart';
@@ -32,20 +32,20 @@ class _CreateStoryState extends State<CreateStoryScreen> {
 
   /// Zefyr editor like any other input field requires a focus node.
   late FocusNode _focusNode;
-  late ReadStoryDataFactory readStoryDataFactory;
+  late ReadStoryDataModel readStoryDataModel;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    readStoryDataFactory =
-        ModalRoute.of(context)!.settings.arguments as ReadStoryDataFactory;
+    readStoryDataModel =
+        ModalRoute.of(context)!.settings.arguments as ReadStoryDataModel;
     _bloc = BlocProvider.of<PostBloc>(context);
-    _bloc.setStoryCollectionName(readStoryDataFactory.storyScreenId.value);
+    _bloc.setStoryCollectionName(readStoryDataModel.storyScreenId.value);
     _focusNode = FocusNode();
     try {
-      if (readStoryDataFactory.isEdit) {
+      if (readStoryDataModel.isEdit) {
         _controller =
-            _bloc.loadRemoteDocument(readStoryDataFactory.story.content);
+            _bloc.loadRemoteDocument(readStoryDataModel.story.content);
       } else {
         _controller = _bloc.loadEmptyDocument();
       }
@@ -106,7 +106,7 @@ class _CreateStoryState extends State<CreateStoryScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(readStoryDataFactory.isEdit ? EDIT_STORY : CREATE_STORY),
+        title: Text(readStoryDataModel.isEdit ? EDIT_STORY : CREATE_STORY),
         backgroundColor: Theme.AppColors.toolBarBackgroundColor,
         actions: <Widget>[
           /* Builder(
@@ -119,14 +119,14 @@ class _CreateStoryState extends State<CreateStoryScreen> {
             ),
           ),*/
           Visibility(
-              visible: readStoryDataFactory.isEdit,
+              visible: readStoryDataModel.isEdit,
               child: Builder(
                 builder: (context) => IconButton(
                   icon: Icon(
                     Icons.delete,
                     color: Theme.AppColors.iconColor,
                   ),
-                  onPressed: () => _bloc.removePost(readStoryDataFactory.story.id),
+                  onPressed: () => _bloc.removePost(readStoryDataModel.story.id),
                 ),
               )),
           Builder(
@@ -168,9 +168,9 @@ class _CreateStoryState extends State<CreateStoryScreen> {
       StoryGenre storyGenre = await Navigation()
           .pushPageResult(context, ROUTE_SELECT_GENRE) as StoryGenre;
       print("Result back : " + storyGenre.toString());
-      if (readStoryDataFactory.isEdit) {
+      if (readStoryDataModel.isEdit) {
         _bloc.updateUserPost(
-            storyGenre.genreName, readStoryDataFactory.story.id);
+            storyGenre.genreName, readStoryDataModel.story.id);
       } else {
         _bloc.addUserPost(storyGenre.genreName);
       }

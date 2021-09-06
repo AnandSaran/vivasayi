@@ -8,13 +8,8 @@ class FirestoreShopRepository implements ShopRepository {
   dynamic shopCollection = FirebaseFirestore.instance.collection(COL_SHOP);
   final geo = Geoflutterfire();
 
-  late final center;
+  late var center;
   final double radius = 50;
-
-  FirestoreShopRepository() {
-    center =
-        geo.point(latitude: 11.161097755043787, longitude: 79.38969615206517);
-  }
 
   updateShopCategory(String shopCategory) {
     shopCollection = shopCollection.where(FIELD_SHOP_CATEGORIES,
@@ -32,12 +27,9 @@ class FirestoreShopRepository implements ShopRepository {
   }
 
   @override
-  Stream<List<DocumentSnapshot>> shops() {
-    /* return geo.collection(collectionRef: shopCollection)
-        .within(center: center, radius: radius, field: FIELD_GEO_QUERY_FIELD_NAME).listen((event) {
-         return event.map((e) => Shop.fromSnapshot(e)).toList();
-    });*/
-
+  Stream<List<DocumentSnapshot>> shops(double lat,double long) {
+    center =
+        geo.point(latitude: lat, longitude: long);
     Stream<List<DocumentSnapshot>> stream = geo
         .collection(collectionRef: shopCollection)
         .within(

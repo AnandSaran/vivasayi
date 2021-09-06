@@ -2,8 +2,8 @@ import 'package:story_repository/story_repository.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 
-class ReadStoryDataFactory {
-  ReadStoryDataFactory({required this.storyScreenId, story, isEdit})
+class ReadStoryDataModel {
+  ReadStoryDataModel({required this.storyScreenId, story, isEdit})
       : this.story = story ??
             Story(
                 id: EMPTY_STRING,

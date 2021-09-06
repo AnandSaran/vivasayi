@@ -49,3 +49,7 @@ const ACTION_SUCCESS = "Success";
 
 //symbol
 const SYMBOL_PLUS = "+";
+const SYMBOL_THREE_DOT = "...";
+
+//Title dialog
+const TITLE_ENABLE_LOCATION = "Enable location";

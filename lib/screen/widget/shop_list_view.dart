@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_repository/shop_repository.dart';
 import 'package:vivasayi/constants/constant.dart';
-import 'package:vivasayi/models/data_factory/read_story_data_factory.dart';
+import 'package:vivasayi/models/data_model/read_story_data_model.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/util/navigation.dart';
 
@@ -65,5 +65,5 @@ GridView storyListView(BuildContext context, List<Shop> shops,
 onTapListItem(
     BuildContext context, Shop shop, HomeNavigationItemIdEnum storyScreenId) {
   Navigation().pushPageWithArgument(context, ROUTE_READ_STORY,
-      ReadStoryDataFactory(storyScreenId: storyScreenId, story: shop));
+      ReadStoryDataModel(storyScreenId: storyScreenId, story: shop));
 }

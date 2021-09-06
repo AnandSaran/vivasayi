@@ -1,52 +1,75 @@
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:vivasayi/bloc/bloc.dart';
+import 'package:vivasayi/constants/constant.dart';
+import 'package:vivasayi/models/data_model/home_screen_data_model.dart';
+import 'package:vivasayi/screen/widget/loading_indicator.dart';
+import 'package:vivasayi/util/navigation.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    _determinePosition().asStream().listen((event) {
-      print(event);
-    });
-    return Container();
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  late SplashScreenBloc _bloc;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _bloc = BlocProvider.of<SplashScreenBloc>(context);
+    listenBlocStream();
+    _bloc.enableLocationService();
   }
 
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
+  @override
+  Widget build(BuildContext context) {
+    return LoadingIndicator();
+  }
 
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
-      return Future.error('Location services are disabled.');
-    }
+  void listenBlocStream() {
+    listenErrorMessage();
+    listenIsLocationServiceEnable();
+    listenLocationPermissionDenied();
+    listenLocation();
+  }
 
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
-        return Future.error('Location permissions are denied');
+  void listenErrorMessage() {
+    _bloc.errorMessage.stream.listen((event) {
+      Navigation().showToast(context, event);
+    });
+  }
+
+  void listenIsLocationServiceEnable() {
+    _bloc.isLocationServiceEnabled.stream.listen((event) {
+      if (event) {
+        _bloc.enableLocationPermission();
+      } else {
+        showHomeScreen();
       }
-    }
+    });
+  }
 
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
+  void listenLocation() {
+    _bloc.location.stream.listen((event) {
+      print(event);
+      showHomeScreen(currentLocation: event);
+    });
+  }
 
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
-    return await Geolocator.getCurrentPosition();
+  void showHomeScreen({Position? currentLocation}) {
+    Navigation().popAndPushNamed(context, ROUTE_HOME,
+        data: HomeScreenDataModel(currentLocation));
+  }
+
+  void listenLocationPermissionDenied() {
+    _bloc.locationPermissionDenied.stream.listen((event) {
+      if (event) {
+        // openAppSettings();
+        showHomeScreen();
+      }
+    });
   }
 }

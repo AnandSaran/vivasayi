@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:location_repository/location_repository.dart';
 import 'package:shop_repository/shop_repository.dart';
 
 class ShopEvent extends Equatable {
@@ -8,7 +9,11 @@ class ShopEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadShop extends ShopEvent {}
+class LoadShop extends ShopEvent {
+  final Location location;
+
+  const LoadShop(this.location);
+}
 
 class AddShop extends ShopEvent {
   final Shop shop;
@@ -53,4 +58,13 @@ class ShopUpdated extends ShopEvent {
 
   @override
   List<Object> get props => [stories];
+}
+
+class AddressUpdated extends ShopEvent {
+  final String address;
+
+  const AddressUpdated(this.address);
+
+  @override
+  List<Object> get props => [address];
 }

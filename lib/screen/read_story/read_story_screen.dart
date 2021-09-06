@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:vivasayi/constants/navigator_constants.dart';
-import 'package:vivasayi/models/data_factory/read_story_data_factory.dart';
+import 'package:vivasayi/models/data_model/data_model.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/screen/widget/loading_indicator.dart';
 import 'package:vivasayi/style/theme.dart' as Theme;
@@ -20,17 +20,17 @@ class _ReadStoryScreenState extends State<ReadStoryScreen> {
   final FocusNode _focusNode = FocusNode();
   QuillController? _controller;
   bool _loading = false;
-  late ReadStoryDataFactory readStoryDataFactory;
+  late ReadStoryDataModel readStoryDataModel;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    readStoryDataFactory =
-        ModalRoute.of(context)!.settings.arguments as ReadStoryDataFactory;
+    readStoryDataModel =
+        ModalRoute.of(context)!.settings.arguments as ReadStoryDataModel;
 
     if (_controller == null && !_loading) {
       _loading = true;
-      _loadContent(readStoryDataFactory);
+      _loadContent(readStoryDataModel);
     }
   }
 
@@ -44,7 +44,7 @@ class _ReadStoryScreenState extends State<ReadStoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(readStoryDataFactory.storyScreenId.title),
+        title: Text(readStoryDataModel.storyScreenId.title),
         backgroundColor: Theme.AppColors.toolBarBackgroundColor,
         actions: <Widget>[
           Builder(
@@ -54,7 +54,7 @@ class _ReadStoryScreenState extends State<ReadStoryScreen> {
                 color: Theme.AppColors.iconColor,
               ),
               onPressed: () {
-                onTapEdit(readStoryDataFactory);
+                onTapEdit(readStoryDataModel);
               },
             ),
           )
@@ -102,10 +102,10 @@ class _ReadStoryScreenState extends State<ReadStoryScreen> {
     );
   }
 
-  Future<void> _loadContent(ReadStoryDataFactory readStoryDataFactory) async {
+  Future<void> _loadContent(ReadStoryDataModel readStoryDataModel) async {
     try {
       final doc =
-          Document.fromJson(jsonDecode(readStoryDataFactory.story.content));
+          Document.fromJson(jsonDecode(readStoryDataModel.story.content));
       setState(() {
         _controller = QuillController(
             document: doc, selection: const TextSelection.collapsed(offset: 0));
@@ -114,9 +114,9 @@ class _ReadStoryScreenState extends State<ReadStoryScreen> {
     } catch (error) {}
   }
 
-  onTapEdit(ReadStoryDataFactory readStoryDataFactory) {
-    readStoryDataFactory.isEdit = true;
-    Navigation().popAndPushNamed(context, ROUTE_CREATE_STORY,
-        data: readStoryDataFactory);
+  onTapEdit(ReadStoryDataModel readStoryDataModel) {
+    readStoryDataModel.isEdit = true;
+    Navigation()
+        .popAndPushNamed(context, ROUTE_CREATE_STORY, data: readStoryDataModel);
   }
 }

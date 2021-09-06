@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:story_repository/story_repository.dart';
 import 'package:vivasayi/constants/constant.dart';
-import 'package:vivasayi/models/data_factory/read_story_data_factory.dart';
+import 'package:vivasayi/models/data_model/read_story_data_model.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/util/navigation.dart';
 
@@ -94,5 +94,5 @@ ListView storyListView(BuildContext context, List<Story> stories,
 onTapListItem(
     BuildContext context, Story story, HomeNavigationItemIdEnum storyScreenId) {
   Navigation().pushPageWithArgument(context, ROUTE_READ_STORY,
-      ReadStoryDataFactory(storyScreenId: storyScreenId, story: story));
+      ReadStoryDataModel(storyScreenId: storyScreenId, story: story));
 }

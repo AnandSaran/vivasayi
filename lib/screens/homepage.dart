@@ -7,7 +7,7 @@ import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/models/home_navigation_item.dart';
 import 'package:vivasayi/models/models.dart';
 import 'package:vivasayi/screens/agri_doctor_screen.dart';
-import 'package:vivasayi/screens/agri_products.dart';
+import 'package:vivasayi/screens/agri_products_screen.dart';
 import 'package:vivasayi/screens/articles_screen.dart';
 import 'package:vivasayi/screens/equips_screen.dart';
 import 'package:vivasayi/screens/home_content_screen.dart';
@@ -381,10 +381,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void showCreateStoryPage(HomeNavigationItemIdEnum id) {
-    ReadStoryDataFactory readStoryDataFactory =
-        ReadStoryDataFactory(storyScreenId: id);
+    ReadStoryDataModel readStoryDataModel =
+    ReadStoryDataModel(storyScreenId: id);
     Navigation().popAndPushNamed(context, ROUTE_CREATE_STORY,
-        data: readStoryDataFactory);
+        data: readStoryDataModel);
   }
 
   void showCreateShopProfilePage() {

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:location_repository/location_repository.dart';
 import 'package:shop_repository/shop_repository.dart';
 import 'package:vivasayi/bloc/shop/shops.dart';
 
@@ -8,14 +9,15 @@ class IrrigationShopBloc extends Bloc<ShopEvent, ShopState> {
   final ShopRepository _shopRepository;
   StreamSubscription? _shopSubscription;
 
-  IrrigationShopBloc({required ShopRepository shopRepository})
-      : _shopRepository = shopRepository,
+  IrrigationShopBloc({
+    required ShopRepository shopRepository,
+  })  : _shopRepository = shopRepository,
         super(ShopLoading());
 
   @override
   Stream<ShopState> mapEventToState(ShopEvent event) async* {
     if (event is LoadShop) {
-      yield* _mapLoadShopToState();
+      yield* _mapLoadShopToState(event);
     } else if (event is AddShop) {
       yield* _mapAddShopToState(event);
     } else if (event is UpdateShop) {
@@ -27,10 +29,12 @@ class IrrigationShopBloc extends Bloc<ShopEvent, ShopState> {
     }
   }
 
-
-  Stream<ShopState> _mapLoadShopToState() async* {
+  Stream<ShopState> _mapLoadShopToState(LoadShop event) async* {
     _shopSubscription?.cancel();
-    _shopSubscription = _shopRepository.shops().listen((documentSnapShots) {
+    Location location = event.location;
+    _shopSubscription = _shopRepository
+        .shops(location.latitude, location.longitude)
+        .listen((documentSnapShots) {
       add(ShopUpdated(
           documentSnapShots.map((e) => Shop.fromSnapshot(e)).toList()));
     });

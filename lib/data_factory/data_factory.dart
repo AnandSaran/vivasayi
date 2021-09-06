@@ -1,0 +1,1 @@
+export 'user_location_data_factory.dart';

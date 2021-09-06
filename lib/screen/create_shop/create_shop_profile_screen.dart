@@ -21,14 +21,14 @@ class CreateShopProfileScreen extends StatefulWidget {
 }
 
 class _CreateShopProfileScreenState extends State<CreateShopProfileScreen> {
-  late CreateShopProfileBloc _bloc;
+  late CreateShopProfileScreenBloc _bloc;
   final FocusNode _fnPhoneNumber = FocusNode();
   final FocusNode _fnWhatsAppNumber = FocusNode();
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _bloc = BlocProvider.of<CreateShopProfileBloc>(context);
+    _bloc = BlocProvider.of<CreateShopProfileScreenBloc>(context);
     _bloc.initShopCategory();
     listenErrorMessage();
   }
