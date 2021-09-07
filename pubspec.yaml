@@ -29,6 +29,8 @@ dependencies:
     path: story_repository
   shop_repository:
     path: shop_repository
+  product_repository:
+    path: product_repository
   location_repository:
     path: location_repository
   jiffy: ^3.0.1
