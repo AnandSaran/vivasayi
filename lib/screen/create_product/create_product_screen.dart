@@ -342,7 +342,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           ],
           androidUiSettings: AndroidUiSettings(
               toolbarTitle: CROP_IMAGE,
-              toolbarColor: Colors.deepOrange,
+              toolbarColor: Theme.AppColors.toolBarBackgroundColor,
               toolbarWidgetColor: Colors.white,
               initAspectRatio: CropAspectRatioPreset.original,
               lockAspectRatio: true),
