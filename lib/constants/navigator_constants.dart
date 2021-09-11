@@ -7,3 +7,4 @@ const ROUTE_CREATE_STORY='/create_story_screen';
 const ROUTE_READ_STORY='/read_story_screen';
 const ROUTE_SELECT_GENRE='/select_genre_screen';
 const ROUTE_CREATE_SHOP_PROFILE='/create_shop_profile_screen';
+const ROUTE_CREATE_PRODUCT='/create_product_screen';

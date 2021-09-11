@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as FlutterBloc;
 import 'package:location_repository/location_repository.dart';
+import 'package:product_repository/product_repository.dart';
 import 'package:shop_repository/shop_repository.dart';
 import 'package:story_genre_repository/story_genre_repository.dart';
 import 'package:story_repository/story_repository.dart';
@@ -15,6 +16,7 @@ import 'package:vivasayi/bloc/shop_address/shop_address_bloc.dart';
 import 'package:vivasayi/bloc/story/home_story_bloc.dart';
 import 'package:vivasayi/bloc/story_genres/story_genres.dart';
 import 'package:vivasayi/repository/repository.dart';
+import 'package:vivasayi/screen/create_product/create_product_screen.dart';
 import 'package:vivasayi/screen/create_shop/create_shop_profile_screen.dart';
 import 'package:vivasayi/screen/read_story/read_story_screen.dart';
 import 'package:vivasayi/screen/splash/splash_screen.dart';
@@ -76,6 +78,13 @@ class App extends StatelessWidget {
                   shopRepository: FirestoreShopRepository()),
               child: CreateShopProfileScreen(),
             ),
+        ROUTE_CREATE_PRODUCT: (context) =>
+            BlocProvider<CreateProductScreenBloc>(
+              bloc: CreateProductScreenBloc(
+                  productRepository: FirestoreProductRepository(),
+                  scaleTypeRepository: ScaleTypeRepository()),
+              child: CreateProductScreen(),
+            )
       },
     );
   }

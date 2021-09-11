@@ -9,6 +9,7 @@ class Product extends Equatable {
   final String description;
   final String qty;
   final String scaleType;
+  final String price;
 
   const Product({
     id,
@@ -17,6 +18,7 @@ class Product extends Equatable {
     required this.description,
     required this.qty,
     required this.scaleType,
+    required this.price,
   }) : this.id = id ?? EMPTY_STRING;
 
   Map<String, Object?> toJson() {
@@ -27,15 +29,17 @@ class Product extends Equatable {
       'description': description,
       'qty': qty,
       'scaleType': scaleType,
+      'price': price,
     };
   }
 
   @override
-  List<Object?> get props => [id, name, imageUrl, description, qty, scaleType];
+  List<Object?> get props =>
+      [id, name, imageUrl, description, qty, scaleType, price];
 
   @override
   String toString() {
-    return 'Shop { id: $id, name: $name, imageUrl: $imageUrl, description: $description, qty: $qty, scaleType: $scaleType}';
+    return 'Shop { id: $id, name: $name, imageUrl: $imageUrl, description: $description, qty: $qty, scaleType: $scaleType, price: $price}';
   }
 
   static Product fromJson(Map<String, Object> json) {
@@ -45,7 +49,8 @@ class Product extends Equatable {
         imageUrl: json['imageUrl'] as List<String>,
         description: json['description'] as String,
         qty: json['qty'] as String,
-        scaleType: json['scaleType'] as String);
+        scaleType: json['scaleType'] as String,
+        price: json['price'] as String);
   }
 
   static Product fromSnapshot(DocumentSnapshot snap) {
@@ -57,7 +62,8 @@ class Product extends Equatable {
         imageUrl: snap.get('imageUrl'),
         description: snap.get('description'),
         qty: snap.get('qty'),
-        scaleType: snap.get('scaleType'));
+        scaleType: snap.get('scaleType'),
+        price: snap.get('price'));
   }
 
   Map<String, Object?> toDocument() {
@@ -66,7 +72,8 @@ class Product extends Equatable {
       'imageUrl': imageUrl,
       'description': description,
       'qty': qty,
-      'scaleType': scaleType
+      'scaleType': scaleType,
+      'price': price
     };
   }
 }
