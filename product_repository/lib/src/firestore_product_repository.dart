@@ -5,6 +5,7 @@ import 'package:product_repository/product_repository.dart';
 class FirestoreProductRepository implements ProductRepository {
   late var productCollection;
 
+  @override
   setProductCollection(String shopId) {
     productCollection = FirebaseFirestore.instance
         .collection(COL_SHOP)

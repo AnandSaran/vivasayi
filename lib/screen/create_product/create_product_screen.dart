@@ -6,10 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multiple_stream_builder/multiple_stream_builder.dart';
+import 'package:product_repository/product_repository.dart';
 import 'package:progress_state_button/iconed_button.dart';
 import 'package:progress_state_button/progress_button.dart';
 import 'package:vivasayi/bloc/bloc.dart';
 import 'package:vivasayi/constants/constant.dart';
+import 'package:vivasayi/models/data_model/create_product_data_model.dart';
 import 'package:vivasayi/screen/widget/loading_indicator.dart';
 import 'package:vivasayi/style/theme.dart' as Theme;
 import 'package:vivasayi/util/navigation.dart';
@@ -26,14 +28,31 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
   final FocusNode _fnDescription = FocusNode();
   final FocusNode _fnQty = FocusNode();
   final FocusNode _fnPrice = FocusNode();
-  final FocusNode _fnScaleType = FocusNode();
+  final TextEditingController _tecName = TextEditingController();
+  final TextEditingController _tecQty = TextEditingController();
+  final TextEditingController _tecPrice = TextEditingController();
+  final TextEditingController _tecDescription = TextEditingController();
   final rgeDecimalValue = RegExp('[0-9]+[.]?[0-9]*');
+  late CreateProductDataModel createProductDataModel;
+  String _title = CREATE_PRODUCT;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    createProductDataModel =
+        ModalRoute.of(context)!.settings.arguments as CreateProductDataModel;
     _bloc = BlocProvider.of<CreateProductScreenBloc>(context);
     _bloc.initScaleTypeRepository();
+    if (createProductDataModel.isEdit) {
+      _title = EDIT_PRODUCT;
+      _bloc.setShop(createProductDataModel.shop);
+      Product product = createProductDataModel.product;
+      _bloc.setProduct(product);
+      _tecName.text = product.name;
+      _tecQty.text = product.qty;
+      _tecPrice.text = product.price;
+      _tecDescription.text = product.description;
+    }
     listenErrorMessage();
   }
 
@@ -41,7 +60,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(CREATE_PRODUCT),
+        title: Text(_title),
         backgroundColor: Theme.AppColors.toolBarBackgroundColor,
         elevation: TOOLBAR_ELEVATION,
       ),
@@ -127,6 +146,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           return Padding(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
             child: TextFormField(
+              controller: _tecName,
               onChanged: (text) {
                 _bloc.changeProductName(text);
               },
@@ -154,6 +174,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           return Padding(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
             child: TextFormField(
+              controller: _tecDescription,
               onChanged: (text) {
                 _bloc.changeDescription(text);
               },
@@ -180,6 +201,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
           return Padding(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
             child: TextFormField(
+              controller: _tecPrice,
               onChanged: (text) {
                 _bloc.changePrice(text);
               },
@@ -208,6 +230,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
         stream: _bloc.qty,
         builder: (context, AsyncSnapshot<String> snapshot) {
           return TextFormField(
+            controller: _tecQty,
             onChanged: (text) {
               _bloc.changeQty(text);
             },
@@ -328,6 +351,11 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
   void listenErrorMessage() {
     _bloc.errorMessage.stream.listen((event) {
       Navigation().showToast(context, event);
+    });
+    _bloc.progressButtonState.stream.listen((event) {
+      if(event==ButtonState.success){
+        Navigation().popDelay(context,SCREEN_CLOSING_DELAY_MILLI_SECOND);
+      }
     });
   }
 

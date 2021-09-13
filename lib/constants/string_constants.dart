@@ -13,6 +13,7 @@ const String EDIT_STORY = "Edit Story";
 const String STORY_GENRE = "Story Genre";
 const String CREATE_SHOP = "Create Shop";
 const String CREATE_PRODUCT = "Create Product";
+const String EDIT_PRODUCT = "Edit Product";
 const String SHOP_NAME = "Shop name";
 const String PRODUCT_NAME = "Product name";
 const String PHONE_NUMBER = "Phone number";
@@ -64,6 +65,8 @@ const ACTION_SUCCESS = "Success";
 //symbol
 const SYMBOL_PLUS = "+";
 const SYMBOL_THREE_DOT = "...";
+const SYMBOL_FORWARD_SLASH = "/";
+const SYMBOL_BACKWARD_SLASH = "\\";
 
 //Title dialog
 const TITLE_ENABLE_LOCATION = "Enable location";

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_repository/shop_repository.dart';
 import 'package:vivasayi/constants/constant.dart';
-import 'package:vivasayi/models/data_model/read_story_data_model.dart';
+import 'package:vivasayi/models/data_model/create_product_data_model.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/util/navigation.dart';
 
@@ -31,6 +31,10 @@ GridView storyListView(BuildContext context, List<Shop> shops,
     children: List.generate(shops.length, (index) {
       Shop shop = shops[index];
       return Center(
+          child: InkWell(
+        onTap: () {
+          onTapListItem(context, shop, storyScreenId);
+        },
         child: Column(
           children: <Widget>[
             Container(
@@ -57,13 +61,16 @@ GridView storyListView(BuildContext context, List<Shop> shops,
             ),
           ],
         ),
-      );
+      ));
     }),
   );
 }
 
 onTapListItem(
     BuildContext context, Shop shop, HomeNavigationItemIdEnum storyScreenId) {
-  Navigation().pushPageWithArgument(context, ROUTE_READ_STORY,
-      ReadStoryDataModel(storyScreenId: storyScreenId, story: shop));
+  Navigation().pushPageWithArgument(
+      context,
+      ROUTE_CREATE_PRODUCT,
+      CreateProductDataModel(
+          storyScreenId: storyScreenId, shop: shop, isEdit: true));
 }

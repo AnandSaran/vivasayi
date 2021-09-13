@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:product_repository/src/models/models.dart';
 
 abstract class ProductRepository {
+  setProductCollection(String collectionId);
+
   Future<void> addNewProduct(Product product);
 
   Future<void> deleteProduct(Product product);

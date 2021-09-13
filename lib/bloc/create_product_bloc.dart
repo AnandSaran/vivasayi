@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:product_repository/product_repository.dart';
 import 'package:progress_state_button/progress_button.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shop_repository/src/models/shop.dart';
 import 'package:vivasayi/bloc/bloc_provider/bloc_provider.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/extension/extension.dart';
@@ -24,6 +25,9 @@ class CreateProductScreenBloc extends BlocBase {
   final _scaleType = BehaviorSubject<String>();
   final scaleTypes = BehaviorSubject<List<String>>();
   var progressButtonState = BehaviorSubject<ButtonState>();
+  late Shop _shop;
+  bool isEdit = false;
+  String id = EMPTY_STRING;
 
   CreateProductScreenBloc(
       {required this.productRepository, required this.scaleTypeRepository});
@@ -32,6 +36,22 @@ class CreateProductScreenBloc extends BlocBase {
     List<String> scaleTypes = scaleTypeRepository.scaleType();
     changeScaleType(scaleTypes.first);
     changeScaleTypes(scaleTypes);
+  }
+
+  setShop(Shop shop) {
+    _shop = shop;
+    productRepository.setProductCollection(shop.id);
+  }
+
+  setProduct(Product product) {
+    isEdit = true;
+    id = product.id;
+    changeProductName(product.name);
+    changeProductImage(product.imageUrl);
+    changeDescription(product.description);
+    changeQty(product.qty);
+    changeScaleType(product.scaleType);
+    changePrice(product.price);
   }
 
   @override
@@ -179,8 +199,9 @@ class CreateProductScreenBloc extends BlocBase {
 
   _uploadFileToFireStorage(File file) async {
     changeProductImageUploading(true);
-    Reference storageReference =
-        FirebaseStorage.instance.ref().child(PRODUCT_IMAGE + file.name);
+    Reference storageReference = FirebaseStorage.instance
+        .ref()
+        .child(PRODUCT_IMAGE + _shop.id + SYMBOL_FORWARD_SLASH + file.name);
     UploadTask uploadTask = storageReference.putFile(file);
     return await uploadTask
         .whenComplete(() => null)
@@ -201,21 +222,27 @@ class CreateProductScreenBloc extends BlocBase {
         isValidProductImage &&
         isValidQty &&
         isValidPrice) {
-      createProduct();
+      if (isEdit) {
+        updateProduct();
+      } else {
+        createProduct();
+      }
     }
   }
 
   createProduct() {
     changeProgressButtonState(ButtonState.loading);
-    Product product = new Product(
-        name: _productName.value.trim(),
-        imageUrl: _productImage.value,
-        description: _description.value,
-        qty: _qty.value,
-        scaleType: _scaleType.value,
-        price: _price.value);
+    Product product = generateProduct();
     productRepository
         .addNewProduct(product)
+        .whenComplete(() => changeProgressButtonState(ButtonState.success));
+  }
+
+  updateProduct() {
+    changeProgressButtonState(ButtonState.loading);
+    Product product = generateProduct();
+    productRepository
+        .updateProduct(product)
         .whenComplete(() => changeProgressButtonState(ButtonState.success));
   }
 
@@ -255,5 +282,17 @@ class CreateProductScreenBloc extends BlocBase {
       _price.sink.addError(ERROR_PRICE);
       return false;
     }
+  }
+
+  Product generateProduct() {
+    Product product = new Product(
+        id: id,
+        name: _productName.value.trim(),
+        imageUrl: _productImage.value,
+        description: _description.value,
+        qty: _qty.value,
+        scaleType: _scaleType.value,
+        price: _price.value);
+    return product;
   }
 }

@@ -73,4 +73,9 @@ class Navigation {
   hidKeyPad() {
     FocusManager.instance.primaryFocus?.unfocus();
   }
+
+  Future<void> popDelay(BuildContext context, int milliseconds) async {
+    await new Future.delayed(Duration(milliseconds: milliseconds));
+    pop(context);
+  }
 }
