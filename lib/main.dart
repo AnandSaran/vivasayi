@@ -22,6 +22,7 @@ import 'package:vivasayi/screen/read_story/read_story_screen.dart';
 import 'package:vivasayi/screen/splash/splash_screen.dart';
 import 'package:vivasayi/screen/story_genre/story_genre_screen.dart';
 import 'package:vivasayi/screens/homepage.dart';
+import 'package:vivasayi/screens/product_screen.dart';
 import 'package:vivasayi/style/theme.dart';
 
 import 'bloc/bloc.dart';
@@ -84,7 +85,8 @@ class App extends StatelessWidget {
                   productRepository: FirestoreProductRepository(),
                   scaleTypeRepository: ScaleTypeRepository()),
               child: CreateProductScreen(),
-            )
+            ),
+        ROUTE_SHOP_SCREEN: (context) => ProductScreen(),
       },
     );
   }
