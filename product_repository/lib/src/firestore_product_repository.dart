@@ -3,7 +3,7 @@ import 'package:product_repository/constants/constant.dart';
 import 'package:product_repository/product_repository.dart';
 
 class FirestoreProductRepository implements ProductRepository {
-  late var productCollection;
+  late CollectionReference productCollection;
 
   @override
   setProductCollection(String shopId) {

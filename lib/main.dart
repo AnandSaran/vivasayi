@@ -31,6 +31,7 @@ import 'bloc/shop_address/shop_address_bloc.dart';
 import 'constants/constant.dart';
 import 'models/enum/enum.dart';
 import 'screen/create_story/create_story_screen.dart';
+import 'screens/product_details.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -86,7 +87,14 @@ class App extends StatelessWidget {
                   scaleTypeRepository: ScaleTypeRepository()),
               child: CreateProductScreen(),
             ),
-        ROUTE_SHOP_SCREEN: (context) => ProductScreen(),
+        ROUTE_PRODUCT_LIST_SCREEN: (context) =>
+            FlutterBloc.BlocProvider<ProductBloc>(
+                create: (context) {
+                  return ProductBloc(
+                      productRepository: FirestoreProductRepository());
+                },
+                child: ProductScreen()),
+        ROUTE_PRODUCT_DETAIL_SCREEN: (context) => ProductDetails(),
       },
     );
   }

@@ -1,6 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vivasayi/screens/product_details.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_repository/shop_repository.dart';
+import 'package:vivasayi/bloc/product/products.dart';
+import 'package:vivasayi/models/data_model/create_shop_data_model.dart';
+import 'package:vivasayi/models/enum/enum.dart';
+import 'package:vivasayi/screen/widget/loading_indicator.dart';
+import 'package:vivasayi/screen/widget/product_view.dart';
 import 'package:vivasayi/style/theme.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -9,6 +15,22 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+  late ProductBloc _bloc;
+  late CreateShopDataModel createShopDataModel;
+  late Shop shop;
+  late HomeNavigationItemIdEnum storyScreenId;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    createShopDataModel =
+        ModalRoute.of(context)!.settings.arguments as CreateShopDataModel;
+    shop = createShopDataModel.shop;
+    storyScreenId = createShopDataModel.storyScreenId;
+    _bloc = BlocProvider.of<ProductBloc>(context);
+    _bloc.add(SetShop(shop.id));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +41,7 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
         centerTitle: true,
         title: Text(
-          'Company Name',
+          shop.name,
           style: (TextStyle(color: Colors.white)),
         ),
         elevation: 5.0,
@@ -46,7 +68,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         image: DecorationImage(
                           image: NetworkImage(
-                            'https://picsum.photos/500/500?random=11',
+                            shop.imageUrl,
                           ),
                           fit: BoxFit.cover,
                         )),
@@ -54,69 +76,14 @@ class _ProductScreenState extends State<ProductScreen> {
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
-                      'Products',
+                      shop.name,
                       style: Theme.of(context).textTheme.headline5,
                     ),
                   ),
                 ],
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Flexible(
-                  child: SingleChildScrollView(
-                    child: GridView.count(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      crossAxisCount: 2,
-                      children: List.generate(10, (index) {
-                        return Center(
-                          child: GestureDetector(
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ProductDetails()),
-                              );
-                            },
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  height: 125.0,
-                                  width: 125.0,
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black.withAlpha(70),
-                                            offset: const Offset(2.0, 2.0),
-                                            blurRadius: 2.0)
-                                      ],
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10.0)),
-                                      image: DecorationImage(
-                                        image: NetworkImage(
-                                          'https://picsum.photos/500/500?random=$index',
-                                        ),
-                                        fit: BoxFit.cover,
-                                      )),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Text(
-                                    'Product $index',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            _buildProductListView(),
             Container(
               height: 60,
               color: AppColors.whiteColor,
@@ -173,5 +140,17 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
       ),
     );
+  }
+
+  _buildProductListView() {
+    return BlocBuilder<ProductBloc, ProductState>(builder: (context, state) {
+      if (state is ProductLoading) {
+        return LoadingIndicator();
+      } else if (state is ProductLoaded) {
+        return productView(shop, state.products, context, storyScreenId);
+      } else {
+        return Container();
+      }
+    });
   }
 }

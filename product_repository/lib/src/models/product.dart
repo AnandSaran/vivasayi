@@ -59,7 +59,7 @@ class Product extends Equatable {
     return Product(
         id: snap.id,
         name: snap.get('name'),
-        imageUrl: snap.get('imageUrl'),
+        imageUrl: List.empty(),
         description: snap.get('description'),
         qty: snap.get('qty'),
         scaleType: snap.get('scaleType'),

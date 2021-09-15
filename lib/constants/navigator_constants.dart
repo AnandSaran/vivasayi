@@ -8,4 +8,5 @@ const ROUTE_READ_STORY='/read_story_screen';
 const ROUTE_SELECT_GENRE='/select_genre_screen';
 const ROUTE_CREATE_SHOP_PROFILE='/create_shop_profile_screen';
 const ROUTE_CREATE_PRODUCT='/create_product_screen';
-const ROUTE_SHOP_SCREEN='/shop_screen';
+const ROUTE_PRODUCT_LIST_SCREEN='/product_list_screen';
+const ROUTE_PRODUCT_DETAIL_SCREEN='/product_detail_screen';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_repository/shop_repository.dart';
 import 'package:vivasayi/constants/constant.dart';
-import 'package:vivasayi/models/data_model/create_product_data_model.dart';
+import 'package:vivasayi/models/data_model/data_model.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/util/navigation.dart';
 
@@ -70,7 +70,7 @@ onTapListItem(
     BuildContext context, Shop shop, HomeNavigationItemIdEnum storyScreenId) {
   Navigation().pushPageWithArgument(
       context,
-      ROUTE_SHOP_SCREEN,
-      CreateProductDataModel(
+      ROUTE_PRODUCT_LIST_SCREEN,
+      CreateShopDataModel(
           storyScreenId: storyScreenId, shop: shop, isEdit: true));
 }

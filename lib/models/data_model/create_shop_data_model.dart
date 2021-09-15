@@ -2,8 +2,8 @@ import 'package:shop_repository/shop_repository.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 
-class CreateProductDataModel {
-  CreateProductDataModel({required this.storyScreenId, shop, isEdit})
+class CreateShopDataModel {
+  CreateShopDataModel({required this.storyScreenId, shop, isEdit})
       : this.shop = shop ??
             Shop(
                 id: EMPTY_STRING,
