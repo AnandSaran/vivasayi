@@ -23,7 +23,7 @@ class ProductWidget extends StatelessWidget {
                       ),
                     ),
                     Text("Filter"),
-                    Expanded(flex:3,child: SizedBox()),
+                    Expanded(flex: 3, child: SizedBox()),
                     Flexible(
                       flex: 5,
                       child: Container(
@@ -34,8 +34,8 @@ class ProductWidget extends StatelessWidget {
                           border: Border.all(
                               color: AppColors.appGreen, // set border color
                               width: 2.0), // set border width
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10.0)), // set rounded corner radius
+                          borderRadius: BorderRadius.all(Radius.circular(
+                              10.0)), // set rounded corner radius
                         ),
                         child: TextField(
                           decoration: InputDecoration(
@@ -72,10 +72,10 @@ class ProductWidget extends StatelessWidget {
                                           offset: const Offset(2.0, 2.0),
                                           blurRadius: 2.0)
                                     ],
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                     image: DecorationImage(
-                                      image:  NetworkImage(
+                                      image: NetworkImage(
                                         'https://picsum.photos/500/500?random=$index',
                                       ),
                                       fit: BoxFit.cover,

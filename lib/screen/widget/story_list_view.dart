@@ -37,6 +37,7 @@ ListView storyListView(BuildContext context, List<Story> stories,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
+                      margin: EdgeInsets.only(left: 8.0),
                       height: 72.0,
                       width: 72.0,
                       decoration: BoxDecoration(
@@ -55,7 +56,7 @@ ListView storyListView(BuildContext context, List<Story> stories,
                           )),
                     ),
                     SizedBox(
-                      width: 8.0,
+                      width: 16.0,
                     ),
                     Expanded(
                         child: Column(
@@ -69,13 +70,16 @@ ListView storyListView(BuildContext context, List<Story> stories,
                               color: Colors.black87,
                               fontWeight: FontWeight.bold),
                         ),
+                        SizedBox(
+                          height: 6.0,
+                        ),
                         Text(
                           story.subTitle,
                           maxLines: 4,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontSize: 12.0,
-                              color: Colors.black54,
+                              color: Colors.black,
                               fontWeight: FontWeight.normal),
                         )
                       ],

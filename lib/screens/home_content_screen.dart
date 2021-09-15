@@ -24,12 +24,14 @@ class HomeContentScreen extends StatelessWidget {
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return Container(
+                    margin: EdgeInsets.only(left: 8.0),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 8.0, left: 8.0),
                       child: Image.asset(
                         'asset/svg/seedimage.png',
-                        height: 200,
-                        width: 250,
+                      //  fit: BoxFit.fitWidth,
+                        height: 150,
+                        width: 300,
                       ),
                     ),
                   );

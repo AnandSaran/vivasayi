@@ -83,7 +83,7 @@ class _EquipsScreenState extends State<EquipsScreen> {
 
   Location getLocation() {
     HomeScreenDataModel homeScreenDataModel =
-    ModalRoute.of(context)!.settings.arguments as HomeScreenDataModel;
+        ModalRoute.of(context)!.settings.arguments as HomeScreenDataModel;
     Location location = DefaultLocationDataFactory()
         .generateOtherShopDefaultLocation(homeScreenDataModel.position);
     return location;

@@ -83,7 +83,7 @@ class _MachinesScreenState extends State<MachinesScreen> {
 
   Location getLocation() {
     HomeScreenDataModel homeScreenDataModel =
-    ModalRoute.of(context)!.settings.arguments as HomeScreenDataModel;
+        ModalRoute.of(context)!.settings.arguments as HomeScreenDataModel;
     Location location = DefaultLocationDataFactory()
         .generateOtherShopDefaultLocation(homeScreenDataModel.position);
     return location;
