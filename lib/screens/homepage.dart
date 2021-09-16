@@ -106,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  _topNavigationWidget() {
+  _topNavigationWidget()  {
     return Container(
       height: 100,
       color: Colors.white,

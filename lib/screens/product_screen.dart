@@ -51,39 +51,48 @@ class _ProductScreenState extends State<ProductScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Container(
-                    height: 125.0,
-                    width: 125.0,
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withAlpha(70),
-                              offset: const Offset(2.0, 2.0),
-                              blurRadius: 2.0)
-                        ],
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            shop.imageUrl,
+            Expanded(
+                child: SingleChildScrollView(
+                    child: Container(
+                        color: Colors.white,
+                        child:
+                            Column(mainAxisSize: MainAxisSize.min, children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 125.0,
+                                  width: 125.0,
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.black.withAlpha(70),
+                                            offset: const Offset(2.0, 2.0),
+                                            blurRadius: 2.0)
+                                      ],
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                          shop.imageUrl,
+                                        ),
+                                        fit: BoxFit.cover,
+                                      )),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    shop.name,
+                                    style:
+                                        Theme.of(context).textTheme.headline5,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          fit: BoxFit.cover,
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      shop.name,
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            _buildProductListView(),
+                          _buildProductListView(),
+                        ])))),
             Container(
               height: 60,
               color: AppColors.whiteColor,
