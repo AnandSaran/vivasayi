@@ -61,7 +61,8 @@ class _ProductDetails extends State<ProductDetails> {
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ProductDetailsContent(product),
+          Expanded(child:
+          ProductDetailsContent(product)),
           Container(
             height: 60,
             color: AppColors.whiteColor,
