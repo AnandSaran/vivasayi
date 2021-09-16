@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_repository/shop_repository.dart';
 import 'package:vivasayi/bloc/product/products.dart';
+import 'package:vivasayi/constants/constant.dart';
+import 'package:vivasayi/models/data_model/create_product_data_model.dart';
 import 'package:vivasayi/models/data_model/create_shop_data_model.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/screen/widget/loading_indicator.dart';
 import 'package:vivasayi/screen/widget/product_view.dart';
 import 'package:vivasayi/style/theme.dart';
+import 'package:vivasayi/style/theme.dart' as AppTheme;
+import 'package:vivasayi/util/navigation.dart';
 
 class ProductScreen extends StatefulWidget {
   @override
@@ -44,7 +48,16 @@ class _ProductScreenState extends State<ProductScreen> {
           shop.name,
           style: (TextStyle(color: Colors.white)),
         ),
-        elevation: 5.0,
+        elevation: TOOLBAR_ELEVATION,
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.add,
+              color: AppTheme.AppColors.iconColor,
+            ),
+            onPressed: () => showCreateProductScreen(createShopDataModel),
+          ),
+        ],
       ),
       body: Container(
         color: Colors.white,
@@ -161,5 +174,13 @@ class _ProductScreenState extends State<ProductScreen> {
         return Container();
       }
     });
+  }
+
+  showCreateProductScreen(CreateShopDataModel createShopDataModel) {
+    Navigation().pushPageWithArgument(
+        context,
+        ROUTE_CREATE_PRODUCT,
+        CreateProductDataModel(
+            storyScreenId: storyScreenId, shop: createShopDataModel.shop));
   }
 }

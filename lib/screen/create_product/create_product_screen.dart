@@ -43,9 +43,9 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
         ModalRoute.of(context)!.settings.arguments as CreateProductDataModel;
     _bloc = BlocProvider.of<CreateProductScreenBloc>(context);
     _bloc.initScaleTypeRepository();
+    _bloc.setShop(createProductDataModel.shop);
     if (createProductDataModel.isEdit) {
       _title = EDIT_PRODUCT;
-      _bloc.setShop(createProductDataModel.shop);
       Product product = createProductDataModel.product;
       _bloc.setProduct(product);
       _tecName.text = product.name;
@@ -63,6 +63,19 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
         title: Text(_title),
         backgroundColor: Theme.AppColors.toolBarBackgroundColor,
         elevation: TOOLBAR_ELEVATION,
+        actions: [
+          Visibility(
+            visible: createProductDataModel.isEdit,
+            child: IconButton(
+              icon: Icon(
+                Icons.delete_forever,
+                color: Theme.AppColors.iconColor,
+              ),
+              onPressed: () =>
+                  _bloc.deleteProduct(createProductDataModel.product),
+            ),
+          )
+        ],
       ),
       body: Container(
         child: GestureDetector(
@@ -353,8 +366,13 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       Navigation().showToast(context, event);
     });
     _bloc.progressButtonState.stream.listen((event) {
-      if(event==ButtonState.success){
-        Navigation().popDelay(context,SCREEN_CLOSING_DELAY_MILLI_SECOND);
+      if (event == ButtonState.success) {
+        Navigation().popDelay(context, SCREEN_CLOSING_DELAY_MILLI_SECOND);
+      }
+    });
+    _bloc.productDeleted.stream.listen((event) {
+      if (event) {
+        Navigation().pop(context);
       }
     });
   }

@@ -25,6 +25,8 @@ class CreateProductScreenBloc extends BlocBase {
   final _scaleType = BehaviorSubject<String>();
   final scaleTypes = BehaviorSubject<List<String>>();
   var progressButtonState = BehaviorSubject<ButtonState>();
+  var productDeleted = BehaviorSubject<bool>();
+
   late Shop _shop;
   bool isEdit = false;
   String id = EMPTY_STRING;
@@ -85,6 +87,9 @@ class CreateProductScreenBloc extends BlocBase {
 
     await progressButtonState.drain();
     progressButtonState.close();
+
+    await productDeleted.drain();
+    productDeleted.close();
   }
 
   Stream<String> get productName =>
@@ -127,6 +132,8 @@ class CreateProductScreenBloc extends BlocBase {
 
   Function(ButtonState) get changeProgressButtonState =>
       progressButtonState.sink.add;
+
+  Function(bool) get changeProductDeleted => productDeleted.sink.add;
 
   final _streamValidateProductName =
       StreamTransformer<String, String>.fromHandlers(
@@ -289,10 +296,18 @@ class CreateProductScreenBloc extends BlocBase {
         id: id,
         name: _productName.value.trim(),
         imageUrl: _productImage.value,
-        description: _description.value,
+        description: _description.valueOrNull == null
+            ? EMPTY_STRING
+            : _description.value,
         qty: _qty.value,
         scaleType: _scaleType.value,
         price: _price.value);
     return product;
+  }
+
+  deleteProduct(Product product) {
+    productRepository
+        .deleteProduct(product)
+        .whenComplete(() => changeProductDeleted(true));
   }
 }
