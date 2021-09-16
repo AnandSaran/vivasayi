@@ -56,7 +56,7 @@ class ProductDetailsContent extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
-                      "Description",
+                      DESCRIPTION,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
