@@ -9,7 +9,7 @@ class FirestoreShopRepository implements ShopRepository {
   final geo = Geoflutterfire();
 
   late var center;
-  final double radius = 5000;
+  final double radius = 50;
 
   updateShopCategory(String shopCategory) {
     shopCollection = shopCollection.where(FIELD_SHOP_CATEGORIES,
