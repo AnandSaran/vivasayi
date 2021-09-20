@@ -31,6 +31,17 @@ class FirestoreProductRepository implements ProductRepository {
   }
 
   @override
+  Stream<List<Product>> productsByShopCategory(String shopCategory) {
+    return productCollection
+        .orderBy(FIELD_NAME)
+        .where(FIELD_PRODUCT_CATEGORY, isEqualTo: shopCategory)
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs.map((doc) => Product.fromSnapshot(doc)).toList();
+    });
+  }
+
+  @override
   Future<void> updateProduct(Product product) {
     return productCollection.doc(product.id).update(product.toDocument());
   }

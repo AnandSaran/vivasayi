@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:product_repository/product_repository.dart';
+import 'package:shop_repository/shop_repository.dart';
 
 class ProductEvent extends Equatable {
   const ProductEvent();
@@ -9,13 +10,15 @@ class ProductEvent extends Equatable {
 }
 
 class SetShop extends ProductEvent {
-  final String shopId;
+  final Shop shop;
 
-  const SetShop(this.shopId);
+  const SetShop(this.shop);
 }
 
 class LoadProduct extends ProductEvent {
-  const LoadProduct();
+  final String screenId;
+
+  const LoadProduct(this.screenId);
 }
 
 class AddProduct extends ProductEvent {

@@ -10,6 +10,7 @@ class Product extends Equatable {
   final String qty;
   final String scaleType;
   final String price;
+  final String productCategory;
 
   const Product({
     id,
@@ -19,6 +20,7 @@ class Product extends Equatable {
     required this.qty,
     required this.scaleType,
     required this.price,
+    required this.productCategory,
   }) : this.id = id ?? EMPTY_STRING;
 
   Map<String, Object?> toJson() {
@@ -30,16 +32,17 @@ class Product extends Equatable {
       'qty': qty,
       'scaleType': scaleType,
       'price': price,
+      'productCategory': productCategory,
     };
   }
 
   @override
   List<Object?> get props =>
-      [id, name, imageUrl, description, qty, scaleType, price];
+      [id, name, imageUrl, description, qty, scaleType, price,productCategory];
 
   @override
   String toString() {
-    return 'Shop { id: $id, name: $name, imageUrl: $imageUrl, description: $description, qty: $qty, scaleType: $scaleType, price: $price}';
+    return 'Shop { id: $id, name: $name, imageUrl: $imageUrl, description: $description, qty: $qty, scaleType: $scaleType, price: $price, productCategory: $productCategory}';
   }
 
   static Product fromJson(Map<String, Object> json) {
@@ -50,7 +53,8 @@ class Product extends Equatable {
         description: json['description'] as String,
         qty: json['qty'] as String,
         scaleType: json['scaleType'] as String,
-        price: json['price'] as String);
+        price: json['price'] as String,
+    productCategory: json['productCategory'] as String);
   }
 
   static Product fromSnapshot(DocumentSnapshot snap) {
@@ -63,17 +67,20 @@ class Product extends Equatable {
         description: snap.get('description'),
         qty: snap.get('qty'),
         scaleType: snap.get('scaleType'),
-        price: snap.get('price'));
+        price: snap.get('price'),
+        productCategory: snap.get('productCategory'));
   }
 
   Map<String, Object?> toDocument() {
     return {
       'name': name,
+      'searchName': name.toLowerCase(),
       'imageUrl': imageUrl,
       'description': description,
       'qty': qty,
       'scaleType': scaleType,
-      'price': price
+      'price': price,
+      'productCategory': productCategory
     };
   }
 }

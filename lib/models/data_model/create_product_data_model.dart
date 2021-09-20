@@ -12,7 +12,8 @@ class CreateProductDataModel {
                 imageUrl: EMPTY_STRING,
                 phoneNumber: EMPTY_STRING,
                 whatsAppNumber: EMPTY_STRING,
-                address: EMPTY_STRING),
+                address: EMPTY_STRING,
+                shopCategories: List.empty()),
         this.product = product ??
             Product(
               id: EMPTY_STRING,
@@ -22,6 +23,7 @@ class CreateProductDataModel {
               qty: EMPTY_STRING,
               scaleType: EMPTY_STRING,
               price: EMPTY_STRING,
+              productCategory: EMPTY_STRING,
             ),
         this.isEdit = isEdit ?? false;
 

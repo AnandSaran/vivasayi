@@ -12,9 +12,11 @@ import 'package:progress_state_button/progress_button.dart';
 import 'package:vivasayi/bloc/bloc.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/data_model/create_product_data_model.dart';
+import 'package:vivasayi/models/enum/home_navigation_item_id_enum.dart';
 import 'package:vivasayi/screen/widget/loading_indicator.dart';
 import 'package:vivasayi/style/theme.dart' as Theme;
 import 'package:vivasayi/util/navigation.dart';
+import 'package:vivasayi/extension/extension.dart';
 
 class CreateProductScreen extends StatefulWidget {
   const CreateProductScreen({Key? key}) : super(key: key);
@@ -48,6 +50,7 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
       _title = EDIT_PRODUCT;
       Product product = createProductDataModel.product;
       _bloc.setProduct(product);
+      _bloc.changeSelectedProductCategory(product.productCategory.toHomeNavigationItemId());
       _tecName.text = product.name;
       _tecQty.text = product.qty;
       _tecPrice.text = product.price;
@@ -92,6 +95,8 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
               _productScaleView(),
               _editTextProductPrice(),
               _editTextProductDescription(),
+              _textSelectProductCategory(),
+              _listViewProductCategory(),
               _buttonSubmit(),
             ],
           ),
@@ -399,5 +404,47 @@ class _CreateProductScreenState extends State<CreateProductScreen> {
         _bloc.onPickImage(croppedFile);
       }
     }
+  }
+
+  Padding _textSelectProductCategory() {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+      child: Text(SELECT_PRODUCT_CATEGORY,
+          style: TextStyle(
+            fontSize: 16,
+          )),
+    );
+  }
+
+  Widget _listViewProductCategory() {
+    return StreamBuilder2<HomeNavigationItemIdEnum,
+            List<HomeNavigationItemIdEnum>>(
+        streams: Tuple2(_bloc.selectedProductCategory, _bloc.productCategory),
+        builder: (context, snapshots) {
+          final selectedProductCategory =
+              snapshots.item1.data ?? HomeNavigationItemIdEnum.HOME;
+          final productCategory = snapshots.item2.data ?? List.empty();
+
+          return ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: productCategory.length,
+              itemBuilder: (BuildContext ctxt, int index) {
+                String title = productCategory[index].title;
+                HomeNavigationItemIdEnum value = productCategory[index];
+                return Padding(
+                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: new RadioListTile<HomeNavigationItemIdEnum>(
+                      title: new Text(title),
+                      value: value,
+                      groupValue: selectedProductCategory,
+                      onChanged: (HomeNavigationItemIdEnum? value) {
+                        if (value != null) {
+                          _bloc.changeSelectedProductCategory(value);
+                        }
+                      },
+                    ));
+              });
+        });
   }
 }

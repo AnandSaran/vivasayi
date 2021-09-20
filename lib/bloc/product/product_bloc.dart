@@ -30,15 +30,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   }
 
   _mapSetShopToState(SetShop event) {
-    _productRepository.setProductCollection(event.shopId);
-    add(LoadProduct());
+    _productRepository.setProductCollection(event.shop.id);
   }
 
   Stream<ProductState> _mapLoadProductToState(LoadProduct event) async* {
     _productSubscription?.cancel();
-    _productSubscription = _productRepository.products().listen(
-          (product) => add(ProductUpdated(product)),
-        );
+    _productSubscription =
+        _productRepository.productsByShopCategory(event.screenId).listen(
+              (product) => add(ProductUpdated(product)),
+            );
   }
 
   Stream<ProductState> _mapAddProductToState(AddProduct event) async* {

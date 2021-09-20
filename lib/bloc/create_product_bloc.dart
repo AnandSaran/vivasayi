@@ -9,6 +9,7 @@ import 'package:shop_repository/src/models/shop.dart';
 import 'package:vivasayi/bloc/bloc_provider/bloc_provider.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/extension/extension.dart';
+import 'package:vivasayi/models/enum/home_navigation_item_id_enum.dart';
 import 'package:vivasayi/repository/repository.dart';
 
 class CreateProductScreenBloc extends BlocBase {
@@ -24,6 +25,8 @@ class CreateProductScreenBloc extends BlocBase {
   final _price = BehaviorSubject<String>();
   final _scaleType = BehaviorSubject<String>();
   final scaleTypes = BehaviorSubject<List<String>>();
+  final _productCategory = BehaviorSubject<List<HomeNavigationItemIdEnum>>();
+  final _selectedProductCategory = BehaviorSubject<HomeNavigationItemIdEnum>();
   var progressButtonState = BehaviorSubject<ButtonState>();
   var productDeleted = BehaviorSubject<bool>();
 
@@ -43,6 +46,11 @@ class CreateProductScreenBloc extends BlocBase {
   setShop(Shop shop) {
     _shop = shop;
     productRepository.setProductCollection(shop.id);
+    changeProductCategory(shop.shopCategories
+        .map((productCategory) => productCategory.toHomeNavigationItemId())
+        .toList());
+    changeSelectedProductCategory(
+        shop.shopCategories.first.toHomeNavigationItemId());
   }
 
   setProduct(Product product) {
@@ -90,6 +98,12 @@ class CreateProductScreenBloc extends BlocBase {
 
     await productDeleted.drain();
     productDeleted.close();
+
+    await _productCategory.drain();
+    _productCategory.close();
+
+    await _selectedProductCategory.drain();
+    _selectedProductCategory.close();
   }
 
   Stream<String> get productName =>
@@ -110,6 +124,13 @@ class CreateProductScreenBloc extends BlocBase {
 
   Stream<String> get scaleType =>
       _scaleType.stream.transform(_streamValidateScaleType);
+
+  Stream<List<HomeNavigationItemIdEnum>> get productCategory =>
+      _productCategory.stream.transform(_streamValidateProductCategory);
+
+  Stream<HomeNavigationItemIdEnum> get selectedProductCategory =>
+      _selectedProductCategory.stream
+          .transform(_streamValidateSelectedProductCategory);
 
   Function(String) get changeErrorMessage => errorMessage.sink.add;
 
@@ -134,6 +155,12 @@ class CreateProductScreenBloc extends BlocBase {
       progressButtonState.sink.add;
 
   Function(bool) get changeProductDeleted => productDeleted.sink.add;
+
+  Function(List<HomeNavigationItemIdEnum>) get changeProductCategory =>
+      _productCategory.sink.add;
+
+  Function(HomeNavigationItemIdEnum) get changeSelectedProductCategory =>
+      _selectedProductCategory.sink.add;
 
   final _streamValidateProductName =
       StreamTransformer<String, String>.fromHandlers(
@@ -194,6 +221,19 @@ class CreateProductScreenBloc extends BlocBase {
     }
   });
 
+  final _streamValidateProductCategory = StreamTransformer<
+          List<HomeNavigationItemIdEnum>,
+          List<HomeNavigationItemIdEnum>>.fromHandlers(
+      handleData: (productCategory, sink) {
+    sink.add(productCategory);
+  });
+
+  final _streamValidateSelectedProductCategory = StreamTransformer<
+          HomeNavigationItemIdEnum, HomeNavigationItemIdEnum>.fromHandlers(
+      handleData: (selectedProductCategory, sink) {
+    sink.add(selectedProductCategory);
+  });
+
   onPickImage(File pickedFile) {
     final path = pickedFile.path;
     uploadImage(path);
@@ -224,11 +264,13 @@ class CreateProductScreenBloc extends BlocBase {
     bool isValidProductImage = validateProductImage();
     bool isValidQty = validateQty();
     bool isValidPrice = validatePrice();
+    bool isValidProductCategory = validateProductCategory();
 
     if (isValidProductName &&
         isValidProductImage &&
         isValidQty &&
-        isValidPrice) {
+        isValidPrice &&
+        isValidProductCategory) {
       if (isEdit) {
         updateProduct();
       } else {
@@ -291,6 +333,15 @@ class CreateProductScreenBloc extends BlocBase {
     }
   }
 
+  bool validateProductCategory() {
+    if (_selectedProductCategory.hasValue) {
+      return true;
+    } else {
+      changeErrorMessage(ERROR_PRODUCT_CATEGORY);
+      return false;
+    }
+  }
+
   Product generateProduct() {
     Product product = new Product(
         id: id,
@@ -301,7 +352,8 @@ class CreateProductScreenBloc extends BlocBase {
             : _description.value,
         qty: _qty.value,
         scaleType: _scaleType.value,
-        price: _price.value);
+        price: _price.value,
+        productCategory: _selectedProductCategory.value.value);
     return product;
   }
 

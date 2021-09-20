@@ -11,7 +11,7 @@ class Shop extends Equatable {
   final String whatsAppNumber;
   final String address;
   final GeoFirePoint? geoFirePoint;
-  final List<String>? shopCategories;
+  final List<String> shopCategories;
 
   const Shop({
     id,
@@ -20,11 +20,10 @@ class Shop extends Equatable {
     required this.phoneNumber,
     required this.whatsAppNumber,
     required this.address,
-    shopCategories,
+    required this.  shopCategories,
     geoFirePoint,
   })  : this.id = id ?? EMPTY_STRING,
-        this.geoFirePoint = geoFirePoint ?? null,
-        this.shopCategories = shopCategories ?? null;
+        this.geoFirePoint = geoFirePoint ?? null;
 
   Map<String, Object?> toJson() {
     return {
@@ -40,8 +39,16 @@ class Shop extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [id, name, imageUrl, phoneNumber, whatsAppNumber, address, geoFirePoint,shopCategories];
+  List<Object?> get props => [
+        id,
+        name,
+        imageUrl,
+        phoneNumber,
+        whatsAppNumber,
+        address,
+        geoFirePoint,
+        shopCategories
+      ];
 
   @override
   String toString() {
@@ -70,14 +77,15 @@ class Shop extends Equatable {
       phoneNumber: snap.get('phoneNumber'),
       whatsAppNumber: snap.get('whatsAppNumber'),
       address: snap.get('address'),
-    //  geoFirePoint: snap.get('geoFirePoint'),
-  //    shopCategories: snap.get('shopCategories') as List<String>,
+      //  geoFirePoint: snap.get('geoFirePoint'),
+      shopCategories: List.from(snap.get('shopCategories')),
     );
   }
 
   Map<String, Object?> toDocument() {
     return {
       'name': name,
+      'searchName': name.toLowerCase(),
       'imageUrl': imageUrl,
       'phoneNumber': phoneNumber,
       'whatsAppNumber': whatsAppNumber,

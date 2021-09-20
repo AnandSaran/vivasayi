@@ -11,5 +11,7 @@ abstract class ProductRepository {
 
   Stream<List<Product>> products();
 
+  Stream<List<Product>> productsByShopCategory(String shopCategory);
+
   Future<void> updateProduct(Product product);
 }

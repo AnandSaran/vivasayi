@@ -22,7 +22,7 @@ class _ProductScreenState extends State<ProductScreen> {
   late ProductBloc _bloc;
   late CreateShopDataModel createShopDataModel;
   late Shop shop;
-  late HomeNavigationItemIdEnum storyScreenId;
+  late HomeNavigationItemIdEnum screenId;
 
   @override
   void didChangeDependencies() {
@@ -30,9 +30,10 @@ class _ProductScreenState extends State<ProductScreen> {
     createShopDataModel =
         ModalRoute.of(context)!.settings.arguments as CreateShopDataModel;
     shop = createShopDataModel.shop;
-    storyScreenId = createShopDataModel.storyScreenId;
+    screenId = createShopDataModel.storyScreenId;
     _bloc = BlocProvider.of<ProductBloc>(context);
-    _bloc.add(SetShop(shop.id));
+    _bloc.add(SetShop(shop));
+    _bloc.add(LoadProduct(screenId.value));
   }
 
   @override
@@ -169,7 +170,7 @@ class _ProductScreenState extends State<ProductScreen> {
       if (state is ProductLoading) {
         return LoadingIndicator();
       } else if (state is ProductLoaded) {
-        return productView(shop, state.products, context, storyScreenId);
+        return productView(shop, state.products, context, screenId);
       } else {
         return Container();
       }
@@ -181,6 +182,6 @@ class _ProductScreenState extends State<ProductScreen> {
         context,
         ROUTE_CREATE_PRODUCT,
         CreateProductDataModel(
-            storyScreenId: storyScreenId, shop: createShopDataModel.shop));
+            storyScreenId: screenId, shop: createShopDataModel.shop));
   }
 }

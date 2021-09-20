@@ -11,7 +11,8 @@ class CreateShopDataModel {
                 imageUrl: EMPTY_STRING,
                 phoneNumber: EMPTY_STRING,
                 whatsAppNumber: EMPTY_STRING,
-                address: EMPTY_STRING),
+                address: EMPTY_STRING,
+                shopCategories: List.empty()),
         this.isEdit = isEdit ?? false;
 
   HomeNavigationItemIdEnum storyScreenId;
