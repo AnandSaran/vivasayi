@@ -223,16 +223,11 @@ class CreateShopProfileScreenBloc extends BlocBase {
 
   createShop() {
     changeProgressButtonState(ButtonState.loading);
-    /*final initialPosition = LatLng(1.3030126608349877, 103.81539875160469);
-    final geo = Geoflutterfire();
-    GeoFirePoint geoFirePoint = geo.point(
-        latitude: initialPosition.latitude,
-        longitude: initialPosition.longitude);*/
     List<String> shopCategories = _shopCategory.value
         .where((element) => element.isSelected)
         .map((e) => e.id.value)
         .toList();
-    String address = _locationName.value.adrAddress!;
+    String address = _locationName.value.formattedAddress ?? EMPTY_STRING;
     var geometry = _location.value.geometry!;
     final location = geometry.location;
     final geo = Geoflutterfire();
@@ -324,7 +319,7 @@ class CreateShopProfileScreenBloc extends BlocBase {
     if (_location.hasValue) {
       return true;
     } else {
-      changeErrorMessage(ERROR_SHOP_CATEGORY);
+      changeErrorMessage(ERROR_SHOP_LOCATION);
       return false;
     }
   }

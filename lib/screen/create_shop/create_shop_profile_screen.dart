@@ -69,7 +69,7 @@ class _CreateShopProfileScreenState extends State<CreateShopProfileScreen> {
                   stream: _bloc.whatsAppNumber,
                   function: _bloc.changeWhatsAppNumber,
                   textInputAction: TextInputAction.done,
-                  fnCurrentFocus:_fnWhatsAppNumber,
+                  fnCurrentFocus: _fnWhatsAppNumber,
                   fnNextFocus: null),
               _textShopLocation(),
               _textSelectShopCategory(),
@@ -287,10 +287,8 @@ class _CreateShopProfileScreenState extends State<CreateShopProfileScreen> {
         builder: (context) => PlacePicker(
           apiKey: API_KEY_MAP, // Put YOUR OWN KEY here.
           onPlacePicked: (result) {
-            print(result.formattedAddress);
-
             if (result.geometry != null) {
-              //result.geometry.location;
+              _bloc.onMapPick(result);
             }
             Navigator.of(context).pop();
           },
@@ -304,6 +302,11 @@ class _CreateShopProfileScreenState extends State<CreateShopProfileScreen> {
   void listenErrorMessage() {
     _bloc.errorMessage.stream.listen((event) {
       Navigation().showToast(context, event);
+    });
+    _bloc.progressButtonState.stream.listen((event) {
+      if (event == ButtonState.success) {
+        Navigation().popDelay(context, SCREEN_CLOSING_DELAY_MILLI_SECOND);
+      }
     });
   }
 }
