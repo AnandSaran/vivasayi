@@ -1,3 +1,4 @@
+import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 
 extension StringExtension on String {
@@ -38,5 +39,9 @@ extension StringExtension on String {
       default:
         return HomeNavigationItemIdEnum.HOME;
     }
+  }
+
+  String replaceSpaceWithNewLine() {
+    return this.replaceAll(SYMBOL_SPACE, SYMBOL_NEW_LINE);
   }
 }

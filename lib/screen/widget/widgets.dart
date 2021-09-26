@@ -13,3 +13,4 @@ export 'phone_number.dart';
 export 'shop_view.dart';
 export 'shop_filter_view.dart';
 export 'alert_dialog.dart';
+export 'widget.dart';

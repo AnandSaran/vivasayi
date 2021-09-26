@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:vivasayi/bloc/home_navigation/home_navigation.dart';
 import 'package:vivasayi/constants/constant.dart';
+import 'package:vivasayi/extension/extension.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/models/home_navigation_item.dart';
 import 'package:vivasayi/models/models.dart';
+import 'package:vivasayi/screen/widget/widget.dart';
 import 'package:vivasayi/screens/agri_doctor_screen.dart';
 import 'package:vivasayi/screens/agri_products_screen.dart';
 import 'package:vivasayi/screens/articles_screen.dart';
@@ -106,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  _topNavigationWidget()  {
+  _topNavigationWidget() {
     return Container(
       height: 100,
       color: Colors.white,
@@ -125,47 +127,55 @@ class _MyHomePageState extends State<MyHomePage> {
             .where((element) =>
                 element.orientation == HomeNavigationItemOrientationEnum.TOP)
             .toList();
-        return ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: topNavigationList.length,
-          itemBuilder: (context, index) {
-            var navigationItem = topNavigationList[index];
-            return Container(
-                width: 90,
-                color: Colors.white,
-                child: InkWell(
-                  onTap: () {
-                    _onClickNavigationItem(navigationItem);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Opacity(
-                        opacity: navigationItem.isSelected
-                            ? OPACITY_100
-                            : OPACITY_50,
-                        child: SvgPicture.asset(navigationItem.imagePath),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            navigationItem.title,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.black, fontSize: 12),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ));
-          },
-        );
+        return navigationList(topNavigationList, AppColors.whiteColor);
       } else {
         return Container();
       }
     });
+  }
+
+  ListView navigationList(
+      List<HomeNavigationItem> navigationList, Color bgColor) {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: navigationList.length,
+      itemBuilder: (context, index) {
+        var navigationItem = navigationList[index];
+        return Container(
+            color: bgColor,
+            child: InkWell(
+              onTap: () {
+                _onClickNavigationItem(navigationItem);
+              },
+              child: Opacity(
+                opacity: navigationItem.isSelected ? OPACITY_100 : OPACITY_50,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    dividerSpace(height: 17),
+                    SvgPicture.asset(
+                      navigationItem.imagePath,
+                      width: HOME_NAVIGATION_ITEM_WIDTH,
+                      height: HOME_NAVIGATION_ITEM_HEIGHT,
+                      color: AppColors.iconColorGreen,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          navigationItem.title.replaceSpaceWithNewLine(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.black, fontSize: 12),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ));
+      },
+    );
   }
 
   Container _bottomNavigationWidget() {
@@ -188,44 +198,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 element.orientation == HomeNavigationItemOrientationEnum.BOTTOM)
             .toList();
 
-        return ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: bottomNavigationList.length,
-          itemBuilder: (context, index) {
-            var navigationItem = bottomNavigationList[index];
-
-            return Container(
-              width: 80,
-              color: AppColors.lightGrey,
-              child: InkWell(
-                onTap: () {
-                  _onClickNavigationItem(navigationItem);
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Opacity(
-                      opacity:
-                          navigationItem.isSelected ? OPACITY_100 : OPACITY_50,
-                      child: SvgPicture.asset(navigationItem.imagePath),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: Text(
-                          navigationItem.title,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black, fontSize: 12),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
+        return navigationList(bottomNavigationList, AppColors.lightGrey);
       } else {
         return Container();
       }
@@ -327,7 +300,7 @@ class _MyHomePageState extends State<MyHomePage> {
         HomeNavigationItemIdEnum.AGRI_MEDICINES);
     Widget option5 = generateCreateStoryDialogOption(
         HomeNavigationItemIdEnum.TERRACE_GARDEN);
-   /* Widget option6 =
+    /* Widget option6 =
         generateCreateStoryDialogOption(HomeNavigationItemIdEnum.AGRI_DOCTORS);*/
     Widget option7 =
         generateCreateStoryDialogOption(HomeNavigationItemIdEnum.ARTICLES);
@@ -382,9 +355,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void showCreateStoryPage(HomeNavigationItemIdEnum id) {
     ReadStoryDataModel readStoryDataModel =
-    ReadStoryDataModel(storyScreenId: id);
-    Navigation().popAndPushNamed(context, ROUTE_CREATE_STORY,
-        data: readStoryDataModel);
+        ReadStoryDataModel(storyScreenId: id);
+    Navigation()
+        .popAndPushNamed(context, ROUTE_CREATE_STORY, data: readStoryDataModel);
   }
 
   void showCreateShopProfilePage() {

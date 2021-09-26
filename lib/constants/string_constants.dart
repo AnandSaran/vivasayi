@@ -71,6 +71,7 @@ const SYMBOL_THREE_DOT = "...";
 const SYMBOL_FORWARD_SLASH = "/";
 const SYMBOL_BACKWARD_SLASH = "\\";
 const SYMBOL_NEW_LINE = "\n";
+const SYMBOL_SPACE = " ";
 
 //Title dialog
 const TITLE_ENABLE_LOCATION = "Enable location";

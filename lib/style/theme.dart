@@ -14,6 +14,7 @@ abstract class AppColors {
   static const Color fabColor = accentColor;
 
   static const Color iconColor = const Color(0xFFFFFFFF);
+  static const Color iconColorGreen = const Color(0xFF00942D);
 
   static const Color blackColor = const Color(0xFF000000);
   static const Color whiteColor = const Color(0xFFFFFFFF);
