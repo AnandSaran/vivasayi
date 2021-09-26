@@ -1,3 +1,5 @@
+import 'package:vivasayi/constants/image_constants.dart';
+
 final List<Map> details = [
   {"name": "Natural Agri", "id": "1", "image": 'asset/svg/natural_agri.svg'},
   {"name": "Modern Agri", "id": "2", "image": 'asset/svg/modern_agri.svg'},
@@ -23,4 +25,12 @@ final List<Map> detailsBottom = [
 
 final List<Map> imagesList = [
   {"image": 'asset/svg/seedimage.png'},
+];
+
+final List<String> bannerImagesList = [
+  ICON_1,
+  ICON_2,
+  ICON_3,
+  ICON_4,
+  ICON_5,
 ];

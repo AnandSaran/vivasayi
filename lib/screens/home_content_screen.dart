@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vivasayi/bloc/bloc.dart';
 import 'package:vivasayi/models/enum/enum.dart';
+import 'package:vivasayi/models/toplist.dart';
 import 'package:vivasayi/screen/widget/widgets.dart';
 
 class HomeContentScreen extends StatelessWidget {
@@ -17,19 +18,21 @@ class HomeContentScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
+              margin: EdgeInsets.only(left: 20.0, bottom: 20.0, top: 10),
               color: Colors.white,
               height: 200,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 10,
+                itemCount: bannerImagesList.length,
                 itemBuilder: (context, index) {
                   return Container(
                     margin: EdgeInsets.only(left: 8.0),
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(20.0),
                       child: Image.asset(
-                        'asset/svg/seedimage.png',
-                      //  fit: BoxFit.fitWidth,
+                        bannerImagesList[index],
+                        fit: BoxFit.fill,
+                        //  fit: BoxFit.fitWidth,
                         height: 150,
                         width: 300,
                       ),

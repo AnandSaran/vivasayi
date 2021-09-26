@@ -101,6 +101,11 @@ flutter:
     - asset/svg/land.svg
     - asset/svg/seeds.svg
     - asset/svg/seedimage.png
+    - asset/png/1.jpeg
+    - asset/png/2.jpeg
+    - asset/png/3.jpeg
+    - asset/png/4.jpeg
+    - asset/png/5.jpeg
 
     # To add assets to your application, add an assets section, like this:
     # assets:
