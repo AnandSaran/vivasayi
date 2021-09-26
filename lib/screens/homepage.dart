@@ -166,7 +166,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text(
                           navigationItem.title.replaceSpaceWithNewLine(),
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black, fontSize: 12),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: (navigationItem.isSelected
+                                  ? 14
+                                  : 12),
+                              fontWeight: (navigationItem.isSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.normal)),
                         ),
                       ),
                     ),
