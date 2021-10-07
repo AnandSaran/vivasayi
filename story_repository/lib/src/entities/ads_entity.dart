@@ -64,17 +64,17 @@ class AdsEntity extends Equatable {
     bool isHomeBannerDirectShopAd = false;
     bool isHomeBannerNearByShopAd = false;
     try {
-      isHomeBannerStory = snap.get('isHomeBannerStory');
+      isHomeBannerStory = snap.get('home_banner_story');
     } catch (e) {
 
     }
     try {
-      isHomeBannerDirectShopAd = snap.get('isHomeBannerDirectShopAd');
+      isHomeBannerDirectShopAd = snap.get('home_banner_direct_shop_ads');
     } catch (e) {
 
     }
     try {
-      isHomeBannerNearByShopAd = snap.get('isHomeBannerNearByShopAd');
+      isHomeBannerNearByShopAd = snap.get('home_banner_near_by_shop_ads');
     } catch (e) {
 
     }

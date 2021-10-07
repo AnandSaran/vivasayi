@@ -349,7 +349,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return SimpleDialogOption(
       child: Padding(
         padding: const EdgeInsets.all(4.0),
-        child: Text(homeNavigationItemId.title),
+        child: Text(homeNavigationItemId.createItemDialogTitle),
       ),
       onPressed: () {
         onClickCreateContentDialogItem(homeNavigationItemId);
