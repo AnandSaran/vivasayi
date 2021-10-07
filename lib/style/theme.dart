@@ -5,7 +5,7 @@ import 'package:flutter/material.dart' as Material;
 
 abstract class AppColors {
   static const Color loginGradientStart = const Color(0xFFFFFFFF);
-  static const Color backgroundColor = const Color(0xFFE9E9E9);
+  static const Color backgroundColor = const Color(0xFFFFFFFF);
   static const Color transparent = const Color(0x00000000);
   static const Color loginGradientEnd = const Color(0xFFFFFFF9);
   static const Color homeNavigationBarBackgroundColor = const Color(0xFFFFFFFF);

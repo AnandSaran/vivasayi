@@ -51,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+      backgroundColor: AppColors.backgroundColor,
       body: _bodyWidget(),
     );
   }
@@ -168,9 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Colors.black,
-                              fontSize: (navigationItem.isSelected
-                                  ? 14
-                                  : 12),
+                              fontSize: (navigationItem.isSelected ? 14 : 12),
                               fontWeight: (navigationItem.isSelected
                                   ? FontWeight.bold
                                   : FontWeight.normal)),
@@ -313,12 +312,12 @@ class _MyHomePageState extends State<MyHomePage> {
         generateCreateStoryDialogOption(HomeNavigationItemIdEnum.ARTICLES);
     Widget option8 =
         generateCreateStoryDialogOption(HomeNavigationItemIdEnum.CREATE_SHOP);
-    Widget option9 =
-        generateCreateStoryDialogOption(HomeNavigationItemIdEnum.CREATE_HOME_BANNER_STORY);
-    Widget option10=
-        generateCreateStoryDialogOption(HomeNavigationItemIdEnum.CREATE_HOME_BANNER_DIRECT_SHOP_ADS);
-    Widget option11=
-        generateCreateStoryDialogOption(HomeNavigationItemIdEnum.CREATE_HOME_BANNER_NEAR_BY_SHOP_ADS);
+    Widget option9 = generateCreateStoryDialogOption(
+        HomeNavigationItemIdEnum.CREATE_HOME_BANNER_STORY);
+    Widget option10 = generateCreateStoryDialogOption(
+        HomeNavigationItemIdEnum.CREATE_HOME_BANNER_DIRECT_SHOP_ADS);
+    Widget option11 = generateCreateStoryDialogOption(
+        HomeNavigationItemIdEnum.CREATE_HOME_BANNER_NEAR_BY_SHOP_ADS);
 
     SimpleDialog dialog = SimpleDialog(
       children: <Widget>[
