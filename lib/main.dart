@@ -6,6 +6,8 @@ import 'package:product_repository/product_repository.dart';
 import 'package:shop_repository/shop_repository.dart';
 import 'package:story_genre_repository/story_genre_repository.dart';
 import 'package:story_repository/story_repository.dart';
+import 'package:vivasayi/bloc/ads/home_banner_bloc.dart';
+import 'package:vivasayi/bloc/ads/home_banner_event.dart';
 import 'package:vivasayi/bloc/shop/agri_product_shop_bloc.dart';
 import 'package:vivasayi/bloc/shop/equip_shop_bloc.dart';
 import 'package:vivasayi/bloc/shop/irrigation_shop_bloc.dart';
@@ -199,6 +201,11 @@ class App extends StatelessWidget {
         FlutterBloc.BlocProvider<NurseryShopAddressBloc>(
           create: (BuildContext context) =>
               NurseryShopAddressBloc(locationRepository: LocationRepository()),
+        ),
+        FlutterBloc.BlocProvider<HomeBannerBloc>(
+          create: (BuildContext context) => HomeBannerBloc(
+              homeBannerAdsRepository: FirestoreHomeBannerAdsRepository())
+            ..add((LoadAds())),
         ),
       ],
       child: MyHomePage(title: APP_NAME),

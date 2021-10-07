@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vivasayi/bloc/ads/home_banner_bloc.dart';
+import 'package:vivasayi/bloc/ads/home_banner_state.dart';
 import 'package:vivasayi/bloc/bloc.dart';
 import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/models/toplist.dart';
@@ -17,30 +19,7 @@ class HomeContentScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              margin: EdgeInsets.only(left: 20.0, bottom: 20.0, top: 10),
-              color: Colors.white,
-              height: 200,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: bannerImagesList.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.only(left: 8.0),
-                    child: ClipRRect(
-                      borderRadius: new BorderRadius.circular(20.0),
-                      child: Image.asset(
-                        bannerImagesList[index],
-                        fit: BoxFit.fill,
-                        //  fit: BoxFit.fitWidth,
-                        height: 150,
-                        width: 300,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+            _buildBannerView(),
             Flexible(child: _buildStoryListView()),
           ],
         ),
@@ -54,6 +33,17 @@ class HomeContentScreen extends StatelessWidget {
         return LoadingIndicator();
       } else if (state is StoryLoaded) {
         return storyView(state.stories, context, id);
+      } else {
+        return Container();
+      }
+    });
+  }
+
+  _buildBannerView() {
+    return BlocBuilder<HomeBannerBloc, HomeBannerState>(
+        builder: (context, state) {
+      if (state is AdLoaded) {
+        return bannerView(state.ads, context, id);
       } else {
         return Container();
       }

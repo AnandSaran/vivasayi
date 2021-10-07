@@ -6,7 +6,8 @@ class PostEntity {
   final String content;
   final String genre;
 
-  PostEntity(this.id,this.userId, this.content,this.genre);
+  PostEntity(this.id, this.userId, this.content, this.genre);
+
   Map<String, Object> toJson() {
     return {
       'id': id,
@@ -15,7 +16,8 @@ class PostEntity {
       'genre': genre,
     };
   }
-  static PostEntity fromJson(Map<String, Object> json){
+
+  static PostEntity fromJson(Map<String, Object> json) {
     return PostEntity(
       json['id'] as String,
       json['userId'] as String,
@@ -38,8 +40,17 @@ class PostEntity {
       'userId': userId,
       'content': content,
       'genre': genre,
-      'date': Timestamp.now() ,
+      'date': Timestamp.now(),
     };
   }
 
+  Map<String, Object> toHomeBannerStoryDocument(String adsFieldName) {
+    return {
+      'userId': userId,
+      'content': content,
+      'genre': genre,
+      adsFieldName: true,
+      'date': Timestamp.now(),
+    };
+  }
 }

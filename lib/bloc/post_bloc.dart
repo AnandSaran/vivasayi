@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:rxdart/rxdart.dart';
-import 'package:story_repository/src/models/story.dart';
+import 'package:story_genre_repository/story_genre_repository.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/extension/extension.dart';
 import 'package:vivasayi/models/models.dart';
@@ -23,6 +23,7 @@ class PostBloc extends BlocBase {
   final _showProgress = BehaviorSubject<bool>();
   final _showSelectStoryGenreScreen = BehaviorSubject<bool>();
   final _postUploaded = BehaviorSubject<bool>();
+  late HomeNavigationItemIdEnum homeNavigationItemIdEnum;
 
   PostBloc() {}
 
@@ -38,7 +39,9 @@ class PostBloc extends BlocBase {
   Function(bool) get setShowSelectStoryGenreScreen =>
       _showSelectStoryGenreScreen.sink.add;
 
-  void setStoryCollectionName(String collectionName) {
+  void setStoryCollectionName(HomeNavigationItemIdEnum id) {
+    setHomeNavigationItemIdEnum(id);
+    String collectionName = homeNavigationItemIdEnum.collectionName;
     _repository.changeCollectionName(collectionName);
   }
 
@@ -89,11 +92,34 @@ class PostBloc extends BlocBase {
     });
   }
 
-  void addUserPost(String genre) {
+  void onSelectStoryGenre(
+      ReadStoryDataModel readStoryDataModel, StoryGenre storyGenre) {
+    if (readStoryDataModel.isEdit) {
+      updateUserPost(storyGenre.genreName, readStoryDataModel.story.id);
+    } else {
+      if (homeNavigationItemIdEnum ==
+          HomeNavigationItemIdEnum.CREATE_HOME_BANNER_STORY) {
+        addHomeBannerStory(storyGenre.genreName);
+      } else {
+        addStory(storyGenre.genreName);
+      }
+    }
+  }
+
+  void addStory(String genre) {
     _showProgress.sink.add(true);
     Post post =
         Post(EMPTY_STRING, EMPTY_STRING, _content.value, EMPTY_STRING, genre);
     _repository.addNewPost(post).then((value) {
+      _cleanDocument();
+    });
+  }
+
+  void addHomeBannerStory(String genre) {
+    _showProgress.sink.add(true);
+    Post post =
+        Post(EMPTY_STRING, EMPTY_STRING, _content.value, EMPTY_STRING, genre);
+    _repository.addHomeBannerStory(post,homeNavigationItemIdEnum.value).then((value) {
       _cleanDocument();
     });
   }
@@ -182,5 +208,7 @@ class PostBloc extends BlocBase {
             }));
   }
 
-  deletePost(Story story) {}
+  void setHomeNavigationItemIdEnum(HomeNavigationItemIdEnum value) {
+    homeNavigationItemIdEnum = value;
+  }
 }

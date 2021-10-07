@@ -14,3 +14,4 @@ export 'shop_view.dart';
 export 'shop_filter_view.dart';
 export 'alert_dialog.dart';
 export 'widget.dart';
+export 'home_banner_view.dart';

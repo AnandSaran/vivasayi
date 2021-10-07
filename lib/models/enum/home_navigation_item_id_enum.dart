@@ -15,6 +15,9 @@ enum HomeNavigationItemIdEnum {
   EQUIPS,
   AGRICULTURAL_PRODUCTS,
   CREATE_SHOP,
+  CREATE_HOME_BANNER_STORY,
+  CREATE_HOME_BANNER_DIRECT_SHOP_ADS,
+  CREATE_HOME_BANNER_NEAR_BY_SHOP_ADS,
 }
 
 extension HomeNavigationItemIdEnumExtension on HomeNavigationItemIdEnum {
@@ -46,8 +49,14 @@ extension HomeNavigationItemIdEnumExtension on HomeNavigationItemIdEnum {
         return 'equips';
       case HomeNavigationItemIdEnum.AGRICULTURAL_PRODUCTS:
         return 'agricultural_products';
-        case HomeNavigationItemIdEnum.CREATE_SHOP:
+      case HomeNavigationItemIdEnum.CREATE_SHOP:
         return 'create_shop';
+      case HomeNavigationItemIdEnum.CREATE_HOME_BANNER_STORY:
+        return 'create_home_banner_story';
+      case HomeNavigationItemIdEnum.CREATE_HOME_BANNER_DIRECT_SHOP_ADS:
+        return 'create_home_banner_direct_shop_ads';
+      case HomeNavigationItemIdEnum.CREATE_HOME_BANNER_NEAR_BY_SHOP_ADS:
+        return 'create_home_banner_near_by_shop_ads';
       default:
         return EMPTY_STRING;
     }
@@ -83,8 +92,27 @@ extension HomeNavigationItemIdEnumExtension on HomeNavigationItemIdEnum {
         return 'Agri Products';
       case HomeNavigationItemIdEnum.CREATE_SHOP:
         return 'Create Shop';
+      case HomeNavigationItemIdEnum.CREATE_HOME_BANNER_STORY:
+        return 'Create Home banner story';
+      case HomeNavigationItemIdEnum.CREATE_HOME_BANNER_DIRECT_SHOP_ADS:
+        return 'Create Home banner direct shop ads';
+      case HomeNavigationItemIdEnum.CREATE_HOME_BANNER_NEAR_BY_SHOP_ADS:
+        return 'Create Home banner near-by shop ads';
       default:
         return EMPTY_STRING;
+    }
+  }
+
+  String get collectionName {
+    switch (this) {
+      case HomeNavigationItemIdEnum.CREATE_HOME_BANNER_STORY:
+        return 'home_banner';
+      case HomeNavigationItemIdEnum.CREATE_HOME_BANNER_DIRECT_SHOP_ADS:
+        return 'home_banner';
+      case HomeNavigationItemIdEnum.CREATE_HOME_BANNER_NEAR_BY_SHOP_ADS:
+        return 'home_banner';
+      default:
+        return this.value;
     }
   }
 }

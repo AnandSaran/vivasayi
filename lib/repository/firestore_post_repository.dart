@@ -17,6 +17,10 @@ class FireStorePostRepository implements PostRepository {
     return postCollection.add(post.toEntity().toDocument());
   }
 
+  Future<void> addHomeBannerStory(Post post, String adsFieldName) {
+    return postCollection.add(post.toEntity().toHomeBannerStoryDocument(adsFieldName));
+  }
+
   @override
   Future<void> deletePost(String documentId) {
     return postCollection.doc(documentId).delete();

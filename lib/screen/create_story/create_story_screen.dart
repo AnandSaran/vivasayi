@@ -12,7 +12,6 @@ import 'package:tuple/tuple.dart';
 import 'package:vivasayi/bloc/bloc.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/data_model/read_story_data_model.dart';
-import 'package:vivasayi/models/enum/enum.dart';
 import 'package:vivasayi/style/theme.dart' as Theme;
 import 'package:vivasayi/universal_ui/universal_ui.dart';
 import 'package:vivasayi/util/navigation.dart';
@@ -26,11 +25,7 @@ class CreateStoryScreen extends StatefulWidget {
 
 class _CreateStoryState extends State<CreateStoryScreen> {
   late PostBloc _bloc;
-
-  /// Allows to control the editor and the document.
   late QuillController _controller;
-
-  /// Zefyr editor like any other input field requires a focus node.
   late FocusNode _focusNode;
   late ReadStoryDataModel readStoryDataModel;
 
@@ -40,7 +35,7 @@ class _CreateStoryState extends State<CreateStoryScreen> {
     readStoryDataModel =
         ModalRoute.of(context)!.settings.arguments as ReadStoryDataModel;
     _bloc = BlocProvider.of<PostBloc>(context);
-    _bloc.setStoryCollectionName(readStoryDataModel.storyScreenId.value);
+    _bloc.setStoryCollectionName(readStoryDataModel.storyScreenId);
     _focusNode = FocusNode();
     try {
       if (readStoryDataModel.isEdit) {
@@ -126,7 +121,8 @@ class _CreateStoryState extends State<CreateStoryScreen> {
                     Icons.delete,
                     color: Theme.AppColors.iconColor,
                   ),
-                  onPressed: () => _bloc.removePost(readStoryDataModel.story.id),
+                  onPressed: () =>
+                      _bloc.removePost(readStoryDataModel.story.id),
                 ),
               )),
           Builder(
@@ -167,13 +163,7 @@ class _CreateStoryState extends State<CreateStoryScreen> {
     try {
       StoryGenre storyGenre = await Navigation()
           .pushPageResult(context, ROUTE_SELECT_GENRE) as StoryGenre;
-      print("Result back : " + storyGenre.toString());
-      if (readStoryDataModel.isEdit) {
-        _bloc.updateUserPost(
-            storyGenre.genreName, readStoryDataModel.story.id);
-      } else {
-        _bloc.addUserPost(storyGenre.genreName);
-      }
+      _bloc.onSelectStoryGenre(readStoryDataModel, storyGenre);
     } catch (e) {}
   }
 

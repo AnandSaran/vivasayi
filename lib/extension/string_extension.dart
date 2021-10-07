@@ -36,6 +36,12 @@ extension StringExtension on String {
         return HomeNavigationItemIdEnum.AGRICULTURAL_PRODUCTS;
       case 'create_shop':
         return HomeNavigationItemIdEnum.CREATE_SHOP;
+      case 'create_home_banner_story':
+        return HomeNavigationItemIdEnum.CREATE_HOME_BANNER_STORY;
+      case 'create_home_banner_direct_shop_ads':
+        return HomeNavigationItemIdEnum.CREATE_HOME_BANNER_DIRECT_SHOP_ADS;
+      case 'create_home_banner_near_by_shop_ads':
+        return HomeNavigationItemIdEnum.CREATE_HOME_BANNER_NEAR_BY_SHOP_ADS;
       default:
         return HomeNavigationItemIdEnum.HOME;
     }
