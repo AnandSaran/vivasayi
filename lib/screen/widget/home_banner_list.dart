@@ -28,6 +28,7 @@ ListView bannerListView(BuildContext context, List<Ads> ads,
   return ListView.builder(
     scrollDirection: Axis.horizontal,
     itemCount: ads.length,
+    padding:EdgeInsets.only(left: 20.0, bottom: 20.0, top: 10,right: 20.0) ,
     itemBuilder: (context, index) {
       Ads ad = ads[index];
       return Container(

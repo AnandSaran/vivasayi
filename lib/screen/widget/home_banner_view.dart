@@ -7,8 +7,7 @@ import 'home_banner_list.dart';
 Widget bannerView(
     List<Ads> ads, BuildContext context, HomeNavigationItemIdEnum id) {
   return Container(
-      margin: EdgeInsets.only(left: 20.0, bottom: 20.0, top: 10),
       color: Colors.white,
-      height: 150,
+      height: 180,
       child: BannerListView(ads: ads, storyScreenId: id));
 }
