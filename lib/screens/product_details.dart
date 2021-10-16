@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_launch/flutter_launch.dart';
 import 'package:product_repository/product_repository.dart';
 import 'package:shop_repository/shop_repository.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/data_model/create_product_data_model.dart';
 import 'package:vivasayi/models/enum/enum.dart';
@@ -24,12 +26,11 @@ class _ProductDetails extends State<ProductDetails> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     createProductDataModel =
-    ModalRoute.of(context)!.settings.arguments as CreateProductDataModel;
+        ModalRoute.of(context)!.settings.arguments as CreateProductDataModel;
     shop = createProductDataModel.shop;
     product = createProductDataModel.product;
     storyScreenId = createProductDataModel.storyScreenId;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,8 @@ class _ProductDetails extends State<ProductDetails> {
           color: Colors.white,
         ),
         centerTitle: true,
-        title: Text(product.name,
+        title: Text(
+          product.name,
           style: (TextStyle(color: Colors.white)),
         ),
         backgroundColor: AppColors.toolBarBackgroundColor,
@@ -61,8 +63,7 @@ class _ProductDetails extends State<ProductDetails> {
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(child:
-          ProductDetailsContent(product)),
+          Expanded(child: ProductDetailsContent(product)),
           Container(
             height: 60,
             color: AppColors.whiteColor,
@@ -75,11 +76,19 @@ class _ProductDetails extends State<ProductDetails> {
                     child: SizedBox(
                       height: 50,
                       child: OutlinedButton.icon(
-                        icon: Icon(Icons.star_outline),
-                        label: Text("Call Now"),
-                        onPressed: () => print("it's pressed"),
+                        icon: Icon(
+                          Icons.call,
+                          color: Colors.green,
+                        ),
+                        label: Text(
+                          CALL_NOW,
+                          style: (TextStyle(color: Colors.green, fontSize: 15)),
+                        ),
+                        onPressed: () {
+                          launch(('tel://${shop.phoneNumber}'));
+                        },
                         style: ElevatedButton.styleFrom(
-                          side: BorderSide(width: 2.0, color: Colors.blue),
+                          side: BorderSide(width: 3.0, color: Colors.green),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
@@ -95,8 +104,9 @@ class _ProductDetails extends State<ProductDetails> {
                     child: SizedBox(
                       height: 50,
                       child: ElevatedButton.icon(
-                        label: Text('Whatsapp'),
-                        icon: Icon(Icons.chat),
+                        label: Text(WHATSAPP),
+                        icon: Image.asset('asset/png/logo_whatsapp.png',
+                            width: 40, height: 40, color: Colors.white),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.green,
                           textStyle: TextStyle(
@@ -107,7 +117,10 @@ class _ProductDetails extends State<ProductDetails> {
                             borderRadius: new BorderRadius.circular(10.0),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          print("whatsAppOpen");
+                          whatsAppOpen();
+                        },
                       ),
                     ),
                   ),
@@ -120,9 +133,14 @@ class _ProductDetails extends State<ProductDetails> {
     );
   }
 
+  void whatsAppOpen() async {
+    await FlutterLaunch.launchWhatsapp(
+        phone: shop.phoneNumber, message: "Hello");
+  }
+
   onTapEdit(CreateProductDataModel createProductDataModel) {
     createProductDataModel.isEdit = true;
-    Navigation()
-        .popAndPushNamed(context, ROUTE_CREATE_PRODUCT, data: createProductDataModel);
+    Navigation().popAndPushNamed(context, ROUTE_CREATE_PRODUCT,
+        data: createProductDataModel);
   }
 }

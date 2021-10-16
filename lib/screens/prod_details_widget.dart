@@ -16,7 +16,6 @@ class ProductDetailsContent extends StatelessWidget {
         .split(SYMBOL_SINGLE_DOT)
         .where((element) => element.trim().length > 0)
         .toList();
-    productImages = product.imageUrl;
   }
 
   @override
@@ -103,13 +102,17 @@ class ProductDetailsContent extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(
-                                    descriptions[index].trim() +
-                                        SYMBOL_SINGLE_DOT,
-                                    style: TextStyle(
-                                        fontSize: 16.0,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal),
+                                  Container(width: 320,
+                                    child: Text(
+                                      descriptions[index].trim() +
+                                          SYMBOL_SINGLE_DOT,
+                                      style: TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.normal),
+                                      maxLines: 10,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                 ],
                               ),

@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_launch/flutter_launch.dart';
 import 'package:shop_repository/shop_repository.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:vivasayi/bloc/product/products.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/data_model/create_product_data_model.dart';
@@ -119,11 +121,20 @@ class _ProductScreenState extends State<ProductScreen> {
                       child: SizedBox(
                         height: 50,
                         child: OutlinedButton.icon(
-                          icon: Icon(Icons.star_outline),
-                          label: Text("Call Now"),
-                          onPressed: () => print("it's pressed"),
+                          icon: Icon(
+                            Icons.call,
+                            color: Colors.green,
+                          ),
+                          label: Text(
+                            CALL_NOW,
+                            style:
+                                (TextStyle(color: Colors.green, fontSize: 15)),
+                          ),
+                          onPressed: () {
+                            launch(('tel://${shop.phoneNumber}'));
+                          },
                           style: ElevatedButton.styleFrom(
-                            side: BorderSide(width: 2.0, color: Colors.blue),
+                            side: BorderSide(width: 3.0, color: Colors.green),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),
@@ -139,8 +150,9 @@ class _ProductScreenState extends State<ProductScreen> {
                       child: SizedBox(
                         height: 50,
                         child: ElevatedButton.icon(
-                          label: Text('Whatsapp'),
-                          icon: Icon(Icons.chat),
+                          label: Text(WHATSAPP),
+                          icon: Image.asset('asset/png/logo_whatsapp.png',
+                              width: 40, height: 40, color: Colors.white),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.green,
                             textStyle: TextStyle(
@@ -151,7 +163,10 @@ class _ProductScreenState extends State<ProductScreen> {
                               borderRadius: new BorderRadius.circular(10.0),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            print("whatsAppOpen");
+                            whatsAppOpen();
+                          },
                         ),
                       ),
                     ),
@@ -163,6 +178,11 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
       ),
     );
+  }
+
+  void whatsAppOpen() async {
+    await FlutterLaunch.launchWhatsapp(
+        phone: shop.phoneNumber, message: "Hello");
   }
 
   _buildProductListView() {

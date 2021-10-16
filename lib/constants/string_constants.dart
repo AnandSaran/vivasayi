@@ -26,6 +26,8 @@ const String QTY = "Qty";
 const String PRICE = "Price";
 const String DESCRIPTION = "Description";
 const String CROP_IMAGE = "Crop image";
+const String CALL_NOW = "Call Now";
+const String WHATSAPP = "Whatsapp";
 
 
 //title - home navigation item

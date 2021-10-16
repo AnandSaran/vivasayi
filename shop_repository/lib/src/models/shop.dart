@@ -8,7 +8,7 @@ class Shop extends Equatable {
   final String name;
   final String imageUrl;
   final String phoneNumber;
-  final String whatsAppNumber;
+  final String whatsAppNumber ;
   final String address;
   final GeoFirePoint? geoFirePoint;
   final List<String> shopCategories;
