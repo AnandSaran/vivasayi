@@ -124,6 +124,28 @@ class ProductDetailsContent extends StatelessWidget {
                   }),
             ),
           ),
+          Flexible(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 50,
+                child: OutlinedButton(
+                  child: Text(
+                    "${product.qty}kg   \u{20B9}  ${product.price}",
+                    style: (TextStyle(color: Colors.green, fontSize: 15)),
+                  ),
+                  onPressed: (){},
+                  style: ElevatedButton.styleFrom(
+                    side: BorderSide(width: 3.0, color: Colors.green),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
