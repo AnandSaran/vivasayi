@@ -45,7 +45,7 @@ dependencies:
   firebase_core: ^1.4.0
   cloud_firestore: ^2.4.0
   firebase_storage: ^10.0.1
-  flutter_quill: ^1.7.3
+  flutter_quill: ^2.0.6
   tuple: ^2.0.0
   universal_html: ^2.0.8
   filesystem_picker: ^2.0.0-nullsafety.0
