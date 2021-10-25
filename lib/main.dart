@@ -36,8 +36,8 @@ import 'screen/create_story/create_story_screen.dart';
 import 'screens/product_details.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+ /* WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();*/
   runApp(App());
 }
 

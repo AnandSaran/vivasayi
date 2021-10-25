@@ -1,9 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:vivasayi/bloc/bloc.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/data_model/home_screen_data_model.dart';
 import 'package:vivasayi/screen/widget/loading_indicator.dart';
+import 'package:vivasayi/screen/widget/widgets.dart';
 import 'package:vivasayi/util/navigation.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,12 +23,23 @@ class _SplashScreenState extends State<SplashScreen> {
     super.didChangeDependencies();
     _bloc = BlocProvider.of<SplashScreenBloc>(context);
     listenBlocStream();
-    _bloc.enableLocationService();
+    initFirebase(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    return LoadingIndicator();
+    return Scaffold(
+        body: Container(
+            decoration: new BoxDecoration(color: Colors.black),
+            child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    widgetLogo()
+                    //your widgets here...
+                  ],
+                ))));
   }
 
   void listenBlocStream() {
@@ -71,5 +84,15 @@ class _SplashScreenState extends State<SplashScreen> {
         showHomeScreen();
       }
     });
+  }
+
+  initFirebase(BuildContext context) async {
+    WidgetsFlutterBinding.ensureInitialized();
+    Firebase.initializeApp().whenComplete(() => showLoadingScreen(context));
+  }
+
+  void showLoadingScreen(BuildContext context) async {
+    await Future.delayed(Duration(milliseconds: 2000));
+    _bloc.enableLocationService();
   }
 }

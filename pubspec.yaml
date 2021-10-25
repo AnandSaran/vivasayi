@@ -109,6 +109,7 @@ flutter:
     - asset/png/4.jpeg
     - asset/png/5.jpeg
     - asset/png/logo_whatsapp.png
+    - asset/png/logo.png
 
     # To add assets to your application, add an assets section, like this:
     # assets:
