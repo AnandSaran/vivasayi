@@ -29,6 +29,9 @@ abstract class AppColors {
   static Color buttonColorLoading = Material.Colors.deepPurple.shade700;
   static Color buttonColorFail = Material.Colors.red.shade900;
   static Color buttonColorSuccess = Material.Colors.green.shade400;
+  static const Color splashBackgroundColor = Color(0xFF042a49);
+  static const Color screenBackgroundColorWhite = Color(0xFFFFFFFF);
+  static const Color iconColorWhite = Color(0xFFFFFFFF);
 
   static const primaryGradient = const LinearGradient(
     colors: const [loginGradientStart, loginGradientEnd],

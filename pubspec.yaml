@@ -33,7 +33,11 @@ dependencies:
     path: product_repository
   location_repository:
     path: location_repository
-  jiffy: ^3.0.1
+  authentication_repository:
+    path: authentication_repository
+  user_repository:
+    path: user_repository
+  jiffy: ^5.0.0
   shared_preferences: ^2.0.6
   flutter_bloc: ^7.0.1
   equatable: ^2.0.0
@@ -64,6 +68,7 @@ dependencies:
   image_cropper: ^1.4.1
   url_launcher: ^6.0.10
   flutter_launch: ^0.3.0
+  get_storage: ^2.0.3
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -110,6 +115,8 @@ flutter:
     - asset/png/5.jpeg
     - asset/png/logo_whatsapp.png
     - asset/png/logo.png
+    - asset/png/login_top.png
+    - asset/png/login_bottom.png
 
     # To add assets to your application, add an assets section, like this:
     # assets:

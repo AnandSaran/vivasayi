@@ -1,2 +1,2 @@
- const String SHARED_PREF_KEY_COMPANY_ID="COMPANY_ID";
- const String SHARED_PREF_KEY_EMPLOYEE_ID="EMPLOYEE_ID";
+const prefKeyUser="user";
+const prefKeyTotalPageViewed="totalPageViewed";

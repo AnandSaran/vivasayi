@@ -1,3 +1,4 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as FlutterBloc;
@@ -6,8 +7,10 @@ import 'package:product_repository/product_repository.dart';
 import 'package:shop_repository/shop_repository.dart';
 import 'package:story_genre_repository/story_genre_repository.dart';
 import 'package:story_repository/story_repository.dart';
+import 'package:user_repository/user_repository.dart';
 import 'package:vivasayi/bloc/ads/home_banner_bloc.dart';
 import 'package:vivasayi/bloc/ads/home_banner_event.dart';
+import 'package:vivasayi/bloc/loading_screen_bloc.dart';
 import 'package:vivasayi/bloc/shop/agri_product_shop_bloc.dart';
 import 'package:vivasayi/bloc/shop/equip_shop_bloc.dart';
 import 'package:vivasayi/bloc/shop/irrigation_shop_bloc.dart';
@@ -21,22 +24,26 @@ import 'package:vivasayi/repository/repository.dart';
 import 'package:vivasayi/screen/create_product/create_product_screen.dart';
 import 'package:vivasayi/screen/create_shop/create_shop_profile_screen.dart';
 import 'package:vivasayi/screen/read_story/read_story_screen.dart';
-import 'package:vivasayi/screen/splash/splash_screen.dart';
 import 'package:vivasayi/screen/story_genre/story_genre_screen.dart';
 import 'package:vivasayi/screens/homepage.dart';
+import 'package:vivasayi/screen/loading_screen.dart';
 import 'package:vivasayi/screens/product_screen.dart';
+import 'package:vivasayi/screen/splash/splash_screen.dart';
 import 'package:vivasayi/style/theme.dart';
+import 'package:vivasayi/util/shared_preference.dart';
 
 import 'bloc/bloc.dart';
 import 'bloc/bloc_provider/bloc_provider.dart';
+import 'bloc/login_screen_bloc.dart';
 import 'bloc/shop_address/shop_address_bloc.dart';
 import 'constants/constant.dart';
 import 'models/enum/enum.dart';
 import 'screen/create_story/create_story_screen.dart';
+import 'screen/login/login_screen.dart';
 import 'screens/product_details.dart';
 
 void main() async {
- /* WidgetsFlutterBinding.ensureInitialized();
+  /* WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();*/
   runApp(App());
 }
@@ -61,6 +68,8 @@ class App extends StatelessWidget {
               bloc: SplashScreenBloc(),
               child: SplashScreen(),
             ),
+        ROUTE_LOADING: (context) => generateLoadingScreenBlocProvider(),
+        ROUTE_LOGIN: (context) => generateLoginScreenBlocProvider(),
         ROUTE_HOME: (context) => generateHomeBlocProvider(),
         ROUTE_CREATE_STORY: (context) => BlocProvider<PostBloc>(
               bloc: PostBloc(),
@@ -209,6 +218,24 @@ class App extends StatelessWidget {
         ),
       ],
       child: MyHomePage(title: APP_NAME),
+    );
+  }
+
+  BlocProvider<LoadingScreenBloc> generateLoadingScreenBlocProvider() {
+    return BlocProvider<LoadingScreenBloc>(
+      bloc: LoadingScreenBloc(
+          authRepository: AuthenticationRepository(),
+          userRepository: UserRepository(),
+          sharedPreferenceUtil: SharedPreferenceUtil()),
+      child: const LoadingScreen(),
+    );
+  }
+
+  BlocProvider<LoginScreenBloc> generateLoginScreenBlocProvider() {
+    return BlocProvider<LoginScreenBloc>(
+      bloc: LoginScreenBloc(
+          AuthenticationRepository(), UserRepository(), SharedPreferenceUtil()),
+      child: const LoginScreen(),
     );
   }
 }

@@ -25,16 +25,4 @@ class DateUtil {
 
     return GOOD + WHITE_SPACE + session + SYMBOL_EXCLAMATION;
   }
-
-  DateTime generateTodayStartTime() {
-    var startTime = (Jiffy().startOf(Units.DAY));
-    return DateTime.fromMicrosecondsSinceEpoch(startTime.microsecondsSinceEpoch)
-        .toUtc();
-  }
-
-  DateTime generateTodayEndTime() {
-    var endTime = (Jiffy().endOf(Units.DAY));
-    return DateTime.fromMicrosecondsSinceEpoch(endTime.microsecondsSinceEpoch)
-        .toUtc();
-  }
 }

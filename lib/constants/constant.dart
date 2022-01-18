@@ -9,3 +9,4 @@ export 'package:vivasayi/constants/sharedpreferece_key.dart';
 export 'package:vivasayi/constants/string_constants.dart';
 export 'package:vivasayi/constants/double_constant.dart';
 export 'package:vivasayi/constants/api_key.dart';
+export 'package:vivasayi/constants/general_constant.dart';

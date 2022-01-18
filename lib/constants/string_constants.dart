@@ -55,6 +55,12 @@ const ERROR_DESCRIPTION = "Enter description";
 const ERROR_QTY = "Enter qty";
 const ERROR_PRICE = "Enter price";
 const ERROR_SCALE_TYPE = "Enter scale type";
+const ERROR_ENTER_6_DIGIT_OTP = "Enter 6 digit Otp";
+const ERROR_INVALID_OTP = "Invalid otp";
+const ERROR_FIREBASE_AUTH_EXCEPTION = "Error";
+const String ERROR_SOMETHING_WENT_WRONG = "Something went wrong, Please try again";
+
+
 
 //place-holder image
 const PLACE_HOLDER_SHOP =
@@ -85,3 +91,42 @@ const SCALE_TYPE_KG = "kg";
 const SCALE_TYPE_GRAM = "g";
 const SCALE_TYPE_LITTER = "l";
 const SCALE_TYPE_MILLI_LITTER = "ml";
+
+//exception code
+const EXCEPTION_INVALID_PHONE_NUMBER = "invalid-phone-number";
+
+//label
+const String labelSelectImage = "Select Images";
+const String labelUploadImages = "Upload Images";
+const String labelNext = "Next";
+const String labelLoading = "Loading";
+const String labelFailed = "Failed";
+const String labelSuccess = "Success";
+const String labelPhoneNumber = "Phone number";
+const String labelSubmit = "Submit";
+const String labelReSubmit = "Re-Submit";
+const String labelVerifyPhone = "Verify mobile";
+const String labelAllImages = "All Images";
+const String labelSelectedImages = "Selected Images";
+const String labelUnSelectedImages = "Un-Selected Images";
+const String labelWatchListImages = "Watch List Images";
+const String labelGenerateReport = "Generate Report";
+const String labelEnterPageNumber = "Enter page number";
+const String labelEnterFolderName = "Enter folder name";
+
+//error message
+const errorValleyName = "Enter valley name";
+const errorSelectImage = "Select at-least 1 image";
+const errorPhoneNumber = "Enter valid phone number";
+const errorFirebaseAuthException = "Error";
+const String errorSomethingWentWrong = "Something went wrong, Please try again";
+const errorEnter6DigitOtp = "Enter 6 digit Otp";
+const errorInvalidOtp = "Invalid otp";
+const errorMobileList = "Add at-least one user";
+const errorUnsupportedPlatform = "Unsupported platform";
+
+//title
+const String titleVerify = "Verify";
+
+//hint
+const String hintEnterOtp = "Enter OTP";

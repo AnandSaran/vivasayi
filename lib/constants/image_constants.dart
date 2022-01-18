@@ -5,3 +5,5 @@ const String ICON_3 = "asset/png/3.jpeg";
 const String ICON_4 = "asset/png/4.jpeg";
 const String ICON_5 = "asset/png/5.jpeg";
 const String ICON_LOGO= "asset/png/logo.png";
+const String ICON_LOGIN_BOTTOM= "asset/png/login_bottom.png";
+const String ICON_LOGIN_TOP= "asset/png/login_top.png";
