@@ -25,7 +25,6 @@ class HomeAccessControlBloc
   @override
   Stream<HomeAccessControlState> mapEventToState(
       HomeAccessControlEvent event) async* {
-    print("mapEventToState");
     if (event is IsShowHomeAccess) {
       yield* _mapIsShowHomeAccessState(event);
     } else if (event is IsShowHomeAccessUpdated) {

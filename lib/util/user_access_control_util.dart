@@ -13,9 +13,13 @@ class UserAccessControlUtil {
 
   bool isValidToHomeAccessIcon(
       String phoneNumber, List<UserAccess> userAccess) {
-    print("isValidToHomeAccessIcon");
     return userAccess.any((element) =>
         element.id == UserAccessEnum.ALL_ACCESS.value &&
         element.mobile.contains(phoneNumber));
+  }
+
+  bool isValidToCreateProductAccessIcon(
+      String userPhoneNumber, String shopPhoneNumber) {
+    return userPhoneNumber == shopPhoneNumber;
   }
 }

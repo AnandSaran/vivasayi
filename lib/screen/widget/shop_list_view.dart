@@ -70,7 +70,7 @@ onTapListItem(
     BuildContext context, Shop shop, HomeNavigationItemIdEnum storyScreenId) {
   Navigation().pushPageWithArgument(
       context,
-      ROUTE_PRODUCT_LIST_SCREEN,
+      ROUTE_PRODUCTS_SCREEN,
       CreateShopDataModel(
           storyScreenId: storyScreenId, shop: shop, isEdit: true));
 }

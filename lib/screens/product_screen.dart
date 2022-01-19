@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_launch/flutter_launch.dart';
 import 'package:shop_repository/shop_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vivasayi/bloc/create_product_access_control/create_product_access_control.dart';
 import 'package:vivasayi/bloc/product/products.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/data_model/create_product_data_model.dart';
@@ -13,6 +14,8 @@ import 'package:vivasayi/screen/widget/loading_indicator.dart';
 import 'package:vivasayi/screen/widget/product_view.dart';
 import 'package:vivasayi/style/theme.dart';
 import 'package:vivasayi/style/theme.dart' as AppTheme;
+import 'package:vivasayi/style/theme.dart';
+import 'package:vivasayi/style/theme.dart';
 import 'package:vivasayi/util/navigation.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -36,6 +39,9 @@ class _ProductScreenState extends State<ProductScreen> {
     _bloc = BlocProvider.of<ProductBloc>(context);
     _bloc.add(SetShop(shop));
     _bloc.add(LoadProduct(screenId.value));
+    context
+        .read<CreateProductAccessControlBloc>()
+        .add(IsShowCreateProductAccess(shop.phoneNumber));
   }
 
   @override
@@ -53,13 +59,7 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
         elevation: TOOLBAR_ELEVATION,
         actions: [
-          IconButton(
-            icon: Icon(
-              Icons.add,
-              color: AppTheme.AppColors.iconColor,
-            ),
-            onPressed: () => showCreateProductScreen(createShopDataModel),
-          ),
+          createProductMenuWidget(),
         ],
       ),
       body: Container(
@@ -203,5 +203,22 @@ class _ProductScreenState extends State<ProductScreen> {
         ROUTE_CREATE_PRODUCT,
         CreateProductDataModel(
             storyScreenId: screenId, shop: createShopDataModel.shop));
+  }
+
+  createProductMenuWidget() {
+    return BlocBuilder<CreateProductAccessControlBloc,
+        CreateProductAccessControlState>(builder: (context, state) {
+      final isShow = state is CreateProductAccessControlLoaded && state.isShow;
+      return Visibility(
+        visible: isShow,
+        child: IconButton(
+          icon: Icon(
+            Icons.add,
+            color: AppTheme.AppColors.iconColor,
+          ),
+          onPressed: () => showCreateProductScreen(createShopDataModel),
+        ),
+      );
+    });
   }
 }

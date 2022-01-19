@@ -9,6 +9,7 @@ import 'package:story_repository/story_repository.dart';
 import 'package:user_repository/user_repository.dart';
 import 'package:vivasayi/bloc/ads/home_banner_bloc.dart';
 import 'package:vivasayi/bloc/ads/home_banner_event.dart';
+import 'package:vivasayi/bloc/create_product_access_control/create_product_access_control_bloc.dart';
 import 'package:vivasayi/bloc/home_access_control/home_access_control.dart';
 import 'package:vivasayi/bloc/loading_screen_bloc.dart';
 import 'package:vivasayi/bloc/shop/agri_product_shop_bloc.dart';
@@ -99,13 +100,8 @@ class App extends StatelessWidget {
                   scaleTypeRepository: ScaleTypeRepository()),
               child: CreateProductScreen(),
             ),
-        ROUTE_PRODUCT_LIST_SCREEN: (context) =>
-            FlutterBloc.BlocProvider<ProductBloc>(
-                create: (context) {
-                  return ProductBloc(
-                      productRepository: FirestoreProductRepository());
-                },
-                child: ProductScreen()),
+        ROUTE_PRODUCTS_SCREEN: (context) =>
+            generateProductScreenBlocProvider(),
         ROUTE_PRODUCT_DETAIL_SCREEN: (context) => ProductDetails(),
       },
     );
@@ -218,11 +214,10 @@ class App extends StatelessWidget {
             ..add((LoadAds())),
         ),
         FlutterBloc.BlocProvider<HomeAccessControlBloc>(
-          create: (BuildContext context) => HomeAccessControlBloc(
-              userAccessRepository: UserAccessRepository(),
-              userAccessControlUtil: UserAccessControlUtil(),
-              sharedPreferenceUtil: SharedPreferenceUtil())
-        ),
+            create: (BuildContext context) => HomeAccessControlBloc(
+                userAccessRepository: UserAccessRepository(),
+                userAccessControlUtil: UserAccessControlUtil(),
+                sharedPreferenceUtil: SharedPreferenceUtil())),
       ],
       child: MyHomePage(title: APP_NAME),
     );
@@ -243,6 +238,23 @@ class App extends StatelessWidget {
       bloc: LoginScreenBloc(
           AuthenticationRepository(), UserRepository(), SharedPreferenceUtil()),
       child: const LoginScreen(),
+    );
+  }
+
+  FlutterBloc.MultiBlocProvider generateProductScreenBlocProvider() {
+    return FlutterBloc.MultiBlocProvider(
+      providers: [
+        FlutterBloc.BlocProvider<ProductBloc>(
+          create: (BuildContext context) =>
+              ProductBloc(productRepository: FirestoreProductRepository()),
+        ),
+        FlutterBloc.BlocProvider<CreateProductAccessControlBloc>(
+          create: (BuildContext context) => CreateProductAccessControlBloc(
+              userAccessControlUtil: UserAccessControlUtil(),
+              sharedPreferenceUtil: SharedPreferenceUtil()),
+        ),
+      ],
+      child: ProductScreen(),
     );
   }
 }
