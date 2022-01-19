@@ -22,13 +22,13 @@ class CreateProductAccessControlBloc extends Bloc<CreateProductAccessControlEven
   Stream<CreateProductAccessControlState> mapEventToState(
       CreateProductAccessControlEvent event) async* {
     if (event is IsShowCreateProductAccess) {
-      yield* _mapIsShowHomeAccessState(event);
+      yield* _mapIsShowCreateProductAccessState(event);
     } else if (event is IsShowCreateProductAccessUpdated) {
-      yield* _mapIsShowHomeAccessUpdateToState(event);
+      yield* _mapIsShowCreateProductAccessUpdateToState(event);
     }
   }
 
-  Stream<CreateProductAccessControlState> _mapIsShowHomeAccessState(
+  Stream<CreateProductAccessControlState> _mapIsShowCreateProductAccessState(
       IsShowCreateProductAccess event) async* {
     add(IsShowCreateProductAccessUpdated(
         _userAccessControlUtil.isValidToCreateProductAccessIcon(
@@ -36,7 +36,7 @@ class CreateProductAccessControlBloc extends Bloc<CreateProductAccessControlEven
             event.shopPhoneNumber)));
   }
 
-  Stream<CreateProductAccessControlLoaded> _mapIsShowHomeAccessUpdateToState(
+  Stream<CreateProductAccessControlLoaded> _mapIsShowCreateProductAccessUpdateToState(
       IsShowCreateProductAccessUpdated event) async* {
     yield CreateProductAccessControlLoaded(event.isShow);
   }
