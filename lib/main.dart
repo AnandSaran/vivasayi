@@ -100,8 +100,7 @@ class App extends StatelessWidget {
                   scaleTypeRepository: ScaleTypeRepository()),
               child: CreateProductScreen(),
             ),
-        ROUTE_PRODUCTS_SCREEN: (context) =>
-            generateProductScreenBlocProvider(),
+        ROUTE_PRODUCTS_SCREEN: (context) => generateProductScreenBlocProvider(),
         ROUTE_PRODUCT_DETAIL_SCREEN: (context) => ProductDetails(),
       },
     );
@@ -250,6 +249,7 @@ class App extends StatelessWidget {
         ),
         FlutterBloc.BlocProvider<CreateProductAccessControlBloc>(
           create: (BuildContext context) => CreateProductAccessControlBloc(
+              userAccessRepository: UserAccessRepository(),
               userAccessControlUtil: UserAccessControlUtil(),
               sharedPreferenceUtil: SharedPreferenceUtil()),
         ),
