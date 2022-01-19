@@ -1,5 +1,4 @@
 import 'package:authentication_repository/authentication_repository.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as FlutterBloc;
 import 'package:location_repository/location_repository.dart';
@@ -10,6 +9,7 @@ import 'package:story_repository/story_repository.dart';
 import 'package:user_repository/user_repository.dart';
 import 'package:vivasayi/bloc/ads/home_banner_bloc.dart';
 import 'package:vivasayi/bloc/ads/home_banner_event.dart';
+import 'package:vivasayi/bloc/home_access_control/home_access_control.dart';
 import 'package:vivasayi/bloc/loading_screen_bloc.dart';
 import 'package:vivasayi/bloc/shop/agri_product_shop_bloc.dart';
 import 'package:vivasayi/bloc/shop/equip_shop_bloc.dart';
@@ -41,6 +41,7 @@ import 'models/enum/enum.dart';
 import 'screen/create_story/create_story_screen.dart';
 import 'screen/login/login_screen.dart';
 import 'screens/product_details.dart';
+import 'util/user_access_control_util.dart';
 
 void main() async {
   /* WidgetsFlutterBinding.ensureInitialized();
@@ -215,6 +216,12 @@ class App extends StatelessWidget {
           create: (BuildContext context) => HomeBannerBloc(
               homeBannerAdsRepository: FirestoreHomeBannerAdsRepository())
             ..add((LoadAds())),
+        ),
+        FlutterBloc.BlocProvider<HomeAccessControlBloc>(
+          create: (BuildContext context) => HomeAccessControlBloc(
+              userAccessRepository: UserAccessRepository(),
+              userAccessControlUtil: UserAccessControlUtil(),
+              sharedPreferenceUtil: SharedPreferenceUtil())
         ),
       ],
       child: MyHomePage(title: APP_NAME),

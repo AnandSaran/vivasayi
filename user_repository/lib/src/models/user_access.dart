@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:vivasayi/constants/constant.dart';
+import 'package:user_repository/constants/constant.dart';
 
-class Access extends Equatable {
+class UserAccess extends Equatable {
   final String id;
   final List<String> mobile;
 
-  const Access({id, mobile})
-      : this.id = id ?? EMPTY_STRING,
+  const UserAccess({id, mobile})
+      : this.id = id ?? emptyString,
         this.mobile = mobile ?? emptyStringList;
 
   Map<String, Object?> toJson() {
@@ -28,21 +28,21 @@ class Access extends Equatable {
     return 'Access { id: $id, mobile: $mobile}';
   }
 
-  static Access fromJson(Map<String, Object> json) {
-    return Access(
+  static UserAccess fromJson(Map<String, Object> json) {
+    return UserAccess(
       id: json['id'] as String,
       mobile: json['mobile'] as List<String>,
     );
   }
 
-  static Access fromSnapshot(DocumentSnapshot snap) {
+  static UserAccess fromSnapshot(DocumentSnapshot snap) {
     if (snap.data() == null) throw Exception();
     final data = snap.data()! as Map<String, dynamic>;
 
-    return Access(
+    return UserAccess(
       id: snap.id,
       mobile: data.containsKey('mobile')
-          ? List.from(data['mobile'])
+          ? List.from(data['mobile']).cast<String>()
           : emptyStringList,
     );
   }

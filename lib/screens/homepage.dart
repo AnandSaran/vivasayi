@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:vivasayi/bloc/home_access_control/home_access_control.dart';
 import 'package:vivasayi/bloc/home_navigation/home_navigation.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/extension/extension.dart';
@@ -42,18 +43,35 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: AppColors.appGreen,
         title: Text(widget.title),
         actions: [
-          IconButton(
-            icon: Icon(
-              Icons.add,
-              color: Theme.AppColors.iconColor,
-            ),
-            onPressed: () => showCreateContentDialog(),
-          ),
+          createContentMenuWidget(),
         ],
       ),
       backgroundColor: AppColors.backgroundColor,
       body: _bodyWidget(),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeAccessControlBloc>().add(IsShowHomeAccess());
+  }
+
+  createContentMenuWidget() {
+    return BlocBuilder<HomeAccessControlBloc, HomeAccessControlState>(
+        builder: (context, state) {
+      final isShow = state is HomeAccessControlLoaded && state.isShow;
+      return Visibility(
+        visible: isShow,
+        child: IconButton(
+          icon: Icon(
+            Icons.add,
+            color: Theme.AppColors.iconColor,
+          ),
+          onPressed: () => showCreateContentDialog(),
+        ),
+      );
+    });
   }
 
   _bodyWidget() {
