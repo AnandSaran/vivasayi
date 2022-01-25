@@ -4,6 +4,7 @@ import 'package:shop_repository/shop_repository.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/data_model/data_model.dart';
 import 'package:vivasayi/models/enum/enum.dart';
+import 'package:vivasayi/screen/widget/widget.dart';
 import 'package:vivasayi/util/navigation.dart';
 
 class ProductListView extends StatelessWidget {
@@ -38,33 +39,33 @@ GridView storyListView(BuildContext context, Shop shop, List<Product> products,
           onTap: () {
             onTapListItem(context, shop, product, storyScreenId);
           },
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: 125.0,
-                width: 125.0,
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withAlpha(70),
-                          offset: const Offset(2.0, 2.0),
-                          blurRadius: 2.0)
-                    ],
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        product.imageUrl.first,
-                      ),
-                      fit: BoxFit.cover,
-                    )),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
+          child: Flexible(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 125.0,
+                  width: 125.0,
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withAlpha(70),
+                            offset: const Offset(2.0, 2.0),
+                            blurRadius: 2.0)
+                      ],
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          product.imageUrl.first,
+                        ),
+                        fit: BoxFit.cover,
+                      )),
+                ),
+                dividerSpace(height: 15),
+                Text(
                   product.name,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );

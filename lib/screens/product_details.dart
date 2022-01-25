@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_launch/flutter_launch.dart';
 import 'package:product_repository/product_repository.dart';
+import 'package:provider/src/provider.dart';
 import 'package:shop_repository/shop_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vivasayi/bloc/create_product_access_control/create_product_access_control.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/data_model/create_product_data_model.dart';
 import 'package:vivasayi/models/enum/enum.dart';
@@ -30,6 +33,9 @@ class _ProductDetails extends State<ProductDetails> {
     shop = createProductDataModel.shop;
     product = createProductDataModel.product;
     storyScreenId = createProductDataModel.storyScreenId;
+    context
+        .read<CreateProductAccessControlBloc>()
+        .add(IsShowCreateProductAccess(shop.phoneNumber));
   }
 
   @override
@@ -47,17 +53,7 @@ class _ProductDetails extends State<ProductDetails> {
         backgroundColor: AppColors.toolBarBackgroundColor,
         elevation: 5.0,
         actions: <Widget>[
-          Builder(
-            builder: (context) => IconButton(
-              icon: Icon(
-                Icons.edit,
-                color: Theme.AppColors.iconColor,
-              ),
-              onPressed: () {
-                onTapEdit(createProductDataModel);
-              },
-            ),
-          )
+          editProductMenuWidget(),
         ],
       ),
       body: Column(
@@ -142,5 +138,24 @@ class _ProductDetails extends State<ProductDetails> {
     createProductDataModel.isEdit = true;
     Navigation().popAndPushNamed(context, ROUTE_CREATE_PRODUCT,
         data: createProductDataModel);
+  }
+
+  editProductMenuWidget() {
+    return BlocBuilder<CreateProductAccessControlBloc,
+        CreateProductAccessControlState>(builder: (context, state) {
+      final isShow = state is CreateProductAccessControlLoaded && state.isShow;
+      return Visibility(
+        visible: isShow,
+        child: IconButton(
+          icon: Icon(
+            Icons.edit,
+            color: Theme.AppColors.iconColor,
+          ),
+          onPressed: () {
+            onTapEdit(createProductDataModel);
+          },
+        ),
+      );
+    });
   }
 }

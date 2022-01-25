@@ -88,7 +88,7 @@ class ProductDetailsContent extends StatelessWidget {
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
-                                        fontSize: 30),
+                                        fontSize: 20),
                                     children: <TextSpan>[
                                       TextSpan(text: ''),
                                     ],
@@ -98,23 +98,25 @@ class ProductDetailsContent extends StatelessWidget {
                               SizedBox(
                                 width: 16.0,
                               ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Container(width: 320,
-                                    child: Text(
-                                      descriptions[index].trim() +
-                                          SYMBOL_SINGLE_DOT,
-                                      style: TextStyle(
-                                          fontSize: 16.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.normal),
-                                      maxLines: 10,
-                                      overflow: TextOverflow.ellipsis,
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      child: Text(
+                                        descriptions[index].trim() +
+                                            SYMBOL_SINGLE_DOT,
+                                        style: TextStyle(
+                                            fontSize: 15.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal),
+                                        maxLines: 10,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ],
                           ),

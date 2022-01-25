@@ -101,7 +101,7 @@ class App extends StatelessWidget {
               child: CreateProductScreen(),
             ),
         ROUTE_PRODUCTS_SCREEN: (context) => generateProductScreenBlocProvider(),
-        ROUTE_PRODUCT_DETAIL_SCREEN: (context) => ProductDetails(),
+        ROUTE_PRODUCT_DETAIL_SCREEN: (context) => generateProductDetailBlocProvider(),
       },
     );
   }
@@ -255,6 +255,20 @@ class App extends StatelessWidget {
         ),
       ],
       child: ProductScreen(),
+    );
+  }
+
+  FlutterBloc.MultiBlocProvider generateProductDetailBlocProvider() {
+    return FlutterBloc.MultiBlocProvider(
+      providers: [
+        FlutterBloc.BlocProvider<CreateProductAccessControlBloc>(
+          create: (BuildContext context) => CreateProductAccessControlBloc(
+              userAccessRepository: UserAccessRepository(),
+              userAccessControlUtil: UserAccessControlUtil(),
+              sharedPreferenceUtil: SharedPreferenceUtil()),
+        ),
+      ],
+      child: ProductDetails(),
     );
   }
 }

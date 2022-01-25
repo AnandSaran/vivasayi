@@ -18,20 +18,22 @@ class ShopFilterView extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          Expanded(
-            flex: 1,
-            child: Icon(
-              Icons.filter_alt_sharp,
-              color: iconColor,
+          Visibility(
+            visible: false,
+            child: Expanded(
+              flex: 1,
+              child: Icon(
+                Icons.filter_alt_sharp,
+                color: iconColor,
+              ),
             ),
           ),
-          Text("Filter"),
+          Visibility(visible: false, child: Text("Filter")),
           Expanded(flex: 3, child: SizedBox()),
           Flexible(
-            flex: 5,
+            flex: 3,
             child: Container(
               margin: EdgeInsets.all(3),
-              padding: EdgeInsets.all(3),
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(
@@ -40,12 +42,17 @@ class ShopFilterView extends StatelessWidget {
                 borderRadius: BorderRadius.all(
                     Radius.circular(10.0)), // set rounded corner radius
               ),
-              child: TextField(
-                onTap: () => onTapAddress(),
-                decoration: InputDecoration(
-                    hintText: address,
-                    border: InputBorder.none,
-                    suffixIcon: Icon(Icons.location_pin, color: iconColor)),
+              child: Padding(
+                padding: EdgeInsets.only(left: 10,right: 10),
+                child: TextField(
+                  readOnly: true,
+                  style: TextStyle(fontSize: 15),
+                  onTap: () => onTapAddress(),
+                  decoration: InputDecoration(
+                      hintText: address,
+                      border: InputBorder.none,
+                      suffixIcon: Icon(Icons.location_pin, color: iconColor)),
+                ),
               ),
             ),
           )

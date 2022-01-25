@@ -7,6 +7,7 @@ import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/models/data_model/home_screen_data_model.dart';
 import 'package:vivasayi/screen/widget/loading_indicator.dart';
 import 'package:vivasayi/screen/widget/widgets.dart';
+import 'package:vivasayi/style/theme.dart';
 import 'package:vivasayi/util/navigation.dart';
 import 'package:vivasayi/util/shared_preference.dart';
 
@@ -32,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-            decoration: new BoxDecoration(color: Colors.black),
+            decoration: new BoxDecoration(color: AppColors.appGreen),
             child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

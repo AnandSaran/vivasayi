@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:vivasayi/bloc/bloc_provider/bloc_provider.dart';
 import 'package:vivasayi/bloc/loading_screen_bloc.dart';
 import 'package:vivasayi/constants/constant.dart';
 import 'package:vivasayi/constants/navigator_constants.dart';
 import 'package:vivasayi/models/data_model/home_screen_data_model.dart';
 import 'package:vivasayi/screen/widget/widget.dart';
+import 'package:vivasayi/style/theme.dart';
 import 'package:vivasayi/util/navigation.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -38,7 +38,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   _widgetLoading() {
     return Scaffold(
         body: Container(
-            decoration: const BoxDecoration(color: Colors.blue),
+            decoration: BoxDecoration(color: AppColors.appGreen),
             child: Center(
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
